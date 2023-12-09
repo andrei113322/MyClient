@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ServiceBroker" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Model" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServiceBroker_SelectAllCoins_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllCoins" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectAllCoins_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllCoinsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectCoinByUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectCoinByUser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectCoinByUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectCoinByUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertCoin_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertCoin" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertCoin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertCoinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_UpdateCoin_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCoin" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_UpdateCoin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCoinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_DeleteCoin_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCoin" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_DeleteCoin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCoinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectAllLogs_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllLogs" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectAllLogs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllLogsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectLogByUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectLogByUser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectLogByUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectLogByUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertLog_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertLog" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertLog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_UpdateLog_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateLog" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_UpdateLog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_DeleteLog_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteLog" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_DeleteLog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectAllOrderHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllOrderHistory" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectAllOrderHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllOrderHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectOrderHistoryByUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectOrderHistoryByUser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectOrderHistoryByUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectOrderHistoryByUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertOrderHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertOrderHistory" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertOrderHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertOrderHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_UpdateOrderHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderHistory" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_UpdateOrderHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrderHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_DeleteOrderHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrderHistory" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_DeleteOrderHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrderHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectAllUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectAllUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectUserByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectUserByEmail" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectUserByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectUserByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectUserByUserName_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectUserByUserName" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_SelectUserByUserName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectUserByUserNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertUser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServiceBroker">
+    <wsdl:operation name="SelectAllCoins">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/SelectAllCoins" message="tns:IServiceBroker_SelectAllCoins_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/SelectAllCoinsResponse" message="tns:IServiceBroker_SelectAllCoins_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectCoinByUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/SelectCoinByUser" message="tns:IServiceBroker_SelectCoinByUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/SelectCoinByUserResponse" message="tns:IServiceBroker_SelectCoinByUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertCoin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/InsertCoin" message="tns:IServiceBroker_InsertCoin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/InsertCoinResponse" message="tns:IServiceBroker_InsertCoin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCoin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/UpdateCoin" message="tns:IServiceBroker_UpdateCoin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/UpdateCoinResponse" message="tns:IServiceBroker_UpdateCoin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCoin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/DeleteCoin" message="tns:IServiceBroker_DeleteCoin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/DeleteCoinResponse" message="tns:IServiceBroker_DeleteCoin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllLogs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/SelectAllLogs" message="tns:IServiceBroker_SelectAllLogs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/SelectAllLogsResponse" message="tns:IServiceBroker_SelectAllLogs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectLogByUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/SelectLogByUser" message="tns:IServiceBroker_SelectLogByUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/SelectLogByUserResponse" message="tns:IServiceBroker_SelectLogByUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertLog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/InsertLog" message="tns:IServiceBroker_InsertLog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/InsertLogResponse" message="tns:IServiceBroker_InsertLog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/UpdateLog" message="tns:IServiceBroker_UpdateLog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/UpdateLogResponse" message="tns:IServiceBroker_UpdateLog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/DeleteLog" message="tns:IServiceBroker_DeleteLog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/DeleteLogResponse" message="tns:IServiceBroker_DeleteLog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllOrderHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/SelectAllOrderHistory" message="tns:IServiceBroker_SelectAllOrderHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/SelectAllOrderHistoryResponse" message="tns:IServiceBroker_SelectAllOrderHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectOrderHistoryByUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/SelectOrderHistoryByUser" message="tns:IServiceBroker_SelectOrderHistoryByUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/SelectOrderHistoryByUserResponse" message="tns:IServiceBroker_SelectOrderHistoryByUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertOrderHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/InsertOrderHistory" message="tns:IServiceBroker_InsertOrderHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/InsertOrderHistoryResponse" message="tns:IServiceBroker_InsertOrderHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/UpdateOrderHistory" message="tns:IServiceBroker_UpdateOrderHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/UpdateOrderHistoryResponse" message="tns:IServiceBroker_UpdateOrderHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrderHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/DeleteOrderHistory" message="tns:IServiceBroker_DeleteOrderHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/DeleteOrderHistoryResponse" message="tns:IServiceBroker_DeleteOrderHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/SelectAllUsers" message="tns:IServiceBroker_SelectAllUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/SelectAllUsersResponse" message="tns:IServiceBroker_SelectAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectUserByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/SelectUserByEmail" message="tns:IServiceBroker_SelectUserByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/SelectUserByEmailResponse" message="tns:IServiceBroker_SelectUserByEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectUserByUserName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/SelectUserByUserName" message="tns:IServiceBroker_SelectUserByUserName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/SelectUserByUserNameResponse" message="tns:IServiceBroker_SelectUserByUserName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/InsertUser" message="tns:IServiceBroker_InsertUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/InsertUserResponse" message="tns:IServiceBroker_InsertUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/UpdateUser" message="tns:IServiceBroker_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/UpdateUserResponse" message="tns:IServiceBroker_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/DeleteUser" message="tns:IServiceBroker_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/DeleteUserResponse" message="tns:IServiceBroker_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServiceBroker" type="tns:IServiceBroker">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SelectAllCoins">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/SelectAllCoins" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectCoinByUser">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/SelectCoinByUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertCoin">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/InsertCoin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCoin">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/UpdateCoin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCoin">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/DeleteCoin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllLogs">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/SelectAllLogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectLogByUser">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/SelectLogByUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertLog">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/InsertLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLog">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/UpdateLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLog">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/DeleteLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllOrderHistory">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/SelectAllOrderHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectOrderHistoryByUser">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/SelectOrderHistoryByUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertOrderHistory">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/InsertOrderHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrderHistory">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/UpdateOrderHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrderHistory">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/DeleteOrderHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllUsers">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/SelectAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectUserByEmail">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/SelectUserByEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectUserByUserName">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/SelectUserByUserName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertUser">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/InsertUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceBroker">
+    <wsdl:port name="BasicHttpBinding_IServiceBroker" binding="tns:BasicHttpBinding_IServiceBroker">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

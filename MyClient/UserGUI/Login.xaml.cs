@@ -66,7 +66,7 @@ namespace UserGUI
             User user = brokerDB.SelectUserByEmail(txtEmail.Text);
             if (user != null && user.Password == txtPassword.Password)
             {
-                MainWindow myMain = new MainWindow();
+                MainWindow myMain = new MainWindow(user);
                 myMain.ShowDialog();
                 this.Close();
             }

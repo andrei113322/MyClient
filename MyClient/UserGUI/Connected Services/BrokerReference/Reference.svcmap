@@ -23,10 +23,11 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="7af30f86-a67e-4b96-a1bb-1e34efa45ccd" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/?disco" />
-    <MetadataFile FileName="ServiceBroker.wsdl" MetadataType="Wsdl" ID="11d7b130-cc7f-41a2-b6c5-63902a59201b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/?wsdl" />
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="8f6dab35-9db0-4e8d-9fbe-b5554223c4e0" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/?xsd=xsd1" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="e8028980-6ddc-42b7-8473-8393c1859a5d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/?xsd=xsd3" />
     <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="2cf81cbf-6b2f-4f97-a6ce-cb4ba3c56fcc" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/?xsd=xsd0" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="8f6dab35-9db0-4e8d-9fbe-b5554223c4e0" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/?xsd=xsd1" />
     <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="27cbd899-239b-4075-b5bd-9aad782c6f80" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/?xsd=xsd2" />
+    <MetadataFile FileName="ServiceBroker.wsdl" MetadataType="Wsdl" ID="11d7b130-cc7f-41a2-b6c5-63902a59201b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfService/ServiceBroker/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UserGUI.BrokerReference;
 
 namespace UserGUI
 {
@@ -20,8 +22,29 @@ namespace UserGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private User user;
+        private Dictionary<Coin, double> coinList;
+        private ServiceBrokerClient brokerDB = new ServiceBrokerClient();
+
+        public MainWindow(User user)
         {
+            this.user = user;
+            coinList = brokerDB.SelectCoinByUser(user);
+
+            foreach (var item in coinList)
+            {
+                switch(item.Key.Symbol)
+                {
+                    case "BTC":
+                        BTCValue.Text = item.Value.ToString();
+                        break;
+                    case "ETH":
+                        ETHValue.Text = item.Value.ToString();
+                        break;
+                    default:
+                        break;
+                }
+            }
             InitializeComponent();
         }
 

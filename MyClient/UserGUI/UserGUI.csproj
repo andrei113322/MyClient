@@ -127,7 +127,13 @@
     <None Include="Connected Services\BrokerReference\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\BrokerReference\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\BrokerReference\ServiceBroker.wsdl" />
+    <None Include="Connected Services\BrokerReference\UserGUI.BrokerReference.Coin.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\BrokerReference\UserGUI.BrokerReference.CoinList.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

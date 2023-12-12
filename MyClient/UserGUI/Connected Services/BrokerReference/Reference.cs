@@ -529,10 +529,10 @@ namespace UserGUI.BrokerReference {
         System.Threading.Tasks.Task<UserGUI.BrokerReference.CoinList> SelectAllCoinsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/SelectCoinByUser", ReplyAction="http://tempuri.org/IServiceBroker/SelectCoinByUserResponse")]
-        UserGUI.BrokerReference.CoinList SelectCoinByUser(UserGUI.BrokerReference.User user);
+        System.Collections.Generic.Dictionary<UserGUI.BrokerReference.Coin, double> SelectCoinByUser(UserGUI.BrokerReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/SelectCoinByUser", ReplyAction="http://tempuri.org/IServiceBroker/SelectCoinByUserResponse")]
-        System.Threading.Tasks.Task<UserGUI.BrokerReference.CoinList> SelectCoinByUserAsync(UserGUI.BrokerReference.User user);
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<UserGUI.BrokerReference.Coin, double>> SelectCoinByUserAsync(UserGUI.BrokerReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertCoin", ReplyAction="http://tempuri.org/IServiceBroker/InsertCoinResponse")]
         void InsertCoin(UserGUI.BrokerReference.Coin coin);
@@ -684,11 +684,11 @@ namespace UserGUI.BrokerReference {
             return base.Channel.SelectAllCoinsAsync();
         }
         
-        public UserGUI.BrokerReference.CoinList SelectCoinByUser(UserGUI.BrokerReference.User user) {
+        public System.Collections.Generic.Dictionary<UserGUI.BrokerReference.Coin, double> SelectCoinByUser(UserGUI.BrokerReference.User user) {
             return base.Channel.SelectCoinByUser(user);
         }
         
-        public System.Threading.Tasks.Task<UserGUI.BrokerReference.CoinList> SelectCoinByUserAsync(UserGUI.BrokerReference.User user) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<UserGUI.BrokerReference.Coin, double>> SelectCoinByUserAsync(UserGUI.BrokerReference.User user) {
             return base.Channel.SelectCoinByUserAsync(user);
         }
         

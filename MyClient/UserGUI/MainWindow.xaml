@@ -84,7 +84,7 @@
                         </Image.RenderTransform>
                     </Image>
                     <TextBlock x:Name="textBlock2" Grid.Column="1" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Text="BTC" VerticalAlignment="Center" FontSize="18" FontFamily="PT Sans" Foreground="#1D212C"/>
-                    <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="5.040000" VerticalAlignment="Center" FontSize="17" FontFamily="PT Sans Pro Narrow" Foreground="#1D212C"/>
+                    <TextBlock x:Name="BTCValue" Grid.Column="2" HorizontalAlignment="Right" Text="0" VerticalAlignment="Center" FontSize="17" FontFamily="PT Sans Pro Narrow" Foreground="#1D212C"/>
                     <TextBlock Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Text="Bitcoin" VerticalAlignment="Center" FontSize="11" FontFamily="PT Sans" Foreground="#92969F" Margin="20,0,0,0" />
                     <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" Text="$35 578.91" VerticalAlignment="Center" FontSize="11" FontFamily="PT Sans" Foreground="#92969F" FontWeight="Bold"/>
                 </Grid>
@@ -110,7 +110,7 @@
                         </Image.RenderTransform>
                     </Image>
                     <TextBlock Text="ETH" FontSize="18" Foreground="#1D212C" Grid.Column="1" Margin="20,0,0,0" FontFamily="PT Sans Caption" VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="2" Text="160.020000" FontSize="17" HorizontalAlignment="Right" FontFamily="PT Sans Pro Narrow" Foreground="#1D212C" VerticalAlignment="Center" />
+                    <TextBlock x:Name="ETHValue"  Grid.Column="2" Text="160.020000" FontSize="17" HorizontalAlignment="Right" FontFamily="PT Sans Pro Narrow" Foreground="#1D212C" VerticalAlignment="Center" />
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="Ethereum" FontSize="11" FontFamily="PT Sans" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#92969F"/>
                     <TextBlock Grid.Row="1" Grid.Column="2" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" FontFamily="PT Sans" Margin="0,2" Foreground="#92969F" VerticalAlignment="Center" ><Run Text="$36"/><Run Text=" "/><Run Text="677.68"/></TextBlock>
                 </Grid>
@@ -136,9 +136,9 @@
                         </Image.RenderTransform>
                     </Image>
                     <TextBlock FontSize="18" Foreground="#1D212C" Grid.Column="1" Margin="20,0,0,0" FontFamily="PT Sans Caption" VerticalAlignment="Center" ><Run Text="L"/><Run Text="TC"/></TextBlock>
-                    <TextBlock Grid.Column="2" FontSize="17" HorizontalAlignment="Right" FontFamily="PT Sans Pro Narrow" Foreground="#1D212C" VerticalAlignment="Center" ><Run Text="135."/><Run Text="8"/><Run Text="90000"/></TextBlock>
+                    <TextBlock x:Name="LTCValue" Grid.Column="2" FontSize="17" HorizontalAlignment="Right" FontFamily="PT Sans Pro Narrow" Foreground="#1D212C" VerticalAlignment="Center" ><Run Text="0."/><Run Text="0"/><Run Text="00000"/></TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="1" FontSize="11" FontFamily="PT Sans" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#92969F"><Run Text="L"/><Run Text="it"/><Run Text="e"/><Run Text="coin"/></TextBlock>
-                    <TextBlock Grid.Row="1" Grid.Column="2" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" FontFamily="PT Sans" Margin="0,2" Foreground="#92969F" VerticalAlignment="Center" ><Run Text="$"/><Run Text="7035.02"/></TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="2" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" FontFamily="PT Sans" Margin="0,2" Foreground="#92969F" VerticalAlignment="Center" ><Run Text="$"/><Run Text="0"/></TextBlock>
                 </Grid>
                 <Grid Height="48">
                     <Grid.ColumnDefinitions>
@@ -162,9 +162,9 @@
                         </Image.RenderTransform>
                     </Image>
                     <TextBlock Text="BNB" FontSize="18" Foreground="#1D212C" Grid.Column="1" Margin="20,0,0,0" FontFamily="PT Sans Caption" VerticalAlignment="Center" />
-                    <TextBlock Grid.Column="2" FontSize="17" HorizontalAlignment="Right" FontFamily="PT Sans Pro Narrow" Foreground="#1D212C" VerticalAlignment="Center" ><Run Text="16"/><Run Text="5"/><Run Text=" 368"/><Run Text="."/><Run Text="4"/><Run Text="0"/><Run Text="0000"/></TextBlock>
+                    <TextBlock x:Name="BNBValue" Grid.Column="2" FontSize="17" HorizontalAlignment="Right" FontFamily="PT Sans Pro Narrow" Foreground="#1D212C" VerticalAlignment="Center" ><Run Text=" 0" /><Run Text="."/><Run Text="0"/><Run Text="0"/><Run Text="0000"/></TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="1" FontSize="11" FontFamily="PT Sans" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#92969F"><Run Text="B"/><Run Text="inance"/><Run Text=" Coin"/></TextBlock>
-                    <TextBlock Grid.Row="1" Grid.Column="2" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" FontFamily="PT Sans" Margin="0,2" Foreground="#92969F" VerticalAlignment="Center" ><Run Text="$"/><Run Text="1 587 536.64"/></TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="2" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" FontFamily="PT Sans" Margin="0,2" Foreground="#92969F" VerticalAlignment="Center" ><Run Text="$"/><Run Text="0"/></TextBlock>
                 </Grid>
             </StackPanel>
 

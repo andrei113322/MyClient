@@ -124,7 +124,7 @@ namespace UserGUI
             User myUser = new User();
             User IfMailExists = brokerDB.SelectUserByEmail(txtEmail.Text);
             User IfUserNameExists = brokerDB.SelectUserByUserName(txtUserName.Text);
-            if ((IfMailExists == null) && (IfUserNameExists == null))
+            if ((IfMailExists == null) && (IfUserNameExists == null) && (txtPassword.Password == txtVerifyPassword.Password))
             {
                 myUser.isMnager = false;
                 myUser.Email = txtEmail.Text;
@@ -135,6 +135,10 @@ namespace UserGUI
                 myUser.Password = txtPassword.Password;
 
                 brokerDB.InsertUser(myUser);
+
+                SuccesfullLogedIn suc = new SuccesfullLogedIn(myUser);
+                this.Close();
+                suc.ShowDialog();
             }
 
         }
@@ -144,5 +148,28 @@ namespace UserGUI
             Application.Current.Shutdown();
         }
 
+        private void txtVerifyPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtVerifyPassword.Password) && txtVerifyPassword.Password.Length > 0)
+            {
+                textVerifyPassword.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textVerifyPassword.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void textVerifyPassword_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtVerifyPassword.Focus();
+        }
+
+        private void Image_MouseUp_1(object sender, MouseButtonEventArgs e)
+        {
+            Login log = new Login();
+            this.Close();
+            log.ShowDialog();
+        }
     }
 }

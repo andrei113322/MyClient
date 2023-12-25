@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:UserGUI"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
         Background="Transparent"
-        Title="SignUp" Height="450" Width="800">
+        Title="SignUp" Height="520" Width="800">
     <Grid>
 
         <Image Source="\Images\close.png" Grid.Column="1" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
+        <Image Source="\Images\left-arrow.png" Grid.Column="0" Panel.ZIndex="1" MouseUp="Image_MouseUp_1" Style="{StaticResource left-arrowBack}" />
         <Border CornerRadius="10 0 0 10">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -53,7 +54,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Source="\Images\Email.png" Height="20" Opacity="0.3"/>
+                            <Image Source="\Images\profile.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textUserName" MouseDown="textUserName_MouseDown" Text="UserName" Style="{StaticResource textHint}"/>
                             <TextBox x:Name="txtUserName" TextChanged="txtUserName_TextChanged" Style="{StaticResource textBox}"/>
                         </Grid>
@@ -67,7 +68,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Source="\Images\Email.png" Height="20" Opacity="0.3"/>
+                            <Image Source="\Images\profile.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textFirstName" MouseDown="textFirstName_MouseDown" Text="FirstName" Style="{StaticResource textHint}"/>
                             <TextBox x:Name="txtFirstName" TextChanged="txtFirstName_TextChanged" Style="{StaticResource textBox}"/>
                         </Grid>
@@ -81,7 +82,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Source="\Images\Email.png" Height="20" Opacity="0.3"/>
+                            <Image Source="\Images\profile.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textSecondName" MouseDown="textSecondName_MouseDown" Text="SecondName" Style="{StaticResource textHint}"/>
                             <TextBox x:Name="txtSecondName" TextChanged="txtSecondName_TextChanged" Style="{StaticResource textBox}"/>
                         </Grid>
@@ -95,7 +96,7 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="\Images\Email.png"
+                            <Image Source="\Images\calendar.png"
                                    Height="20"
                                    Opacity="0.3" />
                             <DatePicker Name="birthdateDatePicker" Width="120" SelectedDate="2023-11-02"
@@ -122,7 +123,30 @@
                     </Border>
                     
                     
-                    <Button Content="Sign Up" Style="{StaticResource button}" Click="signUpButtonClick" Background="#ffffff" Foreground="#3AA9AD" Margin="9"/>
+                    <Border BorderThickness="1"
+                            BorderBrush="#ffffff"
+                            Margin="70 7"
+                            CornerRadius="5"
+                            Background="#ffffff">
+                        <Grid Margin="7 9 ">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="\Images\Password.png"
+                                   Height="20"
+                                   Opacity="0.3" />
+                            <TextBlock x:Name="textVerifyPassword"
+                                       MouseDown="textVerifyPassword_MouseDown"
+                                       Text="PasswordVerify"
+                                       Style="{StaticResource textHint}" />
+                            <PasswordBox x:Name="txtVerifyPassword"
+                                         PasswordChanged="txtVerifyPassword_PasswordChanged"
+                                         Style="{StaticResource textBox}" />
+                        </Grid>
+                    </Border>
+                    
+                    <Button Content="Sign Up" Style="{StaticResource button}" Click="signUpButtonClick" Margin="9"/>
                     
                     
                     

@@ -42,6 +42,10 @@
                 <Setter Property="Foreground"
                         Value="#ffffff" />
             </Style>
+            
+            
+            
+            
             <Style x:Key="button"
                    TargetType="Button">
                 <Setter Property="FontSize"
@@ -85,6 +89,8 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            
+            
             <Style x:Key="textHint"
                    TargetType="TextBlock">
                 <Setter Property="FontSize"
@@ -158,6 +164,9 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            
+            
+            
             <Style x:Key="imgClose"
                    TargetType="Image">
                 <Setter Property="Width"
@@ -182,6 +191,40 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            
+            
+            
+            
+            
+            <Style x:Key="left-arrowBack"
+                   TargetType="Image">
+                <Setter Property="Width"
+                        Value="30" />
+                <Setter Property="Height"
+                        Value="30" />
+                <Setter Property="VerticalAlignment"
+                        Value="Top" />
+                <Setter Property="HorizontalAlignment"
+                        Value="Left" />
+                <Setter Property="Margin"
+                        Value="13 13 0 0" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <ScaleTransform ScaleX="1.1"
+                                                ScaleY="1.1" />
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+            
+            
+            
+            
             
             <Style TargetType="DatePicker">
                 <Setter Property="Background"

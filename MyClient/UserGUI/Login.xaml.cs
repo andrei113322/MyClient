@@ -88,8 +88,8 @@ namespace UserGUI
         private void signUpButtonClick(object sender, RoutedEventArgs e)
         {
             SignUp signUpWin = new SignUp();
-            signUpWin.ShowDialog();
             this.Close();
+            signUpWin.ShowDialog();
         }
     }
 }

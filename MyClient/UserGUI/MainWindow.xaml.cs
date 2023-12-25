@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UserGUI.BrokerReference;
+using System.Threading;
 
 namespace UserGUI
 {
@@ -25,11 +26,17 @@ namespace UserGUI
         private User user;
         private Dictionary<Coin, double> coinList;
         private ServiceBrokerClient brokerDB = new ServiceBrokerClient();
+        private Dictionary<string, decimal> coinsValues;
+        private double totValue = 0;
+
 
         public MainWindow(User user)
         {
+            InitializeComponent();
             this.user = user;
             coinList = brokerDB.SelectCoinByUser(user);
+            getCoinsValue();
+
 
             foreach (var item in coinList)
             {
@@ -37,20 +44,41 @@ namespace UserGUI
                 {
                     case "BTC":
                         BTCValue.Text = item.Value.ToString();
+                        TOTBTCVALUE.Text = ((double)coinsValues["BTCUSDT"] * item.Value).ToString("F2");
+                        totValue += ((double)coinsValues["BTCUSDT"] * item.Value);
                         break;
                     case "ETH":
                         ETHValue.Text = item.Value.ToString();
+                        TOTETHVALUE.Text = ((double)coinsValues["ETHUSDT"]*item.Value).ToString("F2");
+                        totValue += ((double)coinsValues["ETHUSDT"] * item.Value);
                         break;
                     default:
                         break;
                 }
             }
-            InitializeComponent();
+
+            TOTBalance.Text = totValue.ToString("F2");
+            //Thread thread = new Thread(new ThreadStart(getCoinsValue));
+            //thread.Start();
+            //thread.Join();
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void getCoinsValue()
+        {
+            CoinList coins = brokerDB.SelectAllCoins();
+            List<String> myCoins = new List<string>();
+
+            foreach (var item in coins)
+            {
+                myCoins.Add(item.Symbol + "USDT");
+            }
+
+            this.coinsValues = brokerDB.GiveCoinValue(myCoins.ToArray());
         }
     }
 }

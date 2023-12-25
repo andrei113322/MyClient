@@ -647,6 +647,12 @@ namespace UserGUI.BrokerReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/DeleteUser", ReplyAction="http://tempuri.org/IServiceBroker/DeleteUserResponse")]
         System.Threading.Tasks.Task DeleteUserAsync(UserGUI.BrokerReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GiveCoinValue", ReplyAction="http://tempuri.org/IServiceBroker/GiveCoinValueResponse")]
+        System.Collections.Generic.Dictionary<string, decimal> GiveCoinValue(string[] Value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GiveCoinValue", ReplyAction="http://tempuri.org/IServiceBroker/GiveCoinValueResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, decimal>> GiveCoinValueAsync(string[] Value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -842,6 +848,14 @@ namespace UserGUI.BrokerReference {
         
         public System.Threading.Tasks.Task DeleteUserAsync(UserGUI.BrokerReference.User user) {
             return base.Channel.DeleteUserAsync(user);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, decimal> GiveCoinValue(string[] Value) {
+            return base.Channel.GiveCoinValue(Value);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, decimal>> GiveCoinValueAsync(string[] Value) {
+            return base.Channel.GiveCoinValueAsync(Value);
         }
     }
 }

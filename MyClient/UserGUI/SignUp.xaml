@@ -11,7 +11,7 @@
 
         <Image Source="\Images\close.png" Grid.Column="1" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
         <Image Source="\Images\left-arrow.png" Grid.Column="0" Panel.ZIndex="1" MouseUp="Image_MouseUp_1" Style="{StaticResource left-arrowBack}" />
-        <Border CornerRadius="10 0 0 10">
+        <Border CornerRadius="10">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#3AA9AD" Offset="0"/>
@@ -33,16 +33,27 @@
 
                 <StackPanel VerticalAlignment="Top" Width="400">
                     <TextBlock Text="Sign Up" Style="{StaticResource titleText}"/>
+                    
                     <Border BorderThickness="1" BorderBrush="#ffffff" Margin="70 7" CornerRadius="5" Background="#ffffff">
                         <Grid Margin="7 9 ">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
 
                             <Image Source="\Images\Email.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textEmail" MouseDown="textEmail_MouseDown" Text="Email" Style="{StaticResource textHint}"/>
-                            <TextBox x:Name="txtEmail" TextChanged="txtEmail_TextChanged" Style="{StaticResource textBox}"/>
+                            <TextBox x:Name="txtEmail"
+                                     TextChanged="txtEmail_TextChanged"
+                                     Style="{StaticResource textBox}" />
+                            <Image Source="\Images\record.png"
+                                   Height="20"
+                                   Opacity="0.3" 
+                                   Grid.Column="3"
+                                   Margin="0 0 0 0"
+                                   Visibility="Collapsed"
+                                   x:Name="EmailErr"/>
                         </Grid>
                     </Border>
 
@@ -52,11 +63,19 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
 
                             <Image Source="\Images\profile.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textUserName" MouseDown="textUserName_MouseDown" Text="UserName" Style="{StaticResource textHint}"/>
                             <TextBox x:Name="txtUserName" TextChanged="txtUserName_TextChanged" Style="{StaticResource textBox}"/>
+                            <Image Source="\Images\record.png"
+                                   Height="20"
+                                   Opacity="0.3"
+                                   Grid.Column="3"
+                                   Margin="0 0 0 0"
+                                   Visibility="Collapsed" 
+                                   x:Name="UserNameErr"/>
                         </Grid>
                     </Border>
 
@@ -66,11 +85,19 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
 
                             <Image Source="\Images\profile.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textFirstName" MouseDown="textFirstName_MouseDown" Text="FirstName" Style="{StaticResource textHint}"/>
                             <TextBox x:Name="txtFirstName" TextChanged="txtFirstName_TextChanged" Style="{StaticResource textBox}"/>
+                            <Image Source="\Images\record.png"
+                                   Height="20"
+                                   Opacity="0.3"
+                                   Grid.Column="3"
+                                   Margin="0 0 0 0"
+                                   Visibility="Collapsed"
+                                   x:Name="FirstNameErr"/>
                         </Grid>
                     </Border>
 
@@ -80,11 +107,19 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
 
                             <Image Source="\Images\profile.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textSecondName" MouseDown="textSecondName_MouseDown" Text="SecondName" Style="{StaticResource textHint}"/>
                             <TextBox x:Name="txtSecondName" TextChanged="txtSecondName_TextChanged" Style="{StaticResource textBox}"/>
+                            <Image Source="\Images\record.png"
+                                   Height="20"
+                                   Opacity="0.3"
+                                   Grid.Column="3"
+                                   Margin="0 0 0 0"
+                                   Visibility="Collapsed"
+                                   x:Name="SecNameErr"/>
                         </Grid>
                     </Border>
 
@@ -95,6 +130,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
                             <Image Source="\Images\calendar.png"
                                    Height="20"
@@ -103,7 +139,15 @@
                                         Grid.Column="1"
                                         Height="30"
                                         Margin="-90,0,0,0"
-                                        VerticalAlignment="Bottom" />
+                                        VerticalAlignment="Bottom"
+                                        SelectedDateChanged="birthdateDatePicker_SelectedDateChanged"/>
+                            <Image Source="\Images\record.png"
+                                   Height="20"
+                                   Opacity="0.3"
+                                   Grid.Column="3"
+                                   Margin="0 0 0 0"
+                                   Visibility="Collapsed" 
+                                   x:Name="DateErr"/>
                         </Grid>
                     </Border>
 
@@ -115,10 +159,18 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
                             <Image Source="\Images\Password.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource textHint}"/>
                             <PasswordBox x:Name="txtPassword"   PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}"/>
+                            <Image Source="\Images\record.png"
+                                   Height="20"
+                                   Opacity="0.3"
+                                   Grid.Column="3"
+                                   Margin="0 0 0 0"
+                                   Visibility="Collapsed"
+                                   x:Name="PassErr"/>
                         </Grid>
                     </Border>
                     
@@ -132,6 +184,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
                             <Image Source="\Images\Password.png"
                                    Height="20"
@@ -143,6 +196,13 @@
                             <PasswordBox x:Name="txtVerifyPassword"
                                          PasswordChanged="txtVerifyPassword_PasswordChanged"
                                          Style="{StaticResource textBox}" />
+                            <Image Source="\Images\record.png"
+                                   Height="20"
+                                   Opacity="0.3"
+                                   Grid.Column="3"
+                                   Margin="0 0 0 0"
+                                   Visibility="Collapsed"
+                                   x:Name="PassVerErr" />
                         </Grid>
                     </Border>
                     

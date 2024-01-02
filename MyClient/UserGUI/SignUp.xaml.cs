@@ -127,6 +127,7 @@ namespace UserGUI
             User myUser = new User();
             User IfMailExists = brokerDB.SelectUserByEmail(txtEmail.Text);
             User IfUserNameExists = brokerDB.SelectUserByUserName(txtUserName.Text);
+
             EmailErr.Visibility = Visibility.Collapsed;
             UserNameErr.Visibility = Visibility.Collapsed;
             FirstNameErr.Visibility = Visibility.Collapsed;
@@ -271,6 +272,84 @@ namespace UserGUI
         private void SetToolTip(UIElement element, string errorMessage)
         {
             ToolTipService.SetToolTip(element, errorMessage);
+        }
+
+        private void txtEmail_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textEmail.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtEmail_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtEmail.Text))
+            {
+                textEmail.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txtUserName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textUserName.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtUserName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtUserName.Text))
+            {
+                textUserName.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txtFirstName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textFirstName.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtFirstName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtFirstName.Text))
+            {
+                textFirstName.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txtSecondName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textSecondName.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtSecondName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSecondName.Text))
+            {
+                textSecondName.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txtPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textPassword.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPassword.Password))
+            {
+                textPassword.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txtVerifyPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textVerifyPassword.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtVerifyPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtVerifyPassword.Password))
+            {
+                textVerifyPassword.Visibility = Visibility.Visible;
+            }
         }
     }
 }

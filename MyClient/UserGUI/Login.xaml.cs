@@ -32,33 +32,9 @@ namespace UserGUI
             txtEmail.Focus();
         }
 
-        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtEmail.Text) && txtEmail.Text.Length > 0)
-            {
-                textEmail.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                textEmail.Visibility = Visibility.Visible;
-            }
-        }
-
         private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtPassword.Focus();
-        }
-
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtPassword.Password) && txtPassword.Password.Length > 0)
-            {
-                textPassword.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                textPassword.Visibility = Visibility.Visible;
-            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -90,6 +66,32 @@ namespace UserGUI
             SignUp signUpWin = new SignUp();
             this.Close();
             signUpWin.ShowDialog();
+        }
+
+        private void textEmail_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textEmail.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtEmail_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtEmail.Text))
+            {
+                textEmail.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txtPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textPassword.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPassword.Password))
+            {
+                textPassword.Visibility = Visibility.Visible;
+            }
         }
     }
 }

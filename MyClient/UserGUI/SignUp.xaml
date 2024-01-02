@@ -45,8 +45,9 @@
                             <Image Source="\Images\Email.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textEmail" MouseDown="textEmail_MouseDown" Text="Email" Style="{StaticResource textHint}"/>
                             <TextBox x:Name="txtEmail"
-                                     TextChanged="txtEmail_TextChanged"
-                                     Style="{StaticResource textBox}" />
+                                     Style="{StaticResource textBox}"
+                                     GotFocus="txtEmail_GotFocus"
+                                     LostFocus="txtEmail_LostFocus"/>
                             <Image Source="\Images\record.png"
                                    Height="20"
                                    Opacity="0.3"
@@ -72,7 +73,7 @@
 
                             <Image Source="\Images\profile.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textUserName" MouseDown="textUserName_MouseDown" Text="UserName" Style="{StaticResource textHint}"/>
-                            <TextBox x:Name="txtUserName" TextChanged="txtUserName_TextChanged" Style="{StaticResource textBox}"/>
+                            <TextBox x:Name="txtUserName" Style="{StaticResource textBox}" GotFocus="txtUserName_GotFocus" LostFocus="txtUserName_LostFocus"/>
                             <Image Source="\Images\record.png"
                                    Height="20"
                                    Opacity="0.3"
@@ -98,7 +99,7 @@
 
                             <Image Source="\Images\profile.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textFirstName" MouseDown="textFirstName_MouseDown" Text="FirstName" Style="{StaticResource textHint}"/>
-                            <TextBox x:Name="txtFirstName" TextChanged="txtFirstName_TextChanged" Style="{StaticResource textBox}"/>
+                            <TextBox x:Name="txtFirstName" GotFocus="txtFirstName_GotFocus" LostFocus="txtFirstName_LostFocus" Style="{StaticResource textBox}"/>
                             <Image Source="\Images\record.png"
                                    Height="20"
                                    Opacity="0.3"
@@ -124,7 +125,7 @@
 
                             <Image Source="\Images\profile.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textSecondName" MouseDown="textSecondName_MouseDown" Text="SecondName" Style="{StaticResource textHint}"/>
-                            <TextBox x:Name="txtSecondName" TextChanged="txtSecondName_TextChanged" Style="{StaticResource textBox}"/>
+                            <TextBox x:Name="txtSecondName" GotFocus="txtSecondName_GotFocus" LostFocus="txtSecondName_LostFocus" Style="{StaticResource textBox}"/>
                             <Image Source="\Images\record.png"
                                    Height="20"
                                    Opacity="0.3"
@@ -183,7 +184,7 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="\Images\Password.png" Height="20" Opacity="0.3"/>
                             <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource textHint}"/>
-                            <PasswordBox x:Name="txtPassword"   PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}"/>
+                            <PasswordBox x:Name="txtPassword"   GotFocus="txtPassword_GotFocus" LostFocus="txtPassword_LostFocus" Style="{StaticResource textBox}"/>
                             <Image Source="\Images\record.png"
                                    Height="20"
                                    Opacity="0.3"
@@ -218,7 +219,8 @@
                                        Text="PasswordVerify"
                                        Style="{StaticResource textHint}" />
                             <PasswordBox x:Name="txtVerifyPassword"
-                                         PasswordChanged="txtVerifyPassword_PasswordChanged"
+                                         GotFocus="txtVerifyPassword_GotFocus"
+                                         LostFocus="txtVerifyPassword_LostFocus"
                                          Style="{StaticResource textBox}" />
                             <Image Source="\Images\record.png"
                                    Height="20"

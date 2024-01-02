@@ -53,7 +53,10 @@
 
                         <Image Source="\Images\Email.png" Height="20" Opacity="0.3"/>
                         <TextBlock x:Name="textEmail" MouseDown="textEmail_MouseDown" Text="Email" Style="{StaticResource textHint}"/>
-                        <TextBox x:Name="txtEmail" TextChanged="txtEmail_TextChanged" Style="{StaticResource textBox}"/>
+                        <TextBox x:Name="txtEmail"
+                                 Style="{StaticResource textBox}"
+                                 GotFocus="textEmail_GotFocus"
+                                 LostFocus="txtEmail_LostFocus"/>
                     </Grid>
                     
                 </Border>
@@ -67,7 +70,7 @@
 
                         <Image Source="\Images\Password.png" Height="20" Opacity="0.3"/>
                         <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource textHint}"/>
-                        <PasswordBox x:Name="txtPassword"   PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}"/>
+                        <PasswordBox x:Name="txtPassword" Style="{StaticResource textBox}" GotFocus="txtPassword_GotFocus" LostFocus="txtPassword_LostFocus"/>
                     </Grid>
 
                 </Border>

@@ -138,47 +138,56 @@ namespace UserGUI
             if (under18 == false)
             {
                 DateErr.Visibility = Visibility.Visible;
+                SetToolTip(DateErr, "Not over 18");
                 Errr = true;
             }
             if(!txtEmail.Text.Contains("@gmail.com"))
             {
                 EmailErr.Visibility = Visibility.Visible;
+                SetToolTip(EmailErr, "Email must contain @gmail.com");
                 Errr = true;
             }
             if(txtPassword.Password != txtVerifyPassword.Password)
             {
                 PassVerErr.Visibility= Visibility.Visible;
+                SetToolTip(PassVerErr, "Passwords do not match");
                 Errr = true;
             }
             if(IfMailExists != null)
             {
                 EmailErr.Visibility= Visibility.Visible;
+                SetToolTip(EmailErr, "Email already exists");
                 Errr = true;
             }
             if(IfUserNameExists != null)
             {
                 UserNameErr.Visibility= Visibility.Visible;
+                SetToolTip(UserNameErr, "Username already exists");
                 Errr = true;
             }
             if (string.IsNullOrEmpty(txtFirstName.Text))
             {
                 FirstNameErr.Visibility = Visibility.Visible;
+                SetToolTip(FirstNameErr, "First Name is required");
                 Errr = true;
             }
             if (string.IsNullOrEmpty(txtSecondName.Text))
             {
                 SecNameErr.Visibility = Visibility.Visible;
+                SetToolTip(SecNameErr, "Second Name is required");
                 Errr = true;
             }
             if (!(txtUserName.Text.Length >= 5))
             {
                 UserNameErr.Visibility = Visibility.Visible;
+                SetToolTip(UserNameErr, "Username must be at least 5 characters");
                 Errr = true;
             }
 
             if (!Regex.IsMatch(txtPassword.Password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"))
             {
                 PassErr.Visibility = Visibility.Visible;
+                SetToolTip(PassErr, "Password requirements not met, password should contain at least 1 capital letter, 1 regular letter and be 8 lengh");
                 Errr = true;
             }
             if (!Errr)
@@ -257,6 +266,11 @@ namespace UserGUI
                     under18 = false;
                 }
             }
+        }
+
+        private void SetToolTip(UIElement element, string errorMessage)
+        {
+            ToolTipService.SetToolTip(element, errorMessage);
         }
     }
 }

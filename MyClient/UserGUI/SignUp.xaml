@@ -49,11 +49,15 @@
                                      Style="{StaticResource textBox}" />
                             <Image Source="\Images\record.png"
                                    Height="20"
-                                   Opacity="0.3" 
+                                   Opacity="0.3"
                                    Grid.Column="3"
                                    Margin="0 0 0 0"
                                    Visibility="Collapsed"
-                                   x:Name="EmailErr"/>
+                                   x:Name="EmailErr">
+                                   <Image.ToolTip>
+                                        <ToolTip Content="Password does not match" />
+                                   </Image.ToolTip>
+                            </Image>
                         </Grid>
                     </Border>
 
@@ -74,8 +78,12 @@
                                    Opacity="0.3"
                                    Grid.Column="3"
                                    Margin="0 0 0 0"
-                                   Visibility="Collapsed" 
-                                   x:Name="UserNameErr"/>
+                                   Visibility="Collapsed"
+                                   x:Name="UserNameErr">
+                                <Image.ToolTip>
+                                    <ToolTip Content="Password does not match" />
+                                </Image.ToolTip>
+                            </Image>
                         </Grid>
                     </Border>
 
@@ -97,7 +105,11 @@
                                    Grid.Column="3"
                                    Margin="0 0 0 0"
                                    Visibility="Collapsed"
-                                   x:Name="FirstNameErr"/>
+                                   x:Name="FirstNameErr">
+                                <Image.ToolTip>
+                                    <ToolTip Content="Password does not match" />
+                                </Image.ToolTip>
+                            </Image>
                         </Grid>
                     </Border>
 
@@ -119,7 +131,11 @@
                                    Grid.Column="3"
                                    Margin="0 0 0 0"
                                    Visibility="Collapsed"
-                                   x:Name="SecNameErr"/>
+                                   x:Name="SecNameErr">
+                                <Image.ToolTip>
+                                    <ToolTip Content="Password does not match" />
+                                </Image.ToolTip>
+                            </Image>
                         </Grid>
                     </Border>
 
@@ -146,8 +162,12 @@
                                    Opacity="0.3"
                                    Grid.Column="3"
                                    Margin="0 0 0 0"
-                                   Visibility="Collapsed" 
-                                   x:Name="DateErr"/>
+                                   Visibility="Collapsed"
+                                   x:Name="DateErr">
+                                <Image.ToolTip>
+                                    <ToolTip Content="Password does not match" />
+                                </Image.ToolTip>
+                            </Image>
                         </Grid>
                     </Border>
 
@@ -170,7 +190,11 @@
                                    Grid.Column="3"
                                    Margin="0 0 0 0"
                                    Visibility="Collapsed"
-                                   x:Name="PassErr"/>
+                                   x:Name="PassErr">
+                                <Image.ToolTip>
+                                    <ToolTip Content="Password does not match" />
+                                </Image.ToolTip>
+                            </Image>
                         </Grid>
                     </Border>
                     
@@ -202,7 +226,11 @@
                                    Grid.Column="3"
                                    Margin="0 0 0 0"
                                    Visibility="Collapsed"
-                                   x:Name="PassVerErr" />
+                                   x:Name="PassVerErr">
+                                <Image.ToolTip>
+                                    <ToolTip Content="Password does not match" />
+                                </Image.ToolTip>
+                            </Image>
                         </Grid>
                     </Border>
                     

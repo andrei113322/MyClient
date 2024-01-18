@@ -134,6 +134,30 @@
   <wsdl:message name="IServiceBroker_DeleteUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceBroker_GetCoinsByUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCoinsByUser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_GetCoinsByUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCoinsByUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertMyCoin_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertMyCoin" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertMyCoin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertMyCoinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_UpdateMyCoin_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMyCoin" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_UpdateMyCoin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMyCoinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_DeleteMyCoin_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMyCoin" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_DeleteMyCoin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMyCoinResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceBroker_GiveCoinValue_InputMessage">
     <wsdl:part name="parameters" element="tns:GiveCoinValue" />
   </wsdl:message>
@@ -224,6 +248,22 @@
     <wsdl:operation name="DeleteUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/DeleteUser" message="tns:IServiceBroker_DeleteUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/DeleteUserResponse" message="tns:IServiceBroker_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCoinsByUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/GetCoinsByUser" message="tns:IServiceBroker_GetCoinsByUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/GetCoinsByUserResponse" message="tns:IServiceBroker_GetCoinsByUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertMyCoin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/InsertMyCoin" message="tns:IServiceBroker_InsertMyCoin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/InsertMyCoinResponse" message="tns:IServiceBroker_InsertMyCoin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMyCoin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/UpdateMyCoin" message="tns:IServiceBroker_UpdateMyCoin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/UpdateMyCoinResponse" message="tns:IServiceBroker_UpdateMyCoin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMyCoin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/DeleteMyCoin" message="tns:IServiceBroker_DeleteMyCoin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/DeleteMyCoinResponse" message="tns:IServiceBroker_DeleteMyCoin_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GiveCoinValue">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/GiveCoinValue" message="tns:IServiceBroker_GiveCoinValue_InputMessage" />
@@ -414,6 +454,42 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteUser">
       <soap:operation soapAction="http://tempuri.org/IServiceBroker/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCoinsByUser">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/GetCoinsByUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertMyCoin">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/InsertMyCoin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMyCoin">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/UpdateMyCoin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMyCoin">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/DeleteMyCoin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

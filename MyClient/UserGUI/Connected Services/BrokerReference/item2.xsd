@@ -12,7 +12,6 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Symbol" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Users" nillable="true" type="tns:UserList" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -21,16 +20,9 @@
   <xs:complexType name="BaseEntity">
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="isMnager" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BaseEntity" nillable="true" type="tns:BaseEntity" />
-  <xs:complexType name="UserList">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="UserList" nillable="true" type="tns:UserList" />
   <xs:complexType name="User">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseEntity">
@@ -91,4 +83,28 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="OrderHistory" nillable="true" type="tns:OrderHistory" />
+  <xs:complexType name="UserList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserList" nillable="true" type="tns:UserList" />
+  <xs:complexType name="MyCoinList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MyCoin" nillable="true" type="tns:MyCoin" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MyCoinList" nillable="true" type="tns:MyCoinList" />
+  <xs:complexType name="MyCoin">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Coin" nillable="true" type="tns:Coin" />
+          <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+          <xs:element minOccurs="0" name="Value" type="xs:double" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MyCoin" nillable="true" type="tns:MyCoin" />
 </xs:schema>

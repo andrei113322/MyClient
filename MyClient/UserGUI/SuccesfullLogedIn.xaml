@@ -14,7 +14,7 @@
         Title="SuccesfullLogedIn">
     <Grid>
         <Grid>
-            <Border CornerRadius="10 0 0 10">
+            <Border CornerRadius="10">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0"
                                          EndPoint="1,1">

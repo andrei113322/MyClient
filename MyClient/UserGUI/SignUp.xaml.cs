@@ -154,7 +154,13 @@ namespace UserGUI
                 SetToolTip(PassVerErr, "Passwords do not match");
                 Errr = true;
             }
-            if(IfMailExists != null)
+            if (string.IsNullOrEmpty(txtEmail.Text))
+            {
+                EmailErr.Visibility = Visibility.Visible;
+                SetToolTip(EmailErr, "Email is required");
+                Errr = true;
+            }
+            else if(IfMailExists != null)
             {
                 EmailErr.Visibility= Visibility.Visible;
                 SetToolTip(EmailErr, "Email already exists");
@@ -193,7 +199,7 @@ namespace UserGUI
             }
             if (!Errr)
             {
-                myUser.isMnager = false;
+                myUser.IsAdmin = false;
                 myUser.Email = txtEmail.Text;
                 myUser.BirthDate = (DateTime)birthdateDatePicker.SelectedDate;
                 myUser.FirstName = txtFirstName.Text;

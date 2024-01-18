@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UserGUI.BrokerReference;
 using System.Threading;
+using System.Windows.Threading;
+using System.Reflection;
 
 namespace UserGUI
 {
@@ -24,43 +26,56 @@ namespace UserGUI
     public partial class MainWindow : Window
     {
         private User user;
-        private Dictionary<Coin, double> coinList;
-        private ServiceBrokerClient brokerDB = new ServiceBrokerClient();
+        private MyCoinList coinList;
+        private ServiceBrokerClient brokerService = new ServiceBrokerClient();
         private Dictionary<string, decimal> coinsValues;
         private double totValue = 0;
-
+        private List<CoinDesign> coinDesigns;
+        private DispatcherTimer dispatcherTimer;
 
         public MainWindow(User user)
         {
             InitializeComponent();
             this.user = user;
-            coinList = brokerDB.SelectCoinByUser(user);
-            getCoinsValue();
 
+            coinList = brokerService.GetCoinsByUser(user);
+            getCoinsValueSimple();
+            Console.WriteLine("hello");
 
+            Thread getCoinValueThread = new Thread(getCoinsValue);
+            getCoinValueThread.Start();
+
+            coinDesigns = new List<CoinDesign>();
             foreach (var item in coinList)
             {
-                switch(item.Key.Symbol)
-                {
-                    case "BTC":
-                        BTCValue.Text = item.Value.ToString();
-                        TOTBTCVALUE.Text = ((double)coinsValues["BTCUSDT"] * item.Value).ToString("F2");
-                        totValue += ((double)coinsValues["BTCUSDT"] * item.Value);
-                        break;
-                    case "ETH":
-                        ETHValue.Text = item.Value.ToString();
-                        TOTETHVALUE.Text = ((double)coinsValues["ETHUSDT"]*item.Value).ToString("F2");
-                        totValue += ((double)coinsValues["ETHUSDT"] * item.Value);
-                        break;
-                    default:
-                        break;
-                }
+                double usd = (double)coinsValues.ToList().Find(c => c.Key.ToString().Contains(item.Coin.Symbol)).Value;
+                totValue += item.Value * usd;
+
+                CoinDesign cd = new CoinDesign(item, usd);
+                coinsPanel.Children.Add(cd);
+                coinDesigns.Add(cd);
             }
 
+            PurpuleCoinDesign cp = new PurpuleCoinDesign();
+            purpuleCoinsPanel.Children.Add(cp);
+
+
+
             TOTBalance.Text = totValue.ToString("F2");
-            //Thread thread = new Thread(new ThreadStart(getCoinsValue));
-            //thread.Start();
-            //thread.Join();
+
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(2);
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+
+            dispatcherTimer.Start();
+
+
+        }
+
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+           updateConvertData();
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
@@ -68,17 +83,109 @@ namespace UserGUI
             Application.Current.Shutdown();
         }
 
+        private void updateConvertData()
+        {
+            totValue = 0;
+            try
+            {
+                foreach (var item in coinDesigns)
+                {
+                    double usd = (double)coinsValues.ToList().Find(c => c.Key.ToString().Contains(item.myCoin.Coin.Symbol)).Value;
+                    totValue += item.myCoin.Value * usd;
+                    item.updateCoinValue(item.myCoin, usd);
+                }
+                TOTBalance.Text = totValue.ToString("F2");
+                Console.WriteLine("sec run");
+            }
+            catch
+            {
+                Console.WriteLine("An thread error occured\n");
+            }
+        }
+
         private void getCoinsValue()
         {
-            CoinList coins = brokerDB.SelectAllCoins();
+            try
+            {
+                while (true)
+                {
+                    CoinList coins = brokerService.SelectAllCoins();
+                    List<String> myCoins = new List<string>();
+
+                    foreach (var item in coins)
+                    {
+                        myCoins.Add(item.Symbol + "USDT");
+                    }
+                    this.coinsValues = brokerService.GiveCoinValue(myCoins.ToArray());
+                    Console.WriteLine("one run\n");
+                    Thread.Sleep(5000);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("An thread error occured\n");
+            }
+
+        }
+
+        private void getCoinsValueSimple()
+        {
+            CoinList coins = brokerService.SelectAllCoins();
             List<String> myCoins = new List<string>();
 
             foreach (var item in coins)
             {
                 myCoins.Add(item.Symbol + "USDT");
             }
+            this.coinsValues = brokerService.GiveCoinValue(myCoins.ToArray());
+        }
 
-            this.coinsValues = brokerDB.GiveCoinValue(myCoins.ToArray());
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ConvertValue.Text = "0";
+            ConvertToValue.Text = "0";
+
+            string convertsss = ConvertSymbol.Text;
+            ConvertSymbol.Text = ConvertToSymbol.Text;
+            ConvertToSymbol.Text = convertsss;
+
+            ConvertToUSDValue.Text = "0";
+            ConvertUSDValue.Text = "0";
+        }
+
+        private void ConvertValue_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ConvertValue_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ConvertValue.Focus();
+        }
+
+        private void ConvertValue_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (coinsValues != null && !string.IsNullOrEmpty(ConvertSymbol.Text))
+            {
+                if (!string.IsNullOrEmpty(ConvertValue.Text))
+                {
+                    ConvertUSDValue.Text = ((coinsValues.ToList().Find(c => c.Key.ToString().Contains(ConvertSymbol.Text)).Value) * decimal.Parse(ConvertValue.Text)).ToString("F3");
+                    if (!string.IsNullOrEmpty(ConvertToSymbol.Text))
+                    {
+                        ConvertToValue.Text = ((coinsValues.ToList().Find(c => c.Key.ToString().Contains(ConvertSymbol.Text)).Value * decimal.Parse(ConvertValue.Text)) / (coinsValues.ToList().Find(c => c.Key.ToString().Contains(ConvertToSymbol.Text)).Value)).ToString("F3");
+                        if (!string.IsNullOrEmpty(ConvertToValue.Text))
+                        {
+                            ConvertToUSDValue.Text = ((coinsValues.ToList().Find(c => c.Key.ToString().Contains(ConvertToSymbol.Text)).Value) * decimal.Parse(ConvertToValue.Text)).ToString("F3");
+                        }
+                    }
+                }
+                else
+                {
+                    ConvertUSDValue.Text = "0";
+                    ConvertToValue.Text = "0";
+                    ConvertToValue.Text = "0";
+                }
+            }
         }
     }
 }

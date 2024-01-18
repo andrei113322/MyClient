@@ -32,9 +32,6 @@ namespace UserGUI.BrokerReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SymbolField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UserGUI.BrokerReference.UserList UsersField;
-        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name {
             get {
@@ -60,19 +57,6 @@ namespace UserGUI.BrokerReference {
                 }
             }
         }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public UserGUI.BrokerReference.UserList Users {
-            get {
-                return this.UsersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsersField, value) != true)) {
-                    this.UsersField = value;
-                    this.RaisePropertyChanged("Users");
-                }
-            }
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -82,6 +66,7 @@ namespace UserGUI.BrokerReference {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.User))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.Log))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.OrderHistory))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.MyCoin))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.Coin))]
     public partial class BaseEntity : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -90,9 +75,6 @@ namespace UserGUI.BrokerReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool isMnagerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -113,19 +95,6 @@ namespace UserGUI.BrokerReference {
                 if ((this.IDField.Equals(value) != true)) {
                     this.IDField = value;
                     this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool isMnager {
-            get {
-                return this.isMnagerField;
-            }
-            set {
-                if ((this.isMnagerField.Equals(value) != true)) {
-                    this.isMnagerField = value;
-                    this.RaisePropertyChanged("isMnager");
                 }
             }
         }
@@ -499,9 +468,57 @@ namespace UserGUI.BrokerReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="UserList", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="User")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MyCoin", Namespace="http://schemas.datacontract.org/2004/07/Model")]
     [System.SerializableAttribute()]
-    public class UserList : System.Collections.Generic.List<UserGUI.BrokerReference.User> {
+    public partial class MyCoin : UserGUI.BrokerReference.BaseEntity {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private UserGUI.BrokerReference.Coin CoinField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private UserGUI.BrokerReference.User UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double ValueField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public UserGUI.BrokerReference.Coin Coin {
+            get {
+                return this.CoinField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CoinField, value) != true)) {
+                    this.CoinField = value;
+                    this.RaisePropertyChanged("Coin");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public UserGUI.BrokerReference.User User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((this.ValueField.Equals(value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
+                }
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -516,6 +533,20 @@ namespace UserGUI.BrokerReference {
     [System.Runtime.Serialization.CollectionDataContractAttribute(Name="OrderHistoryList", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="OrderHistory")]
     [System.SerializableAttribute()]
     public class OrderHistoryList : System.Collections.Generic.List<UserGUI.BrokerReference.OrderHistory> {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="UserList", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="User")]
+    [System.SerializableAttribute()]
+    public class UserList : System.Collections.Generic.List<UserGUI.BrokerReference.User> {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="MyCoinList", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="MyCoin")]
+    [System.SerializableAttribute()]
+    public class MyCoinList : System.Collections.Generic.List<UserGUI.BrokerReference.MyCoin> {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -535,22 +566,22 @@ namespace UserGUI.BrokerReference {
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<UserGUI.BrokerReference.Coin, double>> SelectCoinByUserAsync(UserGUI.BrokerReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertCoin", ReplyAction="http://tempuri.org/IServiceBroker/InsertCoinResponse")]
-        void InsertCoin(UserGUI.BrokerReference.Coin coin);
+        bool InsertCoin(UserGUI.BrokerReference.Coin coin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertCoin", ReplyAction="http://tempuri.org/IServiceBroker/InsertCoinResponse")]
-        System.Threading.Tasks.Task InsertCoinAsync(UserGUI.BrokerReference.Coin coin);
+        System.Threading.Tasks.Task<bool> InsertCoinAsync(UserGUI.BrokerReference.Coin coin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateCoin", ReplyAction="http://tempuri.org/IServiceBroker/UpdateCoinResponse")]
-        void UpdateCoin(UserGUI.BrokerReference.Coin coin);
+        bool UpdateCoin(UserGUI.BrokerReference.Coin coin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateCoin", ReplyAction="http://tempuri.org/IServiceBroker/UpdateCoinResponse")]
-        System.Threading.Tasks.Task UpdateCoinAsync(UserGUI.BrokerReference.Coin coin);
+        System.Threading.Tasks.Task<bool> UpdateCoinAsync(UserGUI.BrokerReference.Coin coin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/DeleteCoin", ReplyAction="http://tempuri.org/IServiceBroker/DeleteCoinResponse")]
-        void DeleteCoin(UserGUI.BrokerReference.Coin coin);
+        bool DeleteCoin(UserGUI.BrokerReference.Coin coin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/DeleteCoin", ReplyAction="http://tempuri.org/IServiceBroker/DeleteCoinResponse")]
-        System.Threading.Tasks.Task DeleteCoinAsync(UserGUI.BrokerReference.Coin coin);
+        System.Threading.Tasks.Task<bool> DeleteCoinAsync(UserGUI.BrokerReference.Coin coin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/SelectAllLogs", ReplyAction="http://tempuri.org/IServiceBroker/SelectAllLogsResponse")]
         UserGUI.BrokerReference.LogList SelectAllLogs();
@@ -565,22 +596,22 @@ namespace UserGUI.BrokerReference {
         System.Threading.Tasks.Task<UserGUI.BrokerReference.LogList> SelectLogByUserAsync(UserGUI.BrokerReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertLog", ReplyAction="http://tempuri.org/IServiceBroker/InsertLogResponse")]
-        void InsertLog(UserGUI.BrokerReference.Log log);
+        bool InsertLog(UserGUI.BrokerReference.Log log);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertLog", ReplyAction="http://tempuri.org/IServiceBroker/InsertLogResponse")]
-        System.Threading.Tasks.Task InsertLogAsync(UserGUI.BrokerReference.Log log);
+        System.Threading.Tasks.Task<bool> InsertLogAsync(UserGUI.BrokerReference.Log log);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateLog", ReplyAction="http://tempuri.org/IServiceBroker/UpdateLogResponse")]
-        void UpdateLog(UserGUI.BrokerReference.Log log);
+        bool UpdateLog(UserGUI.BrokerReference.Log log);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateLog", ReplyAction="http://tempuri.org/IServiceBroker/UpdateLogResponse")]
-        System.Threading.Tasks.Task UpdateLogAsync(UserGUI.BrokerReference.Log log);
+        System.Threading.Tasks.Task<bool> UpdateLogAsync(UserGUI.BrokerReference.Log log);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/DeleteLog", ReplyAction="http://tempuri.org/IServiceBroker/DeleteLogResponse")]
-        void DeleteLog(UserGUI.BrokerReference.Log log);
+        bool DeleteLog(UserGUI.BrokerReference.Log log);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/DeleteLog", ReplyAction="http://tempuri.org/IServiceBroker/DeleteLogResponse")]
-        System.Threading.Tasks.Task DeleteLogAsync(UserGUI.BrokerReference.Log log);
+        System.Threading.Tasks.Task<bool> DeleteLogAsync(UserGUI.BrokerReference.Log log);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/SelectAllOrderHistory", ReplyAction="http://tempuri.org/IServiceBroker/SelectAllOrderHistoryResponse")]
         UserGUI.BrokerReference.OrderHistoryList SelectAllOrderHistory();
@@ -595,22 +626,22 @@ namespace UserGUI.BrokerReference {
         System.Threading.Tasks.Task<UserGUI.BrokerReference.OrderHistoryList> SelectOrderHistoryByUserAsync(UserGUI.BrokerReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertOrderHistory", ReplyAction="http://tempuri.org/IServiceBroker/InsertOrderHistoryResponse")]
-        void InsertOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory);
+        bool InsertOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertOrderHistory", ReplyAction="http://tempuri.org/IServiceBroker/InsertOrderHistoryResponse")]
-        System.Threading.Tasks.Task InsertOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory);
+        System.Threading.Tasks.Task<bool> InsertOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateOrderHistory", ReplyAction="http://tempuri.org/IServiceBroker/UpdateOrderHistoryResponse")]
-        void UpdateOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory);
+        bool UpdateOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateOrderHistory", ReplyAction="http://tempuri.org/IServiceBroker/UpdateOrderHistoryResponse")]
-        System.Threading.Tasks.Task UpdateOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory);
+        System.Threading.Tasks.Task<bool> UpdateOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/DeleteOrderHistory", ReplyAction="http://tempuri.org/IServiceBroker/DeleteOrderHistoryResponse")]
-        void DeleteOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory);
+        bool DeleteOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/DeleteOrderHistory", ReplyAction="http://tempuri.org/IServiceBroker/DeleteOrderHistoryResponse")]
-        System.Threading.Tasks.Task DeleteOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory);
+        System.Threading.Tasks.Task<bool> DeleteOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/SelectAllUsers", ReplyAction="http://tempuri.org/IServiceBroker/SelectAllUsersResponse")]
         UserGUI.BrokerReference.UserList SelectAllUsers();
@@ -631,22 +662,46 @@ namespace UserGUI.BrokerReference {
         System.Threading.Tasks.Task<UserGUI.BrokerReference.User> SelectUserByUserNameAsync(string userName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertUser", ReplyAction="http://tempuri.org/IServiceBroker/InsertUserResponse")]
-        void InsertUser(UserGUI.BrokerReference.User user);
+        bool InsertUser(UserGUI.BrokerReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertUser", ReplyAction="http://tempuri.org/IServiceBroker/InsertUserResponse")]
-        System.Threading.Tasks.Task InsertUserAsync(UserGUI.BrokerReference.User user);
+        System.Threading.Tasks.Task<bool> InsertUserAsync(UserGUI.BrokerReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateUser", ReplyAction="http://tempuri.org/IServiceBroker/UpdateUserResponse")]
-        void UpdateUser(UserGUI.BrokerReference.User user);
+        bool UpdateUser(UserGUI.BrokerReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateUser", ReplyAction="http://tempuri.org/IServiceBroker/UpdateUserResponse")]
-        System.Threading.Tasks.Task UpdateUserAsync(UserGUI.BrokerReference.User user);
+        System.Threading.Tasks.Task<bool> UpdateUserAsync(UserGUI.BrokerReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/DeleteUser", ReplyAction="http://tempuri.org/IServiceBroker/DeleteUserResponse")]
-        void DeleteUser(UserGUI.BrokerReference.User user);
+        bool DeleteUser(UserGUI.BrokerReference.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/DeleteUser", ReplyAction="http://tempuri.org/IServiceBroker/DeleteUserResponse")]
-        System.Threading.Tasks.Task DeleteUserAsync(UserGUI.BrokerReference.User user);
+        System.Threading.Tasks.Task<bool> DeleteUserAsync(UserGUI.BrokerReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetCoinsByUser", ReplyAction="http://tempuri.org/IServiceBroker/GetCoinsByUserResponse")]
+        UserGUI.BrokerReference.MyCoinList GetCoinsByUser(UserGUI.BrokerReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetCoinsByUser", ReplyAction="http://tempuri.org/IServiceBroker/GetCoinsByUserResponse")]
+        System.Threading.Tasks.Task<UserGUI.BrokerReference.MyCoinList> GetCoinsByUserAsync(UserGUI.BrokerReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertMyCoin", ReplyAction="http://tempuri.org/IServiceBroker/InsertMyCoinResponse")]
+        bool InsertMyCoin(UserGUI.BrokerReference.MyCoin myCoin);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertMyCoin", ReplyAction="http://tempuri.org/IServiceBroker/InsertMyCoinResponse")]
+        System.Threading.Tasks.Task<bool> InsertMyCoinAsync(UserGUI.BrokerReference.MyCoin myCoin);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateMyCoin", ReplyAction="http://tempuri.org/IServiceBroker/UpdateMyCoinResponse")]
+        bool UpdateMyCoin(UserGUI.BrokerReference.MyCoin myCoin);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateMyCoin", ReplyAction="http://tempuri.org/IServiceBroker/UpdateMyCoinResponse")]
+        System.Threading.Tasks.Task<bool> UpdateMyCoinAsync(UserGUI.BrokerReference.MyCoin myCoin);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/DeleteMyCoin", ReplyAction="http://tempuri.org/IServiceBroker/DeleteMyCoinResponse")]
+        bool DeleteMyCoin(UserGUI.BrokerReference.MyCoin myCoin);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/DeleteMyCoin", ReplyAction="http://tempuri.org/IServiceBroker/DeleteMyCoinResponse")]
+        System.Threading.Tasks.Task<bool> DeleteMyCoinAsync(UserGUI.BrokerReference.MyCoin myCoin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GiveCoinValue", ReplyAction="http://tempuri.org/IServiceBroker/GiveCoinValueResponse")]
         System.Collections.Generic.Dictionary<string, decimal> GiveCoinValue(string[] Value);
@@ -698,27 +753,27 @@ namespace UserGUI.BrokerReference {
             return base.Channel.SelectCoinByUserAsync(user);
         }
         
-        public void InsertCoin(UserGUI.BrokerReference.Coin coin) {
-            base.Channel.InsertCoin(coin);
+        public bool InsertCoin(UserGUI.BrokerReference.Coin coin) {
+            return base.Channel.InsertCoin(coin);
         }
         
-        public System.Threading.Tasks.Task InsertCoinAsync(UserGUI.BrokerReference.Coin coin) {
+        public System.Threading.Tasks.Task<bool> InsertCoinAsync(UserGUI.BrokerReference.Coin coin) {
             return base.Channel.InsertCoinAsync(coin);
         }
         
-        public void UpdateCoin(UserGUI.BrokerReference.Coin coin) {
-            base.Channel.UpdateCoin(coin);
+        public bool UpdateCoin(UserGUI.BrokerReference.Coin coin) {
+            return base.Channel.UpdateCoin(coin);
         }
         
-        public System.Threading.Tasks.Task UpdateCoinAsync(UserGUI.BrokerReference.Coin coin) {
+        public System.Threading.Tasks.Task<bool> UpdateCoinAsync(UserGUI.BrokerReference.Coin coin) {
             return base.Channel.UpdateCoinAsync(coin);
         }
         
-        public void DeleteCoin(UserGUI.BrokerReference.Coin coin) {
-            base.Channel.DeleteCoin(coin);
+        public bool DeleteCoin(UserGUI.BrokerReference.Coin coin) {
+            return base.Channel.DeleteCoin(coin);
         }
         
-        public System.Threading.Tasks.Task DeleteCoinAsync(UserGUI.BrokerReference.Coin coin) {
+        public System.Threading.Tasks.Task<bool> DeleteCoinAsync(UserGUI.BrokerReference.Coin coin) {
             return base.Channel.DeleteCoinAsync(coin);
         }
         
@@ -738,27 +793,27 @@ namespace UserGUI.BrokerReference {
             return base.Channel.SelectLogByUserAsync(user);
         }
         
-        public void InsertLog(UserGUI.BrokerReference.Log log) {
-            base.Channel.InsertLog(log);
+        public bool InsertLog(UserGUI.BrokerReference.Log log) {
+            return base.Channel.InsertLog(log);
         }
         
-        public System.Threading.Tasks.Task InsertLogAsync(UserGUI.BrokerReference.Log log) {
+        public System.Threading.Tasks.Task<bool> InsertLogAsync(UserGUI.BrokerReference.Log log) {
             return base.Channel.InsertLogAsync(log);
         }
         
-        public void UpdateLog(UserGUI.BrokerReference.Log log) {
-            base.Channel.UpdateLog(log);
+        public bool UpdateLog(UserGUI.BrokerReference.Log log) {
+            return base.Channel.UpdateLog(log);
         }
         
-        public System.Threading.Tasks.Task UpdateLogAsync(UserGUI.BrokerReference.Log log) {
+        public System.Threading.Tasks.Task<bool> UpdateLogAsync(UserGUI.BrokerReference.Log log) {
             return base.Channel.UpdateLogAsync(log);
         }
         
-        public void DeleteLog(UserGUI.BrokerReference.Log log) {
-            base.Channel.DeleteLog(log);
+        public bool DeleteLog(UserGUI.BrokerReference.Log log) {
+            return base.Channel.DeleteLog(log);
         }
         
-        public System.Threading.Tasks.Task DeleteLogAsync(UserGUI.BrokerReference.Log log) {
+        public System.Threading.Tasks.Task<bool> DeleteLogAsync(UserGUI.BrokerReference.Log log) {
             return base.Channel.DeleteLogAsync(log);
         }
         
@@ -778,27 +833,27 @@ namespace UserGUI.BrokerReference {
             return base.Channel.SelectOrderHistoryByUserAsync(user);
         }
         
-        public void InsertOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory) {
-            base.Channel.InsertOrderHistory(orderHistory);
+        public bool InsertOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory) {
+            return base.Channel.InsertOrderHistory(orderHistory);
         }
         
-        public System.Threading.Tasks.Task InsertOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory) {
+        public System.Threading.Tasks.Task<bool> InsertOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory) {
             return base.Channel.InsertOrderHistoryAsync(orderHistory);
         }
         
-        public void UpdateOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory) {
-            base.Channel.UpdateOrderHistory(orderHistory);
+        public bool UpdateOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory) {
+            return base.Channel.UpdateOrderHistory(orderHistory);
         }
         
-        public System.Threading.Tasks.Task UpdateOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory) {
+        public System.Threading.Tasks.Task<bool> UpdateOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory) {
             return base.Channel.UpdateOrderHistoryAsync(orderHistory);
         }
         
-        public void DeleteOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory) {
-            base.Channel.DeleteOrderHistory(orderHistory);
+        public bool DeleteOrderHistory(UserGUI.BrokerReference.OrderHistory orderHistory) {
+            return base.Channel.DeleteOrderHistory(orderHistory);
         }
         
-        public System.Threading.Tasks.Task DeleteOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory) {
+        public System.Threading.Tasks.Task<bool> DeleteOrderHistoryAsync(UserGUI.BrokerReference.OrderHistory orderHistory) {
             return base.Channel.DeleteOrderHistoryAsync(orderHistory);
         }
         
@@ -826,28 +881,60 @@ namespace UserGUI.BrokerReference {
             return base.Channel.SelectUserByUserNameAsync(userName);
         }
         
-        public void InsertUser(UserGUI.BrokerReference.User user) {
-            base.Channel.InsertUser(user);
+        public bool InsertUser(UserGUI.BrokerReference.User user) {
+            return base.Channel.InsertUser(user);
         }
         
-        public System.Threading.Tasks.Task InsertUserAsync(UserGUI.BrokerReference.User user) {
+        public System.Threading.Tasks.Task<bool> InsertUserAsync(UserGUI.BrokerReference.User user) {
             return base.Channel.InsertUserAsync(user);
         }
         
-        public void UpdateUser(UserGUI.BrokerReference.User user) {
-            base.Channel.UpdateUser(user);
+        public bool UpdateUser(UserGUI.BrokerReference.User user) {
+            return base.Channel.UpdateUser(user);
         }
         
-        public System.Threading.Tasks.Task UpdateUserAsync(UserGUI.BrokerReference.User user) {
+        public System.Threading.Tasks.Task<bool> UpdateUserAsync(UserGUI.BrokerReference.User user) {
             return base.Channel.UpdateUserAsync(user);
         }
         
-        public void DeleteUser(UserGUI.BrokerReference.User user) {
-            base.Channel.DeleteUser(user);
+        public bool DeleteUser(UserGUI.BrokerReference.User user) {
+            return base.Channel.DeleteUser(user);
         }
         
-        public System.Threading.Tasks.Task DeleteUserAsync(UserGUI.BrokerReference.User user) {
+        public System.Threading.Tasks.Task<bool> DeleteUserAsync(UserGUI.BrokerReference.User user) {
             return base.Channel.DeleteUserAsync(user);
+        }
+        
+        public UserGUI.BrokerReference.MyCoinList GetCoinsByUser(UserGUI.BrokerReference.User user) {
+            return base.Channel.GetCoinsByUser(user);
+        }
+        
+        public System.Threading.Tasks.Task<UserGUI.BrokerReference.MyCoinList> GetCoinsByUserAsync(UserGUI.BrokerReference.User user) {
+            return base.Channel.GetCoinsByUserAsync(user);
+        }
+        
+        public bool InsertMyCoin(UserGUI.BrokerReference.MyCoin myCoin) {
+            return base.Channel.InsertMyCoin(myCoin);
+        }
+        
+        public System.Threading.Tasks.Task<bool> InsertMyCoinAsync(UserGUI.BrokerReference.MyCoin myCoin) {
+            return base.Channel.InsertMyCoinAsync(myCoin);
+        }
+        
+        public bool UpdateMyCoin(UserGUI.BrokerReference.MyCoin myCoin) {
+            return base.Channel.UpdateMyCoin(myCoin);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateMyCoinAsync(UserGUI.BrokerReference.MyCoin myCoin) {
+            return base.Channel.UpdateMyCoinAsync(myCoin);
+        }
+        
+        public bool DeleteMyCoin(UserGUI.BrokerReference.MyCoin myCoin) {
+            return base.Channel.DeleteMyCoin(myCoin);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteMyCoinAsync(UserGUI.BrokerReference.MyCoin myCoin) {
+            return base.Channel.DeleteMyCoinAsync(myCoin);
         }
         
         public System.Collections.Generic.Dictionary<string, decimal> GiveCoinValue(string[] Value) {

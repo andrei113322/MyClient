@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UserGUI.BrokerReference;
 
 namespace UserGUI
 {
@@ -20,9 +21,27 @@ namespace UserGUI
     /// </summary>
     public partial class PurpuleCoinDesign : UserControl
     {
-        public PurpuleCoinDesign()
+        public MyCoin myCoin { get; }
+        public PurpuleCoinDesign(MyCoin coin, double val)
         {
             InitializeComponent();
+            this.DataContext = coin;
+            myCoin = coin;
+            changeVal.Text = $"1 {coin.Coin.Symbol} (${val.ToString()})";
+
+            try
+            {
+                imgCoin.Source = new BitmapImage(new Uri($"pack://application:,,,/images/purpuleCoins/{coin.Coin.Symbol}.png"));
+            }
+            catch
+            {
+                imgCoin.Source = null;//new BitmapImage(new Uri($"pack://application:,,,/images/Coins/{logo}.png"));
+            }
+        }
+
+        public string getSymbol()
+        {
+            return this.myCoin.Coin.Symbol;
         }
     }
 }

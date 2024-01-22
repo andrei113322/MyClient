@@ -19,26 +19,28 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0"
                    HorizontalAlignment="Left"
-                   Text="Bitcoin"
+                   Text="{Binding Path=Symbol}"
                    VerticalAlignment="Top"
                    Foreground="#FF1D212C"
-                   FontSize="18" />
+                   FontSize="18" 
+                   x:Name="symbolName"/>
         <TextBlock Grid.Column="0" Grid.Row="1"
                    HorizontalAlignment="Left"
                    TextWrapping="Wrap"
                    VerticalAlignment="Top"
                    FontFamily="PT Sans Narrow"
-                   Text="5.04 BTC ($53 578.91)" />
+                   Text=""
+                   x:Name="changeVal"/>
         <Rectangle Grid.Column="2"
                    Grid.RowSpan="2"
                    Fill="#F6F5FB"
-                   HorizontalAlignment="Left"
+                   HorizontalAlignment="Right"
                    Height="41"
                    RadiusY="17"
                    RadiusX="17"
                    VerticalAlignment="Top"
-                   Width="38" />
-        <Image x:Name="image"
+                   Width="38"/>
+        <Image x:Name="imgCoin"
                Margin="9 9 0 0"
                Grid.Column="2"
                Grid.RowSpan="2"

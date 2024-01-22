@@ -9,6 +9,22 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="comboBoxStyle"
+                   TargetType="ComboBox">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="MaxWidth"
+                        Value="200" />
+                <Setter Property="VerticalAlignment"
+                        Value="Top" />
+                <Setter Property="ScrollViewer.CanContentScroll"
+                        Value="True" />
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                        Value="Auto" />
+            </Style>
+            
+            
+            
+            
             <Style x:Key="MenuButtonStyle"
                    TargetType="{x:Type Button}">
                 <Setter Property="Height"

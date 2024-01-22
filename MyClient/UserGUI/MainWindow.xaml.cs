@@ -54,10 +54,14 @@ namespace UserGUI
                 CoinDesign cd = new CoinDesign(item, usd);
                 coinsPanel.Children.Add(cd);
                 coinDesigns.Add(cd);
-            }
 
-            PurpuleCoinDesign cp = new PurpuleCoinDesign();
-            purpuleCoinsPanel.Children.Add(cp);
+                PurpuleCoinDesign cp = new PurpuleCoinDesign(item, usd);
+                purpuleCoinsPanel.Items.Add(cp);
+
+                PurpuleCoinDesign cpp = new PurpuleCoinDesign(item, usd);
+                purpuleCoinsPanelSecond.Items.Add(cpp);
+
+            }
 
 
 
@@ -157,6 +161,37 @@ namespace UserGUI
         {
 
         }
+
+        private void PurpleCoinsPanel_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            PurpuleCoinDesign selectedControl = purpuleCoinsPanel.SelectedItem as PurpuleCoinDesign;
+
+            // Check if an item is selected
+            if (selectedControl != null)
+            {
+                // Call the getSymbol function on the selected user control
+                ConvertSymbol.Text = selectedControl.getSymbol();
+
+                // Now, 'symbol' holds the result of getSymbol
+                // Do something with 'symbol'
+            }
+        }
+
+        private void PurpleCoinsPanel_SelectionChangedSecond(object sender, RoutedEventArgs e)
+        {
+            PurpuleCoinDesign selectedControl = purpuleCoinsPanelSecond.SelectedItem as PurpuleCoinDesign;
+
+            // Check if an item is selected
+            if (selectedControl != null)
+            {
+                // Call the getSymbol function on the selected user control
+                ConvertToSymbol.Text = selectedControl.getSymbol();
+
+                // Now, 'symbol' holds the result of getSymbol
+                // Do something with 'symbol'
+            }
+        }
+
 
         private void ConvertValue_MouseDown(object sender, MouseButtonEventArgs e)
         {

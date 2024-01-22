@@ -205,9 +205,16 @@
                        Margin="717,173,0,0"
                        VerticalAlignment="Top"
                        Width="45" />
-            <StackPanel x:Name="purpuleCoinsPanel"
+            <!--<StackPanel x:Name="purpuleCoinsPanel"
                         Grid.Column="2"
-                        Margin="-400,272,0,0" />
+                        Margin="-400,272,0,0" />-->
+            <ComboBox x:Name="purpuleCoinsPanel"
+                      Style="{StaticResource comboBoxStyle}"
+                      Grid.Column="2"
+                      Margin="-400,300,0,90"
+                      Width="200"
+                      SelectedIndex="0"
+                      SelectionChanged="PurpleCoinsPanel_SelectionChanged"></ComboBox>
             <!--<TextBlock Grid.Column="2"
                        HorizontalAlignment="Left"
                        Margin="57,272,0,0"
@@ -249,10 +256,13 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>-->
-            <Image Source="/images/down.png"
+            <!--<Image Source="/images/down.png"
                    Margin="238,291,519,448"
-                   Grid.Column="2" />
-            <TextBlock x:Name="textBlock1_Copy3"
+                   Grid.Column="2" />-->
+            
+            
+            
+            <!--<TextBlock x:Name="textBlock1_Copy3"
                        Grid.Column="2"
                        HorizontalAlignment="Left"
                        Margin="416,272,0,0"
@@ -294,10 +304,16 @@
                         <TranslateTransform />
                     </TransformGroup>
                 </Image.RenderTransform>
-            </Image>
-            <Image Source="/Images/down.png"
-                   Margin="597,291,160,448"
-                   Grid.Column="2" />
+            </Image>-->
+            <ComboBox x:Name="purpuleCoinsPanelSecond"
+                      Style="{StaticResource comboBoxStyle}"
+                      Grid.Column="2"
+                      Margin="350,300,0,90"
+                      Width="200"
+                      SelectedIndex="0"
+                      SelectionChanged="PurpleCoinsPanel_SelectionChangedSecond"></ComboBox>
+            
+            
             <Rectangle Grid.Column="2"
                        Fill="#FF1D212C"
                        HorizontalAlignment="Left"
@@ -333,7 +349,7 @@
             <TextBox Grid.Column="2"
                      HorizontalAlignment="Left"
                      Margin="35,407,0,0"
-                     Text="3.000000"
+                     Text="0"
                      VerticalAlignment="Top"
                      Foreground="#FF1D212C"
                      FontSize="28"
@@ -398,7 +414,7 @@
                        HorizontalAlignment="Left"
                        Margin="394,407,0,0"
                        TextWrapping="Wrap"
-                       Text="94.426101"
+                       Text="0"
                        VerticalAlignment="Top"
                        Foreground="#92969F"
                        FontSize="28"

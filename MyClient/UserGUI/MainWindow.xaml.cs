@@ -153,6 +153,10 @@ namespace UserGUI
             ConvertSymbol.Text = ConvertToSymbol.Text;
             ConvertToSymbol.Text = convertsss;
 
+            int index = purpuleCoinsPanelSecond.SelectedIndex;
+            purpuleCoinsPanelSecond.SelectedIndex = purpuleCoinsPanel.SelectedIndex;
+            purpuleCoinsPanel.SelectedIndex = index;
+
             ConvertToUSDValue.Text = "0";
             ConvertUSDValue.Text = "0";
         }
@@ -160,6 +164,31 @@ namespace UserGUI
         private void ConvertValue_LostFocus(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void convertionClick(object sender, RoutedEventArgs e)
+        {
+            double value = coinList.FirstOrDefault(item => item.Coin.Symbol == ConvertSymbol.Text)?.Value ?? 0;
+
+            if (double.TryParse(ConvertValue.Text, out double inputValue) && inputValue <= value)
+            {
+                AfterConvertingSymbol.Text = ConvertSymbol.Text;
+                AfterToConvertingSymbol.Text = ConvertToSymbol.Text;
+                AfterConvertingValue.Text = ConvertValue.Text;
+                AfterToConvertingValue.Text = ConvertToValue.Text;
+                ConfirmationButton.Content = "Confirm";
+                stepTooSeparator.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
+                stepTooNote.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
+                stepTooConfirm.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
+
+
+                StepToo.Visibility = Visibility.Visible;
+                ConvertScreen.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+
+            }
         }
 
         private void PurpleCoinsPanel_SelectionChanged(object sender, RoutedEventArgs e)

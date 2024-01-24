@@ -256,7 +256,6 @@
   <ItemGroup>
     <Resource Include="Images\Coins\ETH.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\purpuleCoins\BTC.png" />
   </ItemGroup>

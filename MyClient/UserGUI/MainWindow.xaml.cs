@@ -330,5 +330,56 @@ namespace UserGUI
                 }
             }
         }
+
+
+
+
+
+        private void tradeSelectionClick(object sender, RoutedEventArgs e)
+        {
+            collapseAllElipses();
+            tradeSelectionEllipse.Visibility = Visibility.Visible;
+        }
+
+        private void convertSelectionClick(object sender, RoutedEventArgs e)
+        {
+            collapseAllElipses();
+            convertSelectionEllipse.Visibility = Visibility.Visible;
+            convertSecondColumn.Visibility = Visibility.Visible;
+            convertThirdColums.Visibility = Visibility.Visible;
+        }
+
+        private void walletSelectionClick(object sender, RoutedEventArgs e)
+        {
+            collapseAllElipses();
+            walletSelectionEllipse.Visibility = Visibility.Visible;
+        }
+
+        private void prizeSelectionClick(object sender, RoutedEventArgs e)
+        {
+            collapseAllElipses();
+            prizeSelectionEllipse.Visibility = Visibility.Visible;
+        }
+
+        private void profileSelectionClick(object sender, RoutedEventArgs e)
+        {
+            collapseAllElipses();
+            profileSelectionEllipse.Visibility = Visibility.Visible;
+        }
+
+        private void collapseAllElipses()
+        {
+            tradeSelectionEllipse.Visibility = Visibility.Collapsed;
+            convertSelectionEllipse.Visibility = Visibility.Collapsed;
+            walletSelectionEllipse.Visibility = Visibility.Collapsed;
+            prizeSelectionEllipse.Visibility = Visibility.Collapsed;
+            profileSelectionEllipse.Visibility = Visibility.Collapsed;
+
+            convertSecondColumn.Visibility = Visibility.Collapsed;
+            convertThirdColums.Visibility = Visibility.Collapsed;
+
+        }
+
+
     }
 }

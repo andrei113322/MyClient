@@ -38,31 +38,73 @@
                            Margin="0,55" />
                     <Button Margin="0,30,0,0" 
                             x:Name="tradeSelection"
-                            Style="{StaticResource MenuButtonStyle}">
-                        <Image Source="/Images/collage.png"
-                               Width="22" />
+                            Style="{StaticResource MenuButtonStyle}"
+                            Click="tradeSelectionClick">
+                        <StackPanel>
+                            <Image Source="/Images/collage.png"
+                                   Width="22" />
+                            <Ellipse Width="5"
+                                     Height="5"
+                                     Fill="White"
+                                     Margin="3"
+                                     Visibility="Collapsed"
+                                     x:Name="tradeSelectionEllipse"/>
+                        </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource MenuButtonStyle}" x:Name="convertSelection">
+                    <Button Style="{StaticResource MenuButtonStyle}"
+                            x:Name="convertSelection"
+                            Click="convertSelectionClick">
                         <StackPanel>
                             <Image Source="/Images/convert.png"
                                    Width="22" />
                             <Ellipse Width="5"
                                      Height="5"
                                      Fill="White"
-                                     Margin="3" />
+                                     Margin="3"
+                                     x:Name="convertSelectionEllipse"/>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource MenuButtonStyle}" x:Name="WalletSelection">
-                        <Image Source="/Images/prop.png"
-                               Width="22" />
+                    <Button Style="{StaticResource MenuButtonStyle}"
+                            x:Name="walletSelection"
+                            Click="walletSelectionClick">
+                        <StackPanel>
+                            <Image Source="/Images/prop.png"
+                                   Width="22" />
+                            <Ellipse Width="5"
+                                     Height="5"
+                                     Fill="White"
+                                     Margin="3"
+                                     Visibility="Collapsed"
+                                     x:Name="walletSelectionEllipse"/>
+                        </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource MenuButtonStyle}" x:Name="prizeSelection">
-                        <Image Source="/Images/notif.png"
-                               Width="22" />
+                    <Button Style="{StaticResource MenuButtonStyle}"
+                            x:Name="prizeSelection"
+                            Click="prizeSelectionClick">
+                        <StackPanel>
+                            <Image Source="/Images/notif.png"
+                                   Width="22" />
+                            <Ellipse Width="5"
+                                     Height="5"
+                                     Fill="White"
+                                     Margin="3"
+                                     Visibility="Collapsed"
+                                     x:Name="prizeSelectionEllipse"/>
+                        </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource MenuButtonStyle}" x:Name="profileSelection">
-                        <Image Source="/Images/profile.png"
-                               Width="22" />
+                    <Button Style="{StaticResource MenuButtonStyle}"
+                            x:Name="profileSelection"
+                            Click="profileSelectionClick">
+                        <StackPanel>
+                            <Image Source="/Images/profile.png"
+                                   Width="22" />
+                            <Ellipse Width="5"
+                                     Height="5"
+                                     Fill="White"
+                                     Margin="3"
+                                     Visibility="Collapsed" 
+                                     x:Name="profileSelectionEllipse"/>
+                        </StackPanel>
                     </Button>
                 </StackPanel>
             </Border>

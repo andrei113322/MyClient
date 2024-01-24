@@ -168,27 +168,81 @@ namespace UserGUI
 
         private void convertionClick(object sender, RoutedEventArgs e)
         {
-            double value = coinList.FirstOrDefault(item => item.Coin.Symbol == ConvertSymbol.Text)?.Value ?? 0;
-
-            if (double.TryParse(ConvertValue.Text, out double inputValue) && inputValue <= value)
+            if (StepToo.Visibility == Visibility.Collapsed)
             {
-                AfterConvertingSymbol.Text = ConvertSymbol.Text;
-                AfterToConvertingSymbol.Text = ConvertToSymbol.Text;
-                AfterConvertingValue.Text = ConvertValue.Text;
-                AfterToConvertingValue.Text = ConvertToValue.Text;
-                ConfirmationButton.Content = "Confirm";
-                stepTooSeparator.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
-                stepTooNote.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
-                stepTooConfirm.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
+                double value = coinList.FirstOrDefault(item => item.Coin.Symbol == ConvertSymbol.Text)?.Value ?? 0;
+
+                if (double.TryParse(ConvertValue.Text, out double inputValue) && inputValue <= value)
+                {
+                    AfterConvertingSymbol.Text = ConvertSymbol.Text;
+                    AfterToConvertingSymbol.Text = ConvertToSymbol.Text;
+                    AfterConvertingValue.Text = ConvertValue.Text;
+                    AfterToConvertingValue.Text = ConvertToValue.Text;
+                    ConfirmationButton.Content = "Confirm";
+                    stepTooSeparator.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
+                    stepTooNote.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
+                    stepTooConfirm.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
 
 
-                StepToo.Visibility = Visibility.Visible;
-                ConvertScreen.Visibility = Visibility.Collapsed;
+                    StepToo.Visibility = Visibility.Visible;
+                    ConvertScreen.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+
+                }
             }
             else
             {
+                MyCoin changeFromCoin = null;
+                MyCoin changeToCoin = null;
+                foreach (var item in coinList)
+                {
+                    if (item.Coin.Symbol == AfterConvertingSymbol.Text)
+                    {
+                        changeFromCoin = item;
+                    }
+                    if (item.Coin.Symbol == AfterToConvertingSymbol.Text)
+                    {
+                        changeToCoin = item;
+                    }
+                }
+                if (changeFromCoin != null && changeToCoin != null)
+                {
+                    changeFromCoin.Value = changeFromCoin.Value - double.Parse(AfterConvertingValue.Text);
+                    brokerService.UpdateMyCoin(changeFromCoin);
+
+                    changeToCoin.Value = changeToCoin.Value + double.Parse(AfterToConvertingValue.Text);
+                    brokerService.UpdateMyCoin(changeToCoin);
+                }
+
+                StepToo.Visibility = Visibility.Collapsed;
+                succesfullScreen.Visibility = Visibility.Visible;
+                ConfirmationButton.Visibility = Visibility.Collapsed;
+
+                stepThreeSeparator.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
+                stepTreeNote.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
+                stepThreeSuccess.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1D212C"));
+
+                dispatcherTimer = new DispatcherTimer();
+                dispatcherTimer.Interval = TimeSpan.FromSeconds(4);
+                dispatcherTimer.Tick += succesfullTimer;
+
+                dispatcherTimer.Start();
 
             }
+        }
+
+        private void CancelButtonPressed(object sender, RoutedEventArgs e)
+        {
+            ConfirmationButton.Content = "Convert Now";
+            stepTooSeparator.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#92969F"));
+            stepTooNote.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#92969F"));
+            stepTooConfirm.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#92969F"));
+
+
+            StepToo.Visibility = Visibility.Collapsed;
+            ConvertScreen.Visibility = Visibility.Visible;
         }
 
         private void PurpleCoinsPanel_SelectionChanged(object sender, RoutedEventArgs e)
@@ -200,6 +254,7 @@ namespace UserGUI
             {
                 // Call the getSymbol function on the selected user control
                 ConvertSymbol.Text = selectedControl.getSymbol();
+                changeMyConvertionValues();
 
                 // Now, 'symbol' holds the result of getSymbol
                 // Do something with 'symbol'
@@ -215,6 +270,8 @@ namespace UserGUI
             {
                 // Call the getSymbol function on the selected user control
                 ConvertToSymbol.Text = selectedControl.getSymbol();
+                changeMyConvertionValues();
+
 
                 // Now, 'symbol' holds the result of getSymbol
                 // Do something with 'symbol'
@@ -228,6 +285,28 @@ namespace UserGUI
         }
 
         private void ConvertValue_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            changeMyConvertionValues();
+        }
+
+        private void succesfullTimer(object sender, EventArgs e)
+        {
+            succesfullScreen.Visibility = Visibility.Collapsed;
+            ConvertScreen.Visibility = Visibility.Visible;
+            ConfirmationButton.Visibility = Visibility.Visible;
+
+            stepTooSeparator.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#92969F"));
+            stepTooNote.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#92969F"));
+            stepTooConfirm.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#92969F"));
+
+            stepThreeSeparator.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#92969F"));
+            stepTreeNote.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#92969F"));
+            stepThreeSuccess.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#92969F"));
+            dispatcherTimer.Stop();
+        }
+
+
+        private void changeMyConvertionValues()
         {
             if (coinsValues != null && !string.IsNullOrEmpty(ConvertSymbol.Text))
             {

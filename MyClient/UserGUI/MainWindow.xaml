@@ -36,12 +36,13 @@
                     <Image Source="/Images/diamond.png"
                            Width="32"
                            Margin="0,55" />
-                    <Button Margin="0,30,0,0"
+                    <Button Margin="0,30,0,0" 
+                            x:Name="tradeSelection"
                             Style="{StaticResource MenuButtonStyle}">
                         <Image Source="/Images/collage.png"
                                Width="22" />
                     </Button>
-                    <Button Style="{StaticResource MenuButtonStyle}">
+                    <Button Style="{StaticResource MenuButtonStyle}" x:Name="convertSelection">
                         <StackPanel>
                             <Image Source="/Images/convert.png"
                                    Width="22" />
@@ -51,15 +52,15 @@
                                      Margin="3" />
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource MenuButtonStyle}">
+                    <Button Style="{StaticResource MenuButtonStyle}" x:Name="WalletSelection">
                         <Image Source="/Images/prop.png"
                                Width="22" />
                     </Button>
-                    <Button Style="{StaticResource MenuButtonStyle}">
+                    <Button Style="{StaticResource MenuButtonStyle}" x:Name="prizeSelection">
                         <Image Source="/Images/notif.png"
                                Width="22" />
                     </Button>
-                    <Button Style="{StaticResource MenuButtonStyle}">
+                    <Button Style="{StaticResource MenuButtonStyle}" x:Name="profileSelection">
                         <Image Source="/Images/profile.png"
                                Width="22" />
                     </Button>
@@ -69,391 +70,400 @@
             
             
             
-            
-            <StackPanel Orientation="Vertical"
-                        Grid.Column="1"
-                        Margin="27, 78, 52, 0">
-                <TextBlock x:Name="textBlock"
-                           TextWrapping="Wrap"
-                           Text="Wallet"
-                           FontSize="26"
-                           FontFamily="Leelawadee" />
-                <Grid Margin="0,60,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="USD "
-                                   FontSize="20"
-                                   Foreground="#1D212C" />
-                        <!--<Image Source="/Images/down.png"
+            <Grid Grid.Column="1" x:Name="convertSecondColumn">
+                <StackPanel Orientation="Vertical"
+                            Grid.Column="1"
+                            Margin="27, 78, 52, 0">
+                    <TextBlock x:Name="textBlock"
+                               TextWrapping="Wrap"
+                               Text="Wallet"
+                               FontSize="26"
+                               FontFamily="Leelawadee" />
+                    <Grid Margin="0,60,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="USD "
+                                       FontSize="20"
+                                       Foreground="#1D212C" />
+                            <!--<Image Source="/Images/down.png"
                                Width="12" />-->
-                    </StackPanel>
-                    <TextBlock x:Name="TOTBalance"
-                               Grid.Column="1"
-                               HorizontalAlignment="Right"
-                               Text="$0"
-                               FontSize="20"
-                               VerticalAlignment="Top"
-                               FontFamily="PT Sans Pro Narrow" />
-                    <TextBlock Grid.Row="1"
-                               HorizontalAlignment="Left"
-                               Text="Market Value"
-                               FontSize="12"
-                               VerticalAlignment="Top"
-                               FontFamily="PT Sans"
-                               Foreground="#92969F" />
-                    <TextBlock Grid.Row="1"
-                               Grid.Column="1"
-                               HorizontalAlignment="Right"
-                               Text="Total Balance"
-                               FontSize="12"
-                               VerticalAlignment="Top"
-                               FontFamily="PT Sans"
-                               Foreground="#92969F" />
-                </Grid>
-                <Separator Margin="0, 35, 0, 0" />
-                
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
-                              HorizontalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="coinsPanel"/>
-                </ScrollViewer>
-                
-            </StackPanel>
-            <TextBlock x:Name="textBlock3"
-                       Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       Margin="32,72,0,0"
-                       TextWrapping="Wrap"
-                       Text="1st Step"
-                       VerticalAlignment="Top"
-                       Foreground="#92969F"
-                       FontSize="11" />
-            <TextBlock x:Name="textBlock4"
-                       Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       Margin="32,85,0,0"
-                       TextWrapping="Wrap"
-                       Text="Select"
-                       Foreground="#1D212C"
-                       VerticalAlignment="Top"
-                       FontSize="18" />
-            <Separator Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Height="15"
-                       Margin="107,82,0,0"
-                       Width="75"
-                       Background="#92969F" />
-            <Separator Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Height="15"
-                       Margin="182,82,0,0"
-                       Width="75"
-                       Background="LightGray"
-                       x:Name="stepTooSeparator"/>
-            <TextBlock Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       Margin="287,72,0,0"
-                       TextWrapping="Wrap"
-                       Text="2nd Step"
-                       VerticalAlignment="Top"
-                       Foreground="#92969F"
-                       FontSize="11"
-                       x:Name="stepTooNote"/>
-            <TextBlock Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       Margin="287,85,0,0"
-                       TextWrapping="Wrap"
-                       Text="Confirm"
-                       Foreground="#92969F"
-                       VerticalAlignment="Top"
-                       FontSize="18"
-                       x:Name="stepTooConfirm"/>
-            <Separator Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Height="15"
-                       Margin="377,82,0,0"
-                       Width="145"
-                       Background="LightGray" />
-            <TextBlock Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       Margin="555,72,0,0"
-                       TextWrapping="Wrap"
-                       Text="3rd Step"
-                       VerticalAlignment="Top"
-                       Foreground="#92969F"
-                       FontSize="11" />
-            <TextBlock Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       Margin="555,85,0,0"
-                       TextWrapping="Wrap"
-                       Text="Success"
-                       Foreground="#92969F"
-                       VerticalAlignment="Top"
-                       FontSize="18" />
-            
-            
-            
-            
-            <Rectangle Grid.Column="2"
-                       Fill="White"
-                       HorizontalAlignment="Left"
-                       Height="496"
-                       Margin="0,173,0,0"
-                       VerticalAlignment="Top"
-                       Width="664" />
-            <Grid Grid.Column="2" x:Name="ConvertScreen">
-                <!--<Rectangle Grid.Column="2"
-                       Fill="White"
-                       HorizontalAlignment="Left"
-                       Height="496"
-                       Margin="717,173,0,0"
-                       VerticalAlignment="Top"
-                       Width="45" />-->
-                <ComboBox x:Name="purpuleCoinsPanel"
-                          Style="{StaticResource comboBoxStyle}"
-                          Margin="-400,300,0,90"
-                          Width="200"
-                          SelectedIndex="0"
-                          SelectionChanged="PurpleCoinsPanel_SelectionChanged"></ComboBox>
-                <ComboBox x:Name="purpuleCoinsPanelSecond"
-                          Style="{StaticResource comboBoxStyle}"
-                          Margin="350,300,0,90"
-                          Width="200"
-                          SelectedIndex="0"
-                          SelectionChanged="PurpleCoinsPanel_SelectionChangedSecond"></ComboBox>
-                <Rectangle 
-                           Fill="#FF1D212C"
-                           HorizontalAlignment="Left"
-                           Height="38"
-                           Margin="314,359,0,0"
-                           RadiusX="17"
-                           RadiusY="17"
-                           VerticalAlignment="Top"
-                           Width="35" />
-                <Image 
-                       Source="/Images/convert.png"
-                       Width="22"
-                       VerticalAlignment="Top"
-                       Margin="321,367,340,0"
-                       Height="22"
-                       MouseDown="Image_MouseDown" />
-                <TextBlock 
-                           HorizontalAlignment="Left"
-                           Margin="35,389,0,0"
-                           Text="You spent"
-                           VerticalAlignment="Top"
-                           Foreground="#92969F"
-                           FontFamily="PT Sans" />
-                <TextBox 
-                         HorizontalAlignment="Left"
-                         Margin="35,407,0,0"
-                         Text="0"
-                         VerticalAlignment="Top"
-                         Foreground="#FF1D212C"
-                         FontSize="28"
-                         FontFamily="PT Sans Narrow"
-                         x:Name="ConvertValue"
-                         MaxLength="10"
-                         Width="170"
-                         LostFocus="ConvertValue_LostFocus"
-                         MouseDown="ConvertValue_MouseDown"
-                         TextChanged="ConvertValue_TextChanged" />
-                <Separator Background="#92969F"
-                           HorizontalAlignment="Left"
-                           Height="15"
-                           Margin="35,440,0,0"
-                           VerticalAlignment="Top"
-                           Width="231" />
-                <TextBlock 
-                           HorizontalAlignment="Left"
-                           Margin="35,389,0,0"
-                           Text="You spent"
-                           VerticalAlignment="Top"
-                           Foreground="#92969F"
-                           FontFamily="PT Sans" />
-                <TextBlock 
-                           HorizontalAlignment="Left"
-                           Margin="229,407,0,0"
-                           Text="BTC"
-                           VerticalAlignment="Top"
-                           Foreground="#FF1D212C"
-                           FontSize="28"
-                           FontFamily="PT Sans Narrow"
-                           x:Name="ConvertSymbol" />
-                <TextBlock 
-                           HorizontalAlignment="Left"
-                           Margin="35,455,0,0"
-                           Text="0"
-                           VerticalAlignment="Top"
-                           Foreground="#92969F"
-                           FontFamily="PT Sans Narrow"
-                           x:Name="ConvertUSDValue" />
-                <TextBlock 
-                           HorizontalAlignment="Left"
-                           Margin="248,455,0,0"
-                           Text="USD"
-                           VerticalAlignment="Top"
-                           Foreground="#92969F"
-                           FontFamily="PT Sans Narrow" />
-                <TextBlock x:Name="textBlock1_Copy10"
-                           HorizontalAlignment="Left"
-                           Margin="393,389,0,0"
-                           TextWrapping="Wrap"
-                           VerticalAlignment="Top"
-                           Foreground="#92969F"
-                           FontFamily="PT Sans"><Run Text="You " /><Run Text="got" /></TextBlock>
-                <TextBlock x:Name="ConvertToValue"
-                           HorizontalAlignment="Left"
-                           Margin="394,407,0,0"
-                           TextWrapping="Wrap"
-                           Text="0"
-                           VerticalAlignment="Top"
-                           Foreground="#92969F"
-                           FontSize="28"
-                           FontFamily="PT Sans Narrow" />
-                <TextBlock x:Name="ConvertToUSDValue"
-                           HorizontalAlignment="Left"
-                           Margin="393,453,0,0"
-                           TextWrapping="Wrap"
-                           VerticalAlignment="Top"
-                           Foreground="#92969F"
-                           FontFamily="PT Sans Narrow"
-                           Text="0"></TextBlock>
-                <Separator 
-                           HorizontalAlignment="Left"
-                           Height="15"
-                           Margin="395,440,0,0"
-                           VerticalAlignment="Top"
-                           Width="231"
-                           Background="LightGray" />
-                <TextBlock x:Name="ConvertToSymbol"
-                           HorizontalAlignment="Left"
-                           Margin="590,407,0,0"
-                           TextWrapping="Wrap"
-                           Text="ETH"
-                           VerticalAlignment="Top"
-                           Foreground="#92969F"
-                           FontSize="28"
-                           FontFamily="PT Sans Narrow" />
-                <TextBlock x:Name="textBlock1_Copy13"
-                           HorizontalAlignment="Left"
-                           Margin="609,453,0,0"
-                           TextWrapping="Wrap"
-                           VerticalAlignment="Top"
-                           Foreground="#92969F"
-                           FontFamily="PT Sans Narrow"
-                           Text="USD" />
+                        </StackPanel>
+                        <TextBlock x:Name="TOTBalance"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Right"
+                                   Text="$0"
+                                   FontSize="20"
+                                   VerticalAlignment="Top"
+                                   FontFamily="PT Sans Pro Narrow" />
+                        <TextBlock Grid.Row="1"
+                                   HorizontalAlignment="Left"
+                                   Text="Market Value"
+                                   FontSize="12"
+                                   VerticalAlignment="Top"
+                                   FontFamily="PT Sans"
+                                   Foreground="#92969F" />
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Right"
+                                   Text="Total Balance"
+                                   FontSize="12"
+                                   VerticalAlignment="Top"
+                                   FontFamily="PT Sans"
+                                   Foreground="#92969F" />
+                    </Grid>
+                    <Separator Margin="0, 35, 0, 0" />
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="coinsPanel" />
+                    </ScrollViewer>
+                </StackPanel>
             </Grid>
             
             
             
-            <TextBlock HorizontalAlignment="Left"
-                       Grid.Column="2"
-                       Margin="34,586,0,0"
-                       TextWrapping="Wrap"
-                       VerticalAlignment="Top"
-                       Foreground="#92969F"
-                       FontFamily="PT Sans Narrow"
-                       Text="Conversion fee:" />
-            <TextBlock HorizontalAlignment="Left"
-                       Grid.Column="2"
-                       Margin="34,603,0,0"
-                       TextWrapping="Wrap"
-                       Text="0.03 BNB"
-                       VerticalAlignment="Top"
-                       Foreground="#FF1D212C"
-                       FontSize="17.5"
-                       FontFamily="PT Sans Narrow" />
-            <Button Background="#FF1D212C"
-                    Grid.Column="2"
-                    Height="50"
-                    Width="170"
-                    Content="Convert Now"
-                    Foreground="White"
-                    FontSize="15"
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right"
-                    Margin="0,0,75,123"
-                    Click="convertionClick"
-                    x:Name="ConfirmationButton" />
-            <Grid Grid.Column="2" x:Name="StepToo" Visibility="Collapsed">
-                
-                <TextBlock HorizontalAlignment="Left"
-                           Margin="160,250,0,0"
-                           Text="Confirm converting"
+            
+            
+            
+            
+            <Grid Grid.Column="2" x:Name="convertThirdColums">
+                <TextBlock x:Name="textBlock3"
+                           Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           Margin="32,72,0,0"
+                           TextWrapping="Wrap"
+                           Text="1st Step"
                            VerticalAlignment="Top"
-                           Foreground="#FF1D212C"
-                           FontSize="40"
+                           Foreground="#92969F"
+                           FontSize="11" />
+                <TextBlock x:Name="textBlock4"
+                           Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           Margin="32,85,0,0"
+                           TextWrapping="Wrap"
+                           Text="Select"
+                           Foreground="#1D212C"
+                           VerticalAlignment="Top"
+                           FontSize="18" />
+                <Separator Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Height="15"
+                           Margin="107,82,0,0"
+                           Width="75"
+                           Background="#92969F" />
+                <Separator Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Height="15"
+                           Margin="182,82,0,0"
+                           Width="75"
+                           Background="LightGray"
+                           x:Name="stepTooSeparator" />
+                <TextBlock Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           Margin="287,72,0,0"
+                           TextWrapping="Wrap"
+                           Text="2nd Step"
+                           VerticalAlignment="Top"
+                           Foreground="#92969F"
+                           FontSize="11"
+                           x:Name="stepTooNote" />
+                <TextBlock Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           Margin="287,85,0,0"
+                           TextWrapping="Wrap"
+                           Text="Confirm"
+                           Foreground="#92969F"
+                           VerticalAlignment="Top"
+                           FontSize="18"
+                           x:Name="stepTooConfirm" />
+                <Separator Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Height="15"
+                           Margin="377,82,0,0"
+                           Width="145"
+                           Background="LightGray"
+                           x:Name="stepThreeSeparator" />
+                <TextBlock Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           Margin="555,72,0,0"
+                           TextWrapping="Wrap"
+                           Text="3rd Step"
+                           VerticalAlignment="Top"
+                           Foreground="#92969F"
+                           FontSize="11"
+                           x:Name="stepTreeNote" />
+                <TextBlock Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           Margin="555,85,0,0"
+                           TextWrapping="Wrap"
+                           Text="Success"
+                           Foreground="#92969F"
+                           VerticalAlignment="Top"
+                           FontSize="18"
+                           x:Name="stepThreeSuccess" />
+                <Rectangle Grid.Column="2"
+                           Fill="White"
+                           HorizontalAlignment="Left"
+                           Height="496"
+                           Margin="0,173,0,0"
+                           VerticalAlignment="Top"
+                           Width="664" />
+                <Grid Grid.Column="2"
+                      x:Name="succesfullScreen"
+                      Visibility="Collapsed">
+                    <TextBlock Text="Success"
+                               FontSize="50"
+                               FontWeight="Bold"
+                               Foreground="#3AA9AD"
+                               HorizontalAlignment="Center"
+                               Margin="0,400,0,0" />
+                    <Image Source="\Images\check.png"
+                           Height="30"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           Margin="450,200,0,0" />
+                </Grid>
+                <Grid Grid.Column="2"
+                      x:Name="ConvertScreen"
+                      Visibility="Visible">
+                    <ComboBox x:Name="purpuleCoinsPanel"
+                              Style="{StaticResource comboBoxStyle}"
+                              Margin="-400,300,0,90"
+                              Width="200"
+                              SelectedIndex="0"
+                              SelectionChanged="PurpleCoinsPanel_SelectionChanged"></ComboBox>
+                    <ComboBox x:Name="purpuleCoinsPanelSecond"
+                              Style="{StaticResource comboBoxStyle}"
+                              Margin="350,300,0,90"
+                              Width="200"
+                              SelectedIndex="0"
+                              SelectionChanged="PurpleCoinsPanel_SelectionChangedSecond"></ComboBox>
+                    <Rectangle Fill="#FF1D212C"
+                               HorizontalAlignment="Left"
+                               Height="38"
+                               Margin="314,359,0,0"
+                               RadiusX="17"
+                               RadiusY="17"
+                               VerticalAlignment="Top"
+                               Width="35" />
+                    <Image Source="/Images/convert.png"
+                           Width="22"
+                           VerticalAlignment="Top"
+                           Margin="321,367,340,0"
+                           Height="22"
+                           MouseDown="Image_MouseDown" />
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="35,389,0,0"
+                               Text="You spent"
+                               VerticalAlignment="Top"
+                               Foreground="#92969F"
+                               FontFamily="PT Sans" />
+                    <TextBox HorizontalAlignment="Left"
+                             Margin="35,407,0,0"
+                             Text="0"
+                             VerticalAlignment="Top"
+                             Foreground="#FF1D212C"
+                             FontSize="28"
+                             FontFamily="PT Sans Narrow"
+                             x:Name="ConvertValue"
+                             MaxLength="10"
+                             Width="170"
+                             LostFocus="ConvertValue_LostFocus"
+                             MouseDown="ConvertValue_MouseDown"
+                             TextChanged="ConvertValue_TextChanged" />
+                    <Separator Background="#92969F"
+                               HorizontalAlignment="Left"
+                               Height="15"
+                               Margin="35,440,0,0"
+                               VerticalAlignment="Top"
+                               Width="231" />
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="35,389,0,0"
+                               Text="You spent"
+                               VerticalAlignment="Top"
+                               Foreground="#92969F"
+                               FontFamily="PT Sans" />
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="229,407,0,0"
+                               Text="BTC"
+                               VerticalAlignment="Top"
+                               Foreground="#FF1D212C"
+                               FontSize="28"
+                               FontFamily="PT Sans Narrow"
+                               x:Name="ConvertSymbol" />
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="35,455,0,0"
+                               Text="0"
+                               VerticalAlignment="Top"
+                               Foreground="#92969F"
+                               FontFamily="PT Sans Narrow"
+                               x:Name="ConvertUSDValue" />
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="248,455,0,0"
+                               Text="USD"
+                               VerticalAlignment="Top"
+                               Foreground="#92969F"
+                               FontFamily="PT Sans Narrow" />
+                    <TextBlock x:Name="textBlock1_Copy10"
+                               HorizontalAlignment="Left"
+                               Margin="393,389,0,0"
+                               TextWrapping="Wrap"
+                               VerticalAlignment="Top"
+                               Foreground="#92969F"
+                               FontFamily="PT Sans"><Run Text="You " /><Run Text="got" /></TextBlock>
+                    <TextBlock x:Name="ConvertToValue"
+                               HorizontalAlignment="Left"
+                               Margin="394,407,0,0"
+                               TextWrapping="Wrap"
+                               Text="0"
+                               VerticalAlignment="Top"
+                               Foreground="#92969F"
+                               FontSize="28"
+                               FontFamily="PT Sans Narrow" />
+                    <TextBlock x:Name="ConvertToUSDValue"
+                               HorizontalAlignment="Left"
+                               Margin="393,453,0,0"
+                               TextWrapping="Wrap"
+                               VerticalAlignment="Top"
+                               Foreground="#92969F"
+                               FontFamily="PT Sans Narrow"
+                               Text="0"></TextBlock>
+                    <Separator HorizontalAlignment="Left"
+                               Height="15"
+                               Margin="395,440,0,0"
+                               VerticalAlignment="Top"
+                               Width="231"
+                               Background="LightGray" />
+                    <TextBlock x:Name="ConvertToSymbol"
+                               HorizontalAlignment="Left"
+                               Margin="590,407,0,0"
+                               TextWrapping="Wrap"
+                               Text="ETH"
+                               VerticalAlignment="Top"
+                               Foreground="#92969F"
+                               FontSize="28"
+                               FontFamily="PT Sans Narrow" />
+                    <TextBlock x:Name="textBlock1_Copy13"
+                               HorizontalAlignment="Left"
+                               Margin="609,453,0,0"
+                               TextWrapping="Wrap"
+                               VerticalAlignment="Top"
+                               Foreground="#92969F"
+                               FontFamily="PT Sans Narrow"
+                               Text="USD" />
+                </Grid>
+                <TextBlock HorizontalAlignment="Left"
+                           Grid.Column="2"
+                           Margin="34,586,0,0"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Top"
+                           Foreground="#92969F"
                            FontFamily="PT Sans Narrow"
-                           />
+                           Text="Conversion fee:" />
                 <TextBlock HorizontalAlignment="Left"
-                           Margin="315,300,0,0"
-                           Text="To"
+                           Grid.Column="2"
+                           Margin="34,603,0,0"
+                           TextWrapping="Wrap"
+                           Text="0.03 BNB"
                            VerticalAlignment="Top"
                            Foreground="#FF1D212C"
-                           FontSize="40"
+                           FontSize="17.5"
                            FontFamily="PT Sans Narrow" />
-                
-                
-                <TextBlock HorizontalAlignment="Left"
-                           Margin="229,407,0,0"
-                           Text="BTC"
-                           VerticalAlignment="Top"
-                           Foreground="#FF1D212C"
-                           FontSize="28"
-                           FontFamily="PT Sans Narrow"
-                           x:Name="AfterConvertingSymbol"
-                           />
-                <TextBlock
-                           HorizontalAlignment="Left"
-                           Margin="590,407,0,0"
-                           TextWrapping="Wrap"
-                           Text="ETH"
-                           VerticalAlignment="Top"
-                           Foreground="#FF1D212C"
-                           FontSize="28"
-                           FontFamily="PT Sans Narrow"
-                    x:Name="AfterToConvertingSymbol"/>
-                <TextBlock 
-                           HorizontalAlignment="Left"
-                           Margin="394,407,0,0"
-                           TextWrapping="Wrap"
-                           Text="0"
-                           VerticalAlignment="Top"
-                           Foreground="#FF1D212C"
-                           FontSize="28"
-                           FontFamily="PT Sans Narrow"
-                    x:Name="AfterToConvertingValue"
-                    />
-                <TextBlock HorizontalAlignment="Left"
-                           Margin="35,407,0,0"
-                           TextWrapping="Wrap"
-                           Text="0"
-                           VerticalAlignment="Top"
-                           Foreground="#FF1D212C"
-                           FontSize="28"
-                           FontFamily="PT Sans Narrow"
-                           x:Name="AfterConvertingValue"/>
                 <Button Background="#FF1D212C"
+                        Grid.Column="2"
                         Height="50"
                         Width="170"
-                        Content="Cancel"
+                        Content="Convert Now"
                         Foreground="White"
                         FontSize="15"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Right"
-                        Margin="0,0,455,123"
-                        x:Name="CancelButton" />
+                        Margin="0,0,75,123"
+                        Click="convertionClick"
+                        x:Name="ConfirmationButton" />
+                <Grid Grid.Column="2"
+                      x:Name="StepToo"
+                      Visibility="Collapsed">
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="160,250,0,0"
+                               Text="Confirm converting"
+                               VerticalAlignment="Top"
+                               Foreground="#FF1D212C"
+                               FontSize="40"
+                               FontFamily="PT Sans Narrow" />
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="315,300,0,0"
+                               Text="To"
+                               VerticalAlignment="Top"
+                               Foreground="#FF1D212C"
+                               FontSize="40"
+                               FontFamily="PT Sans Narrow" />
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="229,407,0,0"
+                               Text="BTC"
+                               VerticalAlignment="Top"
+                               Foreground="#FF1D212C"
+                               FontSize="28"
+                               FontFamily="PT Sans Narrow"
+                               x:Name="AfterConvertingSymbol" />
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="590,407,0,0"
+                               TextWrapping="Wrap"
+                               Text="ETH"
+                               VerticalAlignment="Top"
+                               Foreground="#FF1D212C"
+                               FontSize="28"
+                               FontFamily="PT Sans Narrow"
+                               x:Name="AfterToConvertingSymbol" />
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="394,407,0,0"
+                               TextWrapping="Wrap"
+                               Text="0"
+                               VerticalAlignment="Top"
+                               Foreground="#FF1D212C"
+                               FontSize="28"
+                               FontFamily="PT Sans Narrow"
+                               x:Name="AfterToConvertingValue" />
+                    <TextBlock HorizontalAlignment="Left"
+                               Margin="35,407,0,0"
+                               TextWrapping="Wrap"
+                               Text="0"
+                               VerticalAlignment="Top"
+                               Foreground="#FF1D212C"
+                               FontSize="28"
+                               FontFamily="PT Sans Narrow"
+                               x:Name="AfterConvertingValue" />
+                    <Button Background="#FF1D212C"
+                            Height="50"
+                            Width="170"
+                            Content="Cancel"
+                            Foreground="White"
+                            FontSize="15"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,455,123"
+                            x:Name="CancelButton"
+                            Click="CancelButtonPressed" />
+                </Grid>
             </Grid>
+
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             

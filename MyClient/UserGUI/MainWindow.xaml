@@ -112,7 +112,7 @@
             
             
             
-            <Grid Grid.Column="1" x:Name="convertSecondColumn">
+            <Grid Grid.Column="1" x:Name="convertSecondColumn" Visibility="Collapsed">
                 <StackPanel Orientation="Vertical"
                             Grid.Column="1"
                             Margin="27, 78, 52, 0">
@@ -174,7 +174,7 @@
             
             
             
-            <Grid Grid.Column="2" x:Name="convertThirdColums">
+            <Grid Grid.Column="2" x:Name="convertThirdColums" Visibility="Collapsed">
                 <TextBlock x:Name="textBlock3"
                            Grid.Column="2"
                            HorizontalAlignment="Left"
@@ -497,12 +497,75 @@
                             Click="CancelButtonPressed" />
                 </Grid>
             </Grid>
+            
+            
+            
+            
+            <Grid Grid.Column="1" Visibility="Visible" x:Name="profileFirstColumn">
+                <StackPanel>
+                    <Rectangle
+                               HorizontalAlignment="Center"
+                               Height="125"
+                               RadiusX="100"
+                               Margin="0,25,0,0"
+                               RadiusY="100"
+                               VerticalAlignment="Top"
+                               Width="125"
+                               Stroke="black"
+                               StrokeThickness="2">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/Images/profile-avatar.png" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    
+                    <TextBlock Text="UID" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                    
+                    <Button Height="70"
+                            Margin="0,25,0,0"
+                            Background="#1D212C"
+                            Content="Verification"
+                            Foreground="White"
+                            FontSize="25"
+                            Width="300"/>
+                    <Button Height="70"
+                               Margin="0,25,0,0"
+                               Background="#1D212C"
+                            Content="Order History"
+                            Foreground="White"
+                            FontSize="25"
+                            Width="300"
+                            Click="OrderHistoryButtonClick"/>
+                    <Button Height="70"
+                               Margin="0,25,0,0"
+                            Content="Update User"
+                               Background="#1D212C"
+                            Foreground="White"
+                            FontSize="25"
+                            Width="300"/>
+                    <Button Height="100"
+                               Margin="0,80,0,0"
+                               Background="#1D212C"
+                            Content="Log Out"
+                            Foreground="White"
+                            FontSize="25"
+                            Width="300"
+                            Click="LogOutClick"
+                            />
+                </StackPanel>
 
-            
-            
-            
-            
-            
+                
+            </Grid>
+            <Grid Grid.Column="2"
+                  x:Name="profileSecondColumn">
+                <Grid x:Name="OrderHistoryProfile">
+                    <TextBlock HorizontalAlignment="Center" Text="Order History" FontSize="50" Margin="0,60,0,0"/>
+                    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                  Margin="0,175,50,0" CanContentScroll="True">
+                        <ListView x:Name="OrderHistoryPanel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"></ListView>
+                    </ScrollViewer>
+                </Grid>
+                
+            </Grid>
             
             
             

@@ -32,6 +32,7 @@ namespace UserGUI
         private double totValue = 0;
         private List<CoinDesign> coinDesigns;
         private DispatcherTimer dispatcherTimer;
+        private OrderHistoryList orderHistoryList;
 
         public MainWindow(User user)
         {
@@ -365,6 +366,8 @@ namespace UserGUI
         {
             collapseAllElipses();
             profileSelectionEllipse.Visibility = Visibility.Visible;
+            profileSecondColumn.Visibility = Visibility.Visible;
+            profileFirstColumn.Visibility = Visibility.Visible;
         }
 
         private void collapseAllElipses()
@@ -377,6 +380,34 @@ namespace UserGUI
 
             convertSecondColumn.Visibility = Visibility.Collapsed;
             convertThirdColums.Visibility = Visibility.Collapsed;
+
+            profileSecondColumn.Visibility = Visibility.Collapsed;
+            profileFirstColumn.Visibility = Visibility.Collapsed;
+
+        }
+
+
+
+        private void LogOutClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            Login loginWindow = new Login();
+            loginWindow.ShowDialog();
+
+        }
+
+        private void OrderHistoryButtonClick(object sender, RoutedEventArgs e)
+        {
+            OrderHistoryProfile.Visibility = Visibility.Visible;
+            orderHistoryList = brokerService.SelectOrderHistoryByUser(user);
+            TextBlock myText;
+            foreach (var item in orderHistoryList)
+            {
+                myText = new TextBlock();
+                myText.Text = $"Symbol {item.Symbol} Side {item.Side} Type {item.Type} QTY {item.Qty} Price {item.Price} FillPrice {item.FillPrice} Status {item.Status} PlacingT {item.Placingtime} ClosingT {item.ClosingTime}";
+                myText.FontSize = 25;
+                OrderHistoryPanel.Items.Add(myText);
+            }
 
         }
 

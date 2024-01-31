@@ -33,6 +33,7 @@ namespace UserGUI
         private List<CoinDesign> coinDesigns;
         private DispatcherTimer dispatcherTimer;
         private OrderHistoryList orderHistoryList;
+        private int spaceBetween = 30;
 
         public MainWindow(User user)
         {
@@ -398,17 +399,81 @@ namespace UserGUI
 
         private void OrderHistoryButtonClick(object sender, RoutedEventArgs e)
         {
-            OrderHistoryProfile.Visibility = Visibility.Visible;
-            orderHistoryList = brokerService.SelectOrderHistoryByUser(user);
-            TextBlock myText;
-            foreach (var item in orderHistoryList)
+            hideAllProfile();
+            this.spaceBetween = 30;
+
+            var textBlocksToRemove = new List<TextBlock>();
+
+            foreach (var child in OrderHistoryPanel.Children)
             {
-                myText = new TextBlock();
-                myText.Text = $"Symbol {item.Symbol} Side {item.Side} Type {item.Type} QTY {item.Qty} Price {item.Price} FillPrice {item.FillPrice} Status {item.Status} PlacingT {item.Placingtime} ClosingT {item.ClosingTime}";
-                myText.FontSize = 25;
-                OrderHistoryPanel.Items.Add(myText);
+                if (child is TextBlock textBlock && textBlock.Tag != null && textBlock.Tag.ToString() == "data1")
+                {
+                    textBlocksToRemove.Add(textBlock);
+                }
             }
 
+            foreach (var textBlockToRemove in textBlocksToRemove)
+            {
+                OrderHistoryPanel.Children.Remove(textBlockToRemove);
+            }
+
+            OrderHistoryProfile.Visibility = Visibility.Visible;
+            orderHistoryList = brokerService.SelectOrderHistoryByUser(user);
+
+
+            foreach (var item in orderHistoryList)
+            {
+                // Create TextBlocks for each column and set their text
+                TextBlock symbolText = new TextBlock() { Text = item.Symbol, FontSize = 25, Margin = new Thickness(0,spaceBetween,0,0), Tag = "data1" };
+                TextBlock sideText = new TextBlock() { Text = item.Side, FontSize = 25, Margin = new Thickness(0,spaceBetween,0,0), Tag = "data1" };
+                TextBlock typeText = new TextBlock() { Text = item.Type, FontSize = 25, Margin = new Thickness(0,spaceBetween,0,0), Tag = "data1" };
+                TextBlock qtyText = new TextBlock() { Text = item.Qty.ToString(), FontSize = 25, Margin = new Thickness(0,spaceBetween,0,0), Tag = "data1" };
+                TextBlock priceText = new TextBlock() { Text = item.Price.ToString(), FontSize = 25, Margin = new Thickness(0,spaceBetween,0,0), Tag = "data1" };
+                TextBlock fillPriceText = new TextBlock() { Text = item.FillPrice.ToString(), FontSize = 25, Margin = new Thickness(0,spaceBetween,0,0), Tag = "data1" };
+                TextBlock statusText = new TextBlock() { Text = item.Status, FontSize = 25, Margin = new Thickness(0,spaceBetween,0,0), Tag = "data1" };
+                TextBlock placingTimeText = new TextBlock() { Text = item.Placingtime.ToString("MM/dd/yyyy"), FontSize = 25, Margin = new Thickness(0,spaceBetween,0,0), Tag = "data1" };
+                TextBlock closingTimeText = new TextBlock() { Text = item.ClosingTime.ToString("MM/dd/yyyy"), FontSize = 25, Margin = new Thickness(0,spaceBetween,0,0), Tag = "data1" };
+
+                // Add TextBlocks to the grid with appropriate column
+                OrderHistoryPanel.Children.Add(symbolText);
+                OrderHistoryPanel.Children.Add(sideText);
+                OrderHistoryPanel.Children.Add(typeText);
+                OrderHistoryPanel.Children.Add(qtyText);
+                OrderHistoryPanel.Children.Add(priceText);
+                OrderHistoryPanel.Children.Add(fillPriceText);
+                OrderHistoryPanel.Children.Add(statusText);
+                OrderHistoryPanel.Children.Add(placingTimeText);
+                OrderHistoryPanel.Children.Add(closingTimeText);
+
+                // Set the Grid.Row property for each TextBlock
+                Grid.SetColumn(symbolText, 0);
+                Grid.SetColumn(sideText, 1);
+                Grid.SetColumn(typeText, 2);
+                Grid.SetColumn(qtyText, 3);
+                Grid.SetColumn(priceText, 4);
+                Grid.SetColumn(fillPriceText, 5);
+                Grid.SetColumn(statusText, 6);
+                Grid.SetColumn(placingTimeText, 7);
+                Grid.SetColumn(closingTimeText, 8);
+                // Add the grid to the StackPanel
+                //Grid.SetRow(rowGrid, OrderHistoryPanel.RowDefinitions.Count - 1);
+                this.spaceBetween += 30;
+            }
+
+        }
+
+        private void UpdateUserClick(object sender, RoutedEventArgs e)
+        {
+            hideAllProfile();
+            UpdateUserColumn.Visibility = Visibility.Visible;
+
+
+        }
+
+        private void hideAllProfile()
+        {
+            OrderHistoryProfile.Visibility = Visibility.Collapsed;
+            UpdateUserColumn.Visibility = Visibility.Collapsed;
         }
 
 

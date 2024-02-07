@@ -112,7 +112,7 @@
             
             
             
-            <Grid Grid.Column="1" x:Name="convertSecondColumn" Visibility="Collapsed">
+            <Grid Grid.Column="1" x:Name="convertSecondColumn" Visibility="Visible">
                 <StackPanel Orientation="Vertical"
                             Grid.Column="1"
                             Margin="27, 78, 52, 0">
@@ -174,7 +174,7 @@
             
             
             
-            <Grid Grid.Column="2" x:Name="convertThirdColums" Visibility="Collapsed">
+            <Grid Grid.Column="2" x:Name="convertThirdColums" Visibility="Visible">
                 <TextBlock x:Name="textBlock3"
                            Grid.Column="2"
                            HorizontalAlignment="Left"
@@ -500,8 +500,10 @@
             
             
             
-            
-            <Grid Grid.Column="1" Visibility="Visible" x:Name="profileFirstColumn">
+            <Grid x:Name="UserUpdateSection">
+                
+            </Grid>
+            <Grid Grid.Column="1" Visibility="Collapsed" x:Name="profileFirstColumn">
                 <StackPanel>
                     <Rectangle
                                HorizontalAlignment="Center"
@@ -557,7 +559,7 @@
                 
             </Grid>
             <Grid Grid.Column="2"
-                  x:Name="profileSecondColumn">
+                  x:Name="profileSecondColumn" Visibility="Collapsed">
                 <Grid x:Name="OrderHistoryProfile" Visibility="Collapsed">
                     <TextBlock HorizontalAlignment="Center" Text="Order History" FontSize="50" Margin="0,60,0,0"/>
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" Margin="0,130,0,0">

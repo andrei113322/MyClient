@@ -17,6 +17,7 @@ using UserGUI.BrokerReference;
 using System.Threading;
 using System.Windows.Threading;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace UserGUI
 {
@@ -34,6 +35,8 @@ namespace UserGUI
         private DispatcherTimer dispatcherTimer;
         private OrderHistoryList orderHistoryList;
         private int spaceBetween = 30;
+        private User newUser = new User();
+        private bool under18;
 
         public MainWindow(User user)
         {
@@ -365,7 +368,20 @@ namespace UserGUI
 
         private void profileSelectionClick(object sender, RoutedEventArgs e)
         {
+            newUser.UserName = user.UserName;
+            newUser.Password = user.Password;
+            newUser.BirthDate = user.BirthDate;
+            newUser.Email = user.Email;
+            newUser.FirstName = user.FirstName;
+            newUser.SecondName = user.SecondName;
+            newUser.IsAdmin = user.IsAdmin;
+            newUser.ID = user.ID;
+            
+
+
             collapseAllElipses();
+            
+            this.DataContext = newUser;
             profileSelectionEllipse.Visibility = Visibility.Visible;
             profileSecondColumn.Visibility = Visibility.Visible;
             profileFirstColumn.Visibility = Visibility.Visible;
@@ -470,10 +486,141 @@ namespace UserGUI
 
         }
 
+
+
+        private void UpdateInformationClick(object sender, RoutedEventArgs e)
+        {
+
+            bool Errr = false;
+            User myUser = new User();
+            User IfMailExists = brokerService.SelectUserByEmail(changeEmail.Text);
+            User IfUserNameExists = brokerService.SelectUserByUserName(changeUserName.Text);
+
+            EmailErr.Visibility = Visibility.Collapsed;
+            UserNameErr.Visibility = Visibility.Collapsed;
+            FirstNameErr.Visibility = Visibility.Collapsed;
+            SecNameErr.Visibility = Visibility.Collapsed;
+            DateErr.Visibility = Visibility.Collapsed;
+            PassErr.Visibility = Visibility.Collapsed;
+
+            if (!checkUnder18())
+            {
+                DateErr.Visibility = Visibility.Visible;
+                SetToolTip(DateErr, "Not over 18");
+                Errr = true;
+            }
+            if (!changeEmail.Text.Contains("@gmail.com"))
+            {
+                EmailErr.Visibility = Visibility.Visible;
+                SetToolTip(EmailErr, "Email must contain @gmail.com");
+                Errr = true;
+            }
+            if (string.IsNullOrEmpty(changeEmail.Text))
+            {
+                EmailErr.Visibility = Visibility.Visible;
+                SetToolTip(EmailErr, "Email is required");
+                Errr = true;
+            }
+            else if (IfMailExists != null && user.Email != changeEmail.Text)
+            {
+                EmailErr.Visibility = Visibility.Visible;
+                SetToolTip(EmailErr, "Email already exists");
+                Errr = true;
+            }
+            if (IfUserNameExists != null && user.UserName != changeUserName.Text)
+            {
+                UserNameErr.Visibility = Visibility.Visible;
+                SetToolTip(UserNameErr, "Username already exists");
+                Errr = true;
+            }
+            if (string.IsNullOrEmpty(changeFirstName.Text))
+            {
+                FirstNameErr.Visibility = Visibility.Visible;
+                SetToolTip(FirstNameErr, "First Name is required");
+                Errr = true;
+            }
+            if (string.IsNullOrEmpty(changeSecondName.Text))
+            {
+                SecNameErr.Visibility = Visibility.Visible;
+                SetToolTip(SecNameErr, "Second Name is required");
+                Errr = true;
+            }
+            if (!(changeUserName.Text.Length >= 5))
+            {
+                UserNameErr.Visibility = Visibility.Visible;
+                SetToolTip(UserNameErr, "Username must be at least 5 characters");
+                Errr = true;
+            }
+
+            if (!Regex.IsMatch(changePassword.Text, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"))
+            {
+                PassErr.Visibility = Visibility.Visible;
+                SetToolTip(PassErr, "Password requirements not met, password should contain at least 1 capital letter, 1 regular letter and be 8 lengh");
+                Errr = true;
+            }
+            if (!Errr)
+            {
+                user.UserName = newUser.UserName;
+                user.Password = newUser.Password;
+                user.BirthDate = newUser.BirthDate;
+                user.Email = newUser.Email;
+                user.FirstName = newUser.FirstName;
+                user.SecondName = newUser.SecondName;
+                user.IsAdmin = newUser.IsAdmin;
+                user.ID = newUser.ID;
+
+
+
+                brokerService.UpdateUser(user);
+            }
+        }
+
+
+
+
+
+
+
         private void hideAllProfile()
         {
             OrderHistoryProfile.Visibility = Visibility.Collapsed;
             UpdateUserColumn.Visibility = Visibility.Collapsed;
+        }
+
+        private void SetToolTip(UIElement element, string errorMessage)
+        {
+            ToolTipService.SetToolTip(element, errorMessage);
+        }
+
+        private bool checkUnder18()
+        {
+            if (birthdateDatePicker.SelectedDate.HasValue)
+            {
+                DateTime selectedDate = birthdateDatePicker.SelectedDate.Value;
+                DateTime currentDate = DateTime.Today;
+
+                int age = currentDate.Year - selectedDate.Year;
+
+                // Check if the birthday has occurred this year
+                if (selectedDate.Date > currentDate.AddYears(-age))
+                {
+                    age--;
+                }
+
+                // Assuming 18 is the legal age
+                if (age >= 18)
+                {
+                    // Person is over 18
+                    // You can perform further actions or validations here
+                    return true;
+                }
+                else
+                {
+                    // Person is under 18
+                    return false;
+                }
+            }
+            return false;
         }
 
 

@@ -164,6 +164,18 @@
   <wsdl:message name="IServiceBroker_GiveCoinValue_OutputMessage">
     <wsdl:part name="parameters" element="tns:GiveCoinValueResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceBroker_GetNotificationsBySender_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotificationsBySender" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_GetNotificationsBySender_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotificationsBySenderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_GetNotificationsByReciever_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotificationsByReciever" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_GetNotificationsByReciever_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotificationsByRecieverResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceBroker">
     <wsdl:operation name="SelectAllCoins">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/SelectAllCoins" message="tns:IServiceBroker_SelectAllCoins_InputMessage" />
@@ -268,6 +280,14 @@
     <wsdl:operation name="GiveCoinValue">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/GiveCoinValue" message="tns:IServiceBroker_GiveCoinValue_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/GiveCoinValueResponse" message="tns:IServiceBroker_GiveCoinValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNotificationsBySender">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/GetNotificationsBySender" message="tns:IServiceBroker_GetNotificationsBySender_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/GetNotificationsBySenderResponse" message="tns:IServiceBroker_GetNotificationsBySender_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNotificationsByReciever">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/GetNotificationsByReciever" message="tns:IServiceBroker_GetNotificationsByReciever_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/GetNotificationsByRecieverResponse" message="tns:IServiceBroker_GetNotificationsByReciever_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceBroker" type="tns:IServiceBroker">
@@ -499,6 +519,24 @@
     </wsdl:operation>
     <wsdl:operation name="GiveCoinValue">
       <soap:operation soapAction="http://tempuri.org/IServiceBroker/GiveCoinValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNotificationsBySender">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/GetNotificationsBySender" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNotificationsByReciever">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/GetNotificationsByReciever" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

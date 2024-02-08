@@ -67,6 +67,7 @@ namespace UserGUI.BrokerReference {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.Log))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.OrderHistory))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.MyCoin))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.Notification))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.Coin))]
     public partial class BaseEntity : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -523,6 +524,77 @@ namespace UserGUI.BrokerReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Notification", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+    [System.SerializableAttribute()]
+    public partial class Notification : UserGUI.BrokerReference.BaseEntity {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RecieverField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SenderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime SentDateField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Data {
+            get {
+                return this.DataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DataField, value) != true)) {
+                    this.DataField = value;
+                    this.RaisePropertyChanged("Data");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Reciever {
+            get {
+                return this.RecieverField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RecieverField, value) != true)) {
+                    this.RecieverField = value;
+                    this.RaisePropertyChanged("Reciever");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Sender {
+            get {
+                return this.SenderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SenderField, value) != true)) {
+                    this.SenderField = value;
+                    this.RaisePropertyChanged("Sender");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime SentDate {
+            get {
+                return this.SentDateField;
+            }
+            set {
+                if ((this.SentDateField.Equals(value) != true)) {
+                    this.SentDateField = value;
+                    this.RaisePropertyChanged("SentDate");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.CollectionDataContractAttribute(Name="LogList", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="Log")]
     [System.SerializableAttribute()]
     public class LogList : System.Collections.Generic.List<UserGUI.BrokerReference.Log> {
@@ -547,6 +619,13 @@ namespace UserGUI.BrokerReference {
     [System.Runtime.Serialization.CollectionDataContractAttribute(Name="MyCoinList", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="MyCoin")]
     [System.SerializableAttribute()]
     public class MyCoinList : System.Collections.Generic.List<UserGUI.BrokerReference.MyCoin> {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="NotificationList", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="Notification")]
+    [System.SerializableAttribute()]
+    public class NotificationList : System.Collections.Generic.List<UserGUI.BrokerReference.Notification> {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -708,6 +787,18 @@ namespace UserGUI.BrokerReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GiveCoinValue", ReplyAction="http://tempuri.org/IServiceBroker/GiveCoinValueResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, decimal>> GiveCoinValueAsync(string[] Value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetNotificationsBySender", ReplyAction="http://tempuri.org/IServiceBroker/GetNotificationsBySenderResponse")]
+        UserGUI.BrokerReference.NotificationList GetNotificationsBySender(UserGUI.BrokerReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetNotificationsBySender", ReplyAction="http://tempuri.org/IServiceBroker/GetNotificationsBySenderResponse")]
+        System.Threading.Tasks.Task<UserGUI.BrokerReference.NotificationList> GetNotificationsBySenderAsync(UserGUI.BrokerReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetNotificationsByReciever", ReplyAction="http://tempuri.org/IServiceBroker/GetNotificationsByRecieverResponse")]
+        UserGUI.BrokerReference.NotificationList GetNotificationsByReciever(UserGUI.BrokerReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetNotificationsByReciever", ReplyAction="http://tempuri.org/IServiceBroker/GetNotificationsByRecieverResponse")]
+        System.Threading.Tasks.Task<UserGUI.BrokerReference.NotificationList> GetNotificationsByRecieverAsync(UserGUI.BrokerReference.User user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -943,6 +1034,22 @@ namespace UserGUI.BrokerReference {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, decimal>> GiveCoinValueAsync(string[] Value) {
             return base.Channel.GiveCoinValueAsync(Value);
+        }
+        
+        public UserGUI.BrokerReference.NotificationList GetNotificationsBySender(UserGUI.BrokerReference.User user) {
+            return base.Channel.GetNotificationsBySender(user);
+        }
+        
+        public System.Threading.Tasks.Task<UserGUI.BrokerReference.NotificationList> GetNotificationsBySenderAsync(UserGUI.BrokerReference.User user) {
+            return base.Channel.GetNotificationsBySenderAsync(user);
+        }
+        
+        public UserGUI.BrokerReference.NotificationList GetNotificationsByReciever(UserGUI.BrokerReference.User user) {
+            return base.Channel.GetNotificationsByReciever(user);
+        }
+        
+        public System.Threading.Tasks.Task<UserGUI.BrokerReference.NotificationList> GetNotificationsByRecieverAsync(UserGUI.BrokerReference.User user) {
+            return base.Channel.GetNotificationsByRecieverAsync(user);
         }
     }
 }

@@ -364,6 +364,17 @@ namespace UserGUI
         {
             collapseAllElipses();
             prizeSelectionEllipse.Visibility = Visibility.Visible;
+            NotificationFirstColumn.Visibility = Visibility.Visible;
+            NotificationSecondColumn.Visibility = Visibility.Visible;
+
+            NotificationList myNotifications = brokerService.GetNotificationsByReciever(user);
+
+            foreach (var item in myNotifications)
+            {
+                NotificationItems.Children.Add(new NotificationDesign(item));
+            }
+
+
         }
 
         private void profileSelectionClick(object sender, RoutedEventArgs e)
@@ -400,6 +411,9 @@ namespace UserGUI
 
             profileSecondColumn.Visibility = Visibility.Collapsed;
             profileFirstColumn.Visibility = Visibility.Collapsed;
+
+            NotificationFirstColumn.Visibility = Visibility.Collapsed;
+            NotificationSecondColumn.Visibility = Visibility.Collapsed;
 
         }
 

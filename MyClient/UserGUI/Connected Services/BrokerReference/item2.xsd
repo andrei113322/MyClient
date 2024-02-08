@@ -107,4 +107,23 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="MyCoin" nillable="true" type="tns:MyCoin" />
+  <xs:complexType name="NotificationList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Notification" nillable="true" type="tns:Notification" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NotificationList" nillable="true" type="tns:NotificationList" />
+  <xs:complexType name="Notification">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Reciever" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Sender" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SentDate" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Notification" nillable="true" type="tns:Notification" />
 </xs:schema>

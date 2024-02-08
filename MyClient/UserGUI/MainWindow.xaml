@@ -112,7 +112,7 @@
             
             
             
-            <Grid Grid.Column="1" x:Name="convertSecondColumn" Visibility="Visible">
+            <Grid Grid.Column="1" x:Name="convertSecondColumn" Visibility="Collapsed">
                 <StackPanel Orientation="Vertical"
                             Grid.Column="1"
                             Margin="27, 78, 52, 0">
@@ -174,7 +174,7 @@
             
             
             
-            <Grid Grid.Column="2" x:Name="convertThirdColums" Visibility="Visible">
+            <Grid Grid.Column="2" x:Name="convertThirdColums" Visibility="Collapsed">
                 <TextBlock x:Name="textBlock3"
                            Grid.Column="2"
                            HorizontalAlignment="Left"
@@ -826,6 +826,26 @@
             </Grid>
             
             
+            
+            <Grid Grid.Column="1" x:Name="NotificationFirstColumn">
+                <ScrollViewer
+                              Height="570"
+                              Margin="0 0 0 70" HorizontalAlignment="Center">
+                    <StackPanel HorizontalAlignment="Center"
+                                Margin="0 0 0 0"
+                                Width="320"
+                                x:Name="NotificationItems">
+                        <TextBlock Text="Notifications"
+                                   FontSize="50" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            
+            
+            
+            <Grid Grid.Column="2" x:Name="NotificationSecondColumn">
+                
+            </Grid>
             
             
             

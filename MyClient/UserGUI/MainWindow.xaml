@@ -827,7 +827,7 @@
             
             
             
-            <Grid Grid.Column="1" x:Name="NotificationFirstColumn">
+            <Grid Grid.Column="1" x:Name="NotificationFirstColumn" Visibility="Collapsed">
                 <ScrollViewer
                               Height="570"
                               Margin="0 0 0 70" HorizontalAlignment="Center">
@@ -843,8 +843,12 @@
             
             
             
-            <Grid Grid.Column="2" x:Name="NotificationSecondColumn">
-                
+            <Grid Grid.Column="2" x:Name="NotificationSecondColumn" Visibility="Collapsed">
+                <ScrollViewer>
+                    <StackPanel Margin="0 40 0 0">
+                        <TextBlock FontSize ="30" x:Name="DataBlock"/>
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
             
             

@@ -367,15 +367,38 @@ namespace UserGUI
             NotificationFirstColumn.Visibility = Visibility.Visible;
             NotificationSecondColumn.Visibility = Visibility.Visible;
 
+            for (int i = NotificationItems.Children.Count - 1; i > 0; i--)
+            {
+                NotificationItems.Children.RemoveAt(i);
+            }
+
             NotificationList myNotifications = brokerService.GetNotificationsByReciever(user);
 
             foreach (var item in myNotifications)
             {
-                NotificationItems.Children.Add(new NotificationDesign(item));
+                var notificationDesign = new NotificationDesign(item);
+                notificationDesign.MouseLeftButtonUp += NotificationDesign_Click; // Add click event handler
+                NotificationItems.Children.Add(notificationDesign);
             }
 
 
         }
+
+        private void NotificationDesign_Click(object sender, MouseButtonEventArgs e)
+        {
+            // Clear existing data in NotificationSecondColumn
+            DataBlock.Text = string.Empty;
+
+            // Get the clicked NotificationDesign control
+            NotificationDesign clickedNotification = (NotificationDesign)sender;
+
+            // Set the extracted data to the corresponding TextBlock elements in NotificationSecondColumn
+            DataBlock.Text = "From: " + clickedNotification.getNotification().Sender + "\n\n" +
+                             "To: " + user.UserName + "\n" + // Assuming user is the recipient
+                             "\nSubject: " + clickedNotification.getNotification().Data;
+        }
+
+
 
         private void profileSelectionClick(object sender, RoutedEventArgs e)
         {

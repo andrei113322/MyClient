@@ -535,7 +535,13 @@ namespace UserGUI.BrokerReference {
         private string RecieverField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RecieverIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SenderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SenderIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime SentDateField;
@@ -567,6 +573,19 @@ namespace UserGUI.BrokerReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int RecieverId {
+            get {
+                return this.RecieverIdField;
+            }
+            set {
+                if ((this.RecieverIdField.Equals(value) != true)) {
+                    this.RecieverIdField = value;
+                    this.RaisePropertyChanged("RecieverId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Sender {
             get {
                 return this.SenderField;
@@ -575,6 +594,19 @@ namespace UserGUI.BrokerReference {
                 if ((object.ReferenceEquals(this.SenderField, value) != true)) {
                     this.SenderField = value;
                     this.RaisePropertyChanged("Sender");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SenderId {
+            get {
+                return this.SenderIdField;
+            }
+            set {
+                if ((this.SenderIdField.Equals(value) != true)) {
+                    this.SenderIdField = value;
+                    this.RaisePropertyChanged("SenderId");
                 }
             }
         }
@@ -799,6 +831,12 @@ namespace UserGUI.BrokerReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetNotificationsByReciever", ReplyAction="http://tempuri.org/IServiceBroker/GetNotificationsByRecieverResponse")]
         System.Threading.Tasks.Task<UserGUI.BrokerReference.NotificationList> GetNotificationsByRecieverAsync(UserGUI.BrokerReference.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertNotification", ReplyAction="http://tempuri.org/IServiceBroker/InsertNotificationResponse")]
+        bool InsertNotification(UserGUI.BrokerReference.Notification notification);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertNotification", ReplyAction="http://tempuri.org/IServiceBroker/InsertNotificationResponse")]
+        System.Threading.Tasks.Task<bool> InsertNotificationAsync(UserGUI.BrokerReference.Notification notification);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1050,6 +1088,14 @@ namespace UserGUI.BrokerReference {
         
         public System.Threading.Tasks.Task<UserGUI.BrokerReference.NotificationList> GetNotificationsByRecieverAsync(UserGUI.BrokerReference.User user) {
             return base.Channel.GetNotificationsByRecieverAsync(user);
+        }
+        
+        public bool InsertNotification(UserGUI.BrokerReference.Notification notification) {
+            return base.Channel.InsertNotification(notification);
+        }
+        
+        public System.Threading.Tasks.Task<bool> InsertNotificationAsync(UserGUI.BrokerReference.Notification notification) {
+            return base.Channel.InsertNotificationAsync(notification);
         }
     }
 }

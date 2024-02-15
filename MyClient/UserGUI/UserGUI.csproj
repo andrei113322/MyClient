@@ -70,6 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CoinBuyDesign.xaml.cs">
+      <DependentUpon>CoinBuyDesign.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CoinDesign.xaml.cs">
       <DependentUpon>CoinDesign.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,10 @@
     <Compile Include="SuccesfullLogedIn.xaml.cs">
       <DependentUpon>SuccesfullLogedIn.xaml</DependentUpon>
     </Compile>
+    <Page Include="CoinBuyDesign.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CoinDesign.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,6 +283,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\profile-avatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />

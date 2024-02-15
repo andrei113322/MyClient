@@ -18,6 +18,8 @@ using System.Threading;
 using System.Windows.Threading;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using Application = System.Windows.Application;
 
 namespace UserGUI
 {
@@ -36,7 +38,6 @@ namespace UserGUI
         private OrderHistoryList orderHistoryList;
         private int spaceBetween = 30;
         private User newUser = new User();
-        private bool under18;
 
         public MainWindow(User user)
         {
@@ -358,7 +359,33 @@ namespace UserGUI
         {
             collapseAllElipses();
             walletSelectionEllipse.Visibility = Visibility.Visible;
+            walletFirstColumn.Visibility = Visibility.Visible;
+            walletSecondColumn.Visibility = Visibility.Visible;
+
+            CoinList coins = brokerService.SelectAllCoins();
+            foreach (var item in coinList)
+            {
+                double usd = (double)coinsValues.ToList().Find(c => c.Key.ToString().Contains(item.Coin.Symbol)).Value;
+                CoinBuyDesign con = new CoinBuyDesign(item, usd);
+                con.Margin = new Thickness(0, 20, 0, 0);
+                con.CoinBuyClicked += coinsBuyHandler;
+                con.CoinSellClicked += coinsWithdrowHandler;
+                buyCoinsLabel.Children.Add(con);
+            }
+            
         }
+        private void coinsBuyHandler(object sender, EventArgs e)
+        {
+            Console.WriteLine("Buy\n");
+        }
+
+
+        private void coinsWithdrowHandler(object sender, EventArgs e)
+        {
+            Console.WriteLine("Sell\n");
+        }
+
+
 
         private void prizeSelectionClick(object sender, RoutedEventArgs e)
         {
@@ -386,6 +413,9 @@ namespace UserGUI
 
         private void NotificationDesign_Click(object sender, MouseButtonEventArgs e)
         {
+            SendNot.Visibility = Visibility.Collapsed;
+            WriteNot.Visibility = Visibility.Collapsed;
+            ReadNot.Visibility = Visibility.Visible;
             // Clear existing data in NotificationSecondColumn
             DataBlock.Text = string.Empty;
 
@@ -437,6 +467,9 @@ namespace UserGUI
 
             NotificationFirstColumn.Visibility = Visibility.Collapsed;
             NotificationSecondColumn.Visibility = Visibility.Collapsed;
+
+            walletFirstColumn.Visibility = Visibility.Collapsed;
+            walletSecondColumn.Visibility = Visibility.Collapsed;
 
         }
 
@@ -519,8 +552,6 @@ namespace UserGUI
         {
             hideAllProfile();
             UpdateUserColumn.Visibility = Visibility.Visible;
-
-
         }
 
 
@@ -660,6 +691,32 @@ namespace UserGUI
             return false;
         }
 
+        private void createNotification(object sender, MouseButtonEventArgs e)
+        {
+            SendNot.Visibility = Visibility.Visible;
+            WriteNot.Visibility = Visibility.Visible;
+            ReadNot.Visibility = Visibility.Collapsed;
+        }
+
+
+        private void SendNotClick(object sender, RoutedEventArgs e)
+        {
+            Notification myNot = new Notification();
+            myNot.Sender = user.UserName;
+            myNot.Reciever = sendToBox.Text;
+            myNot.SentDate = DateTime.Now;
+            myNot.Data = dataBox.Text;
+            myNot.SenderId = user.ID;
+            User recieverUser = brokerService.SelectUserByUserName(myNot.Reciever);
+            if (recieverUser != null)
+            {
+                myNot.RecieverId = recieverUser.ID;
+                brokerService.InsertNotification(myNot);
+            }
+
+        }
+
+        
 
     }
 }

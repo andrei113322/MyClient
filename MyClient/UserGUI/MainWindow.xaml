@@ -835,20 +835,82 @@
                                 Margin="0 0 0 0"
                                 Width="320"
                                 x:Name="NotificationItems">
-                        <TextBlock Text="Notifications"
-                                   FontSize="50" HorizontalAlignment="Center" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Notifications"
+                                       FontSize="50"
+                                       HorizontalAlignment="Left" 
+                                       />
+                            <Image Source="\Images\Plus.png"
+                                   Height="40"
+                                   Margin="0 15 0 0"
+                                   MouseDown="createNotification" />
+                        </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
+                
+                
             </Grid>
             
             
             
             <Grid Grid.Column="2" x:Name="NotificationSecondColumn" Visibility="Collapsed">
-                <ScrollViewer>
+                <ScrollViewer x:Name="ReadNot" Visibility="Collapsed">
                     <StackPanel Margin="0 40 0 0">
-                        <TextBlock FontSize ="30" x:Name="DataBlock"/>
+                        <TextBlock FontSize="22"
+                                   x:Name="DataBlock" />
                     </StackPanel>
                 </ScrollViewer>
+                
+                <ScrollViewer x:Name="WriteNot">
+                    <StackPanel Margin="0 40 0 120" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Send To: "  FontSize="22"/> 
+                            <TextBox
+                                     MaxLength="17"
+                                     HorizontalAlignment="Left"
+                                     Width="250"
+                                     FontSize="22"
+                                     x:Name="sendToBox"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0 20 0 0">
+                            <TextBlock  Text="Data: "
+                                        FontSize="22" />
+                            <TextBox HorizontalAlignment="Left"
+                                     Width="580"
+                                     FontSize="22"
+                                     x:Name="dataBox"
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+                <Button Background="#FF1D212C"
+                        Height="60"
+                        Width="180"
+                        Content="Send"
+                        Foreground="White"
+                        FontSize="15"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="0,0,0,45"
+                        Click="SendNotClick"
+                        x:Name="SendNot" />
+            </Grid>
+            
+            <Grid Grid.Column="1" x:Name="walletFirstColumn">
+                <TextBlock Text="Coins" FontSize="60" HorizontalAlignment="Center" />
+                <ScrollViewer Margin="0 80 0 40">
+                    <StackPanel x:Name="buyCoinsLabel">
+                        
+                    </StackPanel>
+                </ScrollViewer>
+                
+            </Grid>
+            <Grid Grid.Column="2" x:Name="walletSecondColumn">
+                
             </Grid>
             
             

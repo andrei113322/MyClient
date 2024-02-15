@@ -176,6 +176,12 @@
   <wsdl:message name="IServiceBroker_GetNotificationsByReciever_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetNotificationsByRecieverResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertNotification_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertNotification" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBroker_InsertNotification_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertNotificationResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceBroker">
     <wsdl:operation name="SelectAllCoins">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/SelectAllCoins" message="tns:IServiceBroker_SelectAllCoins_InputMessage" />
@@ -288,6 +294,10 @@
     <wsdl:operation name="GetNotificationsByReciever">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/GetNotificationsByReciever" message="tns:IServiceBroker_GetNotificationsByReciever_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/GetNotificationsByRecieverResponse" message="tns:IServiceBroker_GetNotificationsByReciever_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertNotification">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBroker/InsertNotification" message="tns:IServiceBroker_InsertNotification_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBroker/InsertNotificationResponse" message="tns:IServiceBroker_InsertNotification_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceBroker" type="tns:IServiceBroker">
@@ -537,6 +547,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetNotificationsByReciever">
       <soap:operation soapAction="http://tempuri.org/IServiceBroker/GetNotificationsByReciever" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertNotification">
+      <soap:operation soapAction="http://tempuri.org/IServiceBroker/InsertNotification" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

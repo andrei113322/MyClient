@@ -119,7 +119,9 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="Data" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Reciever" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RecieverId" type="xs:int" />
           <xs:element minOccurs="0" name="Sender" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SenderId" type="xs:int" />
           <xs:element minOccurs="0" name="SentDate" type="xs:dateTime" />
         </xs:sequence>
       </xs:extension>

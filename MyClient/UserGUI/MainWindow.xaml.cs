@@ -38,6 +38,7 @@ namespace UserGUI
         private OrderHistoryList orderHistoryList;
         private int spaceBetween = 30;
         private User newUser = new User();
+        private MyCoin SendCoin;
 
         public MainWindow(User user)
         {
@@ -52,6 +53,8 @@ namespace UserGUI
             getCoinValueThread.Start();
 
             coinDesigns = new List<CoinDesign>();
+            chackIfAllCoinsThere(brokerService.SelectAllCoins());
+
             foreach (var item in coinList)
             {
                 double usd = (double)coinsValues.ToList().Find(c => c.Key.ToString().Contains(item.Coin.Symbol)).Value;
@@ -69,8 +72,6 @@ namespace UserGUI
 
             }
 
-
-
             TOTBalance.Text = totValue.ToString("F2");
 
             dispatcherTimer = new DispatcherTimer();
@@ -80,6 +81,50 @@ namespace UserGUI
             dispatcherTimer.Start();
 
 
+        }
+
+        private void chackIfAllCoinsThere(CoinList allCoins)
+        {
+            // Create a list to store missing coins
+            List<Coin> missingCoins = new List<Coin>();
+
+            // Iterate over allCoins and check if each coin exists in coinList
+            foreach (var coin in allCoins)
+            {
+                bool coinExists = false;
+                foreach (var myCoin in coinList)
+                {
+                    if (myCoin.Coin.Symbol == coin.Symbol)
+                    {
+                        coinExists = true;
+                        break;
+                    }
+                }
+
+                // If the coin doesn't exist, add it to missingCoins
+                if (!coinExists)
+                {
+                    missingCoins.Add(coin);
+                }
+            }
+
+            // Add missing coins to coinList with value 0
+            foreach (var missingCoin in missingCoins)
+            {
+                MyCoin newCoin = new MyCoin();
+                newCoin.Coin = missingCoin;
+                newCoin.Value = 0;
+                newCoin.User = user;
+                coinList.Add(newCoin);
+                brokerService.InsertMyCoin(newCoin);
+
+            }
+        }
+
+        private void updateMyCoins()
+        {
+            this.coinList = brokerService.GetCoinsByUser(user);
+            getCoinsValueSimple();
         }
 
 
@@ -358,6 +403,7 @@ namespace UserGUI
         private void walletSelectionClick(object sender, RoutedEventArgs e)
         {
             collapseAllElipses();
+            buyCoinsLabel.Children.Clear();
             walletSelectionEllipse.Visibility = Visibility.Visible;
             walletFirstColumn.Visibility = Visibility.Visible;
             walletSecondColumn.Visibility = Visibility.Visible;
@@ -382,7 +428,11 @@ namespace UserGUI
 
         private void coinsWithdrowHandler(object sender, EventArgs e)
         {
-            Console.WriteLine("Sell\n");
+            CoinBuyDesign coinBuyControl = sender as CoinBuyDesign;
+            this.SendCoin = coinBuyControl.myCoin;
+            coinBuyName.Text = $"Coin {SendCoin.Coin.Symbol}";
+            avlbCoins.Text = $"AVLB:{SendCoin.Value}";
+
         }
 
 
@@ -716,7 +766,57 @@ namespace UserGUI
 
         }
 
-        
+        private void SendCoinClick(object sender, RoutedEventArgs e)
+        {
+            MyCoin copyCoin;
+            MyCoin copyCoin2 = null;
+            MyCoinList senderCoin;
+            if (!string.IsNullOrEmpty(selectedUserToSend.Text))
+            {
+                User sendUser = brokerService.SelectUserByUserName(selectedUserToSend.Text);
+                if (sendUser != null)
+                {
+                    senderCoin = brokerService.GetCoinsByUser(sendUser);
+                    if (SendCoin != null)
+                    {
+                        copyCoin = SendCoin;
+                        copyCoin.Value = copyCoin.Value - double.Parse(amountToSend.Text);
+                        brokerService.UpdateMyCoin(copyCoin);
+                        this.avlbCoins.Text = "AVLB:" + copyCoin.Value;
+                        updateMyCoins();
+
+
+
+
+                        foreach (var item in senderCoin)
+                        {
+                            if (item.Coin.Symbol == copyCoin.Coin.Symbol)
+                            {
+                                copyCoin2 = item;
+                            }
+                        }
+
+                        if (copyCoin2 != null)
+                        {
+                            copyCoin2.Value = copyCoin2.Value + double.Parse(amountToSend.Text);
+                            brokerService.UpdateMyCoin(copyCoin2);
+                        }
+                        else
+                        {
+                            copyCoin2 = new MyCoin();
+                            copyCoin2.User = sendUser;
+                            copyCoin2.Coin = SendCoin.Coin;
+                            copyCoin2.Value = double.Parse(amountToSend.Text);
+                            brokerService.InsertMyCoin(copyCoin2);
+
+                        }
+                    }
+                }
+            }
+
+        }
+
+
 
     }
 }

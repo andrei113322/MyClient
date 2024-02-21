@@ -910,7 +910,47 @@
                 
             </Grid>
             <Grid Grid.Column="2" x:Name="walletSecondColumn">
-                
+                <StackPanel Margin="0 20 0 0">
+                    <TextBlock Text="Coin BTC" FontSize="50" HorizontalAlignment="Center" x:Name="coinBuyName"/>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0 20 0 0">
+                        <TextBlock Text="Amount: "  FontSize="30"/>
+                        <TextBox FontSize="30" MaxLength="10" Width="200" x:Name="amountToSend"/>
+                        <TextBlock Text="AVLB:"
+                                   FontSize="30"
+                                   Margin="20 0 0 0"
+                                   x:Name="avlbCoins" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                        <TextBlock Text="Adrees: "
+                                   FontSize="30" />
+                        <TextBox MaxLength="21" Width="400" FontSize="30"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0 20 0 0">
+                        <TextBlock Text="UserName: " FontSize="30"/>
+                        <TextBox MaxLength="21"
+                                 Width="400"
+                                 FontSize="30"
+                                 x:Name="selectedUserToSend"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 200 0 0">
+                        <TextBlock Text="Fee 0.1 BNB" FontSize="20" Margin="0 20 0 0"/>
+                        <Button Background="#FF1D212C"
+                                Height="60"
+                                Width="180"
+                                Content="Send"
+                                Foreground="White"
+                                FontSize="15"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Center"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Margin="150,0,0,0"
+                                Click="SendCoinClick"
+                                x:Name="SendAdress" />
+                    </StackPanel>
+                </StackPanel>
             </Grid>
             
             

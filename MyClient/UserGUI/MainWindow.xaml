@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:UserGUI"
         mc:Ignorable="d"
         Title="MainWindow"
@@ -900,7 +901,7 @@
                         x:Name="SendNot" />
             </Grid>
             
-            <Grid Grid.Column="1" x:Name="walletFirstColumn">
+            <Grid Grid.Column="1" x:Name="walletFirstColumn" Visibility="Collapsed">
                 <TextBlock Text="Coins" FontSize="60" HorizontalAlignment="Center" />
                 <ScrollViewer Margin="0 80 0 40">
                     <StackPanel x:Name="buyCoinsLabel">
@@ -909,7 +910,7 @@
                 </ScrollViewer>
                 
             </Grid>
-            <Grid Grid.Column="2" x:Name="walletSecondColumn">
+            <Grid Grid.Column="2" x:Name="walletSecondColumn" Visibility="Collapsed">
                 <StackPanel Margin="0 20 0 0">
                     <TextBlock Text="Coin BTC" FontSize="50" HorizontalAlignment="Center" x:Name="coinBuyName"/>
                     <StackPanel Orientation="Horizontal"
@@ -953,10 +954,58 @@
                 </StackPanel>
             </Grid>
             
-            
-            
-            
-       
+            <Grid Grid.Column="1" x:Name="tradeFirstColumn">
+                
+            </Grid>
+            <Grid Grid.Column="2" x:Name="tradeSecondColumn">
+                <StackPanel>
+                    <TextBlock Text="Chart"
+                               FontSize="60"
+                               HorizontalAlignment="Center"
+                               Margin="0 0 0 0" />
+                    <lvc:CartesianChart Background="#222E31" Height="500">
+                        <lvc:CartesianChart.Series>
+                            <lvc:LineSeries Values="{Binding Values1}"
+                                            StrokeThickness="2"
+                                            Stroke="#1C8FC5"
+                                            Fill="Transparent"
+                                            LineSmoothness="1"
+                                            PointGeometrySize="0" />
+                        </lvc:CartesianChart.Series>
+
+                        
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis IsMerged="True">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator StrokeThickness="1"
+                                                   StrokeDashArray="2">
+                                        <lvc:Separator.Stroke>
+                                            <SolidColorBrush Color="#404F56" />
+                                        </lvc:Separator.Stroke>
+                                    </lvc:Separator>
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisX>
+                        
+                        
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis IsMerged="True">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator StrokeThickness="1.5"
+                                                   StrokeDashArray="4">
+                                        <lvc:Separator.Stroke>
+                                            <SolidColorBrush Color="#404F56" />
+                                        </lvc:Separator.Stroke>
+                                    </lvc:Separator>
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                    
+                    
+                    
+                </StackPanel>
+            </Grid>
         </Grid>
     </Border>
 </Window>

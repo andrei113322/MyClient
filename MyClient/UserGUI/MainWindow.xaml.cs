@@ -20,6 +20,8 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Application = System.Windows.Application;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace UserGUI
 {
@@ -39,9 +41,23 @@ namespace UserGUI
         private int spaceBetween = 30;
         private User newUser = new User();
         private MyCoin SendCoin;
+        public SeriesCollection SeriesCollection;
+        private decimal[] closingPrices;
+
+        public ChartValues<double> Values1 { get; set; }
 
         public MainWindow(User user)
         {
+            InitializeComponent();
+            closingPrices = brokerService.GetHistoricalClosingPrices("BTCUSDT");
+            double[] doubleArray = closingPrices.Select(Convert.ToDouble).ToArray();
+
+            Values1 = new ChartValues<double> {};
+            Values1.AddRange(doubleArray);
+
+            DataContext = this;
+
+
             InitializeComponent();
             this.user = user;
 
@@ -80,6 +96,25 @@ namespace UserGUI
 
             dispatcherTimer.Start();
 
+
+        }
+        private void tradeSelectionClick(object sender, RoutedEventArgs e)
+        {
+            collapseAllElipses();
+            tradeSelectionEllipse.Visibility = Visibility.Visible;
+            tradeFirstColumn.Visibility = Visibility.Visible;
+            tradeSecondColumn.Visibility = Visibility.Visible;
+            // Add the series to the SeriesCollection
+            SeriesCollection = new SeriesCollection {
+                    new LineSeries
+                    {
+                        Values = new ChartValues<double> { 3, 5, 7, 4 }
+                    },
+                    new ColumnSeries
+                    {
+                        Values = new ChartValues<decimal> { 5, 6, 2, 7 }
+                    }
+            };
 
         }
 
@@ -382,16 +417,6 @@ namespace UserGUI
             }
         }
 
-
-
-
-
-        private void tradeSelectionClick(object sender, RoutedEventArgs e)
-        {
-            collapseAllElipses();
-            tradeSelectionEllipse.Visibility = Visibility.Visible;
-        }
-
         private void convertSelectionClick(object sender, RoutedEventArgs e)
         {
             collapseAllElipses();
@@ -520,6 +545,9 @@ namespace UserGUI
 
             walletFirstColumn.Visibility = Visibility.Collapsed;
             walletSecondColumn.Visibility = Visibility.Collapsed;
+
+            tradeSecondColumn.Visibility = Visibility.Collapsed;
+            tradeFirstColumn.Visibility = Visibility.Collapsed;
 
         }
 

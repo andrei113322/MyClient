@@ -820,6 +820,12 @@ namespace UserGUI.BrokerReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GiveCoinValue", ReplyAction="http://tempuri.org/IServiceBroker/GiveCoinValueResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, decimal>> GiveCoinValueAsync(string[] Value);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetHistoricalClosingPrices", ReplyAction="http://tempuri.org/IServiceBroker/GetHistoricalClosingPricesResponse")]
+        decimal[] GetHistoricalClosingPrices(string symbol);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetHistoricalClosingPrices", ReplyAction="http://tempuri.org/IServiceBroker/GetHistoricalClosingPricesResponse")]
+        System.Threading.Tasks.Task<decimal[]> GetHistoricalClosingPricesAsync(string symbol);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetNotificationsBySender", ReplyAction="http://tempuri.org/IServiceBroker/GetNotificationsBySenderResponse")]
         UserGUI.BrokerReference.NotificationList GetNotificationsBySender(UserGUI.BrokerReference.User user);
         
@@ -1072,6 +1078,14 @@ namespace UserGUI.BrokerReference {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, decimal>> GiveCoinValueAsync(string[] Value) {
             return base.Channel.GiveCoinValueAsync(Value);
+        }
+        
+        public decimal[] GetHistoricalClosingPrices(string symbol) {
+            return base.Channel.GetHistoricalClosingPrices(symbol);
+        }
+        
+        public System.Threading.Tasks.Task<decimal[]> GetHistoricalClosingPricesAsync(string symbol) {
+            return base.Channel.GetHistoricalClosingPricesAsync(symbol);
         }
         
         public UserGUI.BrokerReference.NotificationList GetNotificationsBySender(UserGUI.BrokerReference.User user) {

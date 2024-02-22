@@ -40,6 +40,7 @@ namespace UserGUI
         private void Timer_Tick(object sender, EventArgs e)
         {
             timer.Stop();
+            myUser = brokerDB.SelectUserByUserName(myUser.UserName);
             MainWindow man = new MainWindow(myUser);
             this.Close();
             man.ShowDialog();

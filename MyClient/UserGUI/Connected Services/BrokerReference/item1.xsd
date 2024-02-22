@@ -358,38 +358,52 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetHistoricalClosingPrices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="symbol" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetHistoricalClosingPricesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetHistoricalClosingPricesResult" nillable="true" type="q32:ArrayOfdecimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetNotificationsBySender">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q32:User" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q33:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetNotificationsBySenderResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetNotificationsBySenderResult" nillable="true" type="q33:NotificationList" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetNotificationsBySenderResult" nillable="true" type="q34:NotificationList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetNotificationsByReciever">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q34:User" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q35:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetNotificationsByRecieverResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetNotificationsByRecieverResult" nillable="true" type="q35:NotificationList" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetNotificationsByRecieverResult" nillable="true" type="q36:NotificationList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertNotification">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="notification" nillable="true" type="q36:Notification" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="notification" nillable="true" type="q37:Notification" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

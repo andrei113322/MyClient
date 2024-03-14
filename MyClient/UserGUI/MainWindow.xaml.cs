@@ -43,6 +43,7 @@ namespace UserGUI
         private MyCoin SendCoin;
         public SeriesCollection SeriesCollection;
         private decimal[] closingPrices;
+        private CoinChartDesign coinToBuy;
 
         public ChartValues<double> Values1 { get; set; }
 
@@ -101,20 +102,43 @@ namespace UserGUI
         private void tradeSelectionClick(object sender, RoutedEventArgs e)
         {
             collapseAllElipses();
+            coinsToChart.Children.Clear();
             tradeSelectionEllipse.Visibility = Visibility.Visible;
             tradeFirstColumn.Visibility = Visibility.Visible;
             tradeSecondColumn.Visibility = Visibility.Visible;
+
+            CoinList coins = brokerService.SelectAllCoins();
+            foreach (var item in coinList)
+            {
+                CoinChartDesign con = new CoinChartDesign(item);
+                con.Margin = new Thickness(0, 20, 0, 0);
+                con.CoinClicked += CoinChartDesign_CoinClicked;
+                coinsToChart.Children.Add(con);
+            }
+
+
+
+            MyCoinList listCoins = brokerService.GetCoinsByUser(user);
+            foreach (var item in listCoins)
+            {
+                if (item.Coin.Symbol == "USDR")
+                {
+                    marginAmount.Text = "AVLB: " + item.Value;
+                }
+            }
+
+
             // Add the series to the SeriesCollection
-            SeriesCollection = new SeriesCollection {
-                    new LineSeries
-                    {
-                        Values = new ChartValues<double> { 3, 5, 7, 4 }
-                    },
-                    new ColumnSeries
-                    {
-                        Values = new ChartValues<decimal> { 5, 6, 2, 7 }
-                    }
-            };
+            //SeriesCollection = new SeriesCollection {
+            //        new LineSeries
+            //        {
+            //            Values = new ChartValues<double> { 3, 5, 7, 4 }
+            //        },
+            //        new ColumnSeries
+            //        {
+            //            Values = new ChartValues<decimal> { 5, 6, 2, 7 }
+            //        }
+            //};
 
         }
 
@@ -204,7 +228,14 @@ namespace UserGUI
 
                     foreach (var item in coins)
                     {
-                        myCoins.Add(item.Symbol + "USDT");
+                        if (item.Symbol == "USD")
+                        {
+                            myCoins.Add(item.Symbol + "USD");
+                        }
+                        else
+                        {
+                            myCoins.Add(item.Symbol + "USDT");
+                        }
                     }
                     this.coinsValues = brokerService.GiveCoinValue(myCoins.ToArray());
                     Console.WriteLine("one run\n");
@@ -225,7 +256,14 @@ namespace UserGUI
 
             foreach (var item in coins)
             {
-                myCoins.Add(item.Symbol + "USDT");
+                if (item.Symbol == "USDT")
+                {
+                    myCoins.Add(item.Symbol + "USD");
+                }
+                else
+                {
+                    myCoins.Add(item.Symbol + "USDT");
+                }
             }
             this.coinsValues = brokerService.GiveCoinValue(myCoins.ToArray());
         }
@@ -437,6 +475,7 @@ namespace UserGUI
             foreach (var item in coinList)
             {
                 double usd = (double)coinsValues.ToList().Find(c => c.Key.ToString().Contains(item.Coin.Symbol)).Value;
+
                 CoinBuyDesign con = new CoinBuyDesign(item, usd);
                 con.Margin = new Thickness(0, 20, 0, 0);
                 con.CoinBuyClicked += coinsBuyHandler;
@@ -843,6 +882,27 @@ namespace UserGUI
             }
 
         }
+
+
+
+
+        private void BuyCoinChart(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void SellCoinChart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        private void CoinChartDesign_CoinClicked(object sender, EventArgs e)
+        {
+            CoinChartDesign myCoin = sender as CoinChartDesign;
+            coinToBuy = myCoin;
+        }
+
+
 
 
 

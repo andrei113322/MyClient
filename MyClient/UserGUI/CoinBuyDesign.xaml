@@ -58,15 +58,6 @@
                        FontSize="17"
                        FontFamily="PT Sans Pro Narrow"
                        Foreground="#1D212C" />
-            <TextBlock Grid.Column="1"
-                       Grid.Row="1"
-                       HorizontalAlignment="Left"
-                       Text="{Binding Path=Name}"
-                       VerticalAlignment="Center"
-                       FontSize="11"
-                       FontFamily="PT Sans"
-                       Foreground="#92969F"
-                       Margin="20,0,0,0" />
             <TextBlock x:Name="TOTBTCVALUE"
                        Grid.Column="2"
                        Grid.Row="1"

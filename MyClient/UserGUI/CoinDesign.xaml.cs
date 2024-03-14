@@ -25,7 +25,7 @@ namespace UserGUI
         public CoinDesign(MyCoin coin, double usd)
         {
             InitializeComponent();
-            this.DataContext = coin;
+            this.DataContext = coin.Coin;
             myCoin = coin;
             TOTBTCVALUE.Text = $"${coin.Value*usd}";
             try

@@ -17,19 +17,19 @@ using UserGUI.BrokerReference;
 namespace UserGUI
 {
     /// <summary>
-    /// Interaction logic for CoinBuyDesign.xaml
+    /// Interaction logic for CoinChartDesign.xaml
     /// </summary>
-    public partial class CoinBuyDesign : UserControl
+    public partial class CoinChartDesign : UserControl
     {
         public MyCoin myCoin { get; }
-        public event EventHandler CoinBuyClicked;
-        public event EventHandler CoinSellClicked;
-        public CoinBuyDesign(MyCoin coin, double usd)
+        public event EventHandler CoinClicked;
+
+        public CoinChartDesign(MyCoin coin)
         {
             InitializeComponent();
+            InitializeControl();
             this.DataContext = coin.Coin;
             myCoin = coin;
-            TOTBTCVALUE.Text = $"${coin.Value * usd}";
             try
             {
                 imgCoin.Source = new BitmapImage(new Uri($"pack://application:,,,/images/Coins/{coin.Coin.Symbol}.png"));
@@ -40,20 +40,16 @@ namespace UserGUI
             }
         }
 
-        public void updateCoinValue(MyCoin coin, double input)
+        private void InitializeControl()
         {
-            TOTBTCVALUE.Text = $"${coin.Value * input}";
+            // Wire up the click event handler
+            this.MouseLeftButtonDown += CoinChartDesign_MouseLeftButtonDown;
         }
 
-        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        private void CoinChartDesign_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            CoinSellClicked?.Invoke(this, EventArgs.Empty);
+            // Raise the CoinClicked event when the control is clicked
+            CoinClicked?.Invoke(this, EventArgs.Empty);
         }
-
-        private void TextBlock_MouseDown_1(object sender, MouseButtonEventArgs e)
-        {
-            CoinBuyClicked?.Invoke(this, EventArgs.Empty);
-        }
-    
     }
 }

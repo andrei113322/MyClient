@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:UserGUI"
+        xmlns:lvc1="clr-namespace:LiveCharts;assembly=LiveCharts"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="700"
@@ -955,7 +956,12 @@
             </Grid>
             
             <Grid Grid.Column="1" x:Name="tradeFirstColumn">
-                
+                <TextBlock Text="Coins"
+                           FontSize="60"
+                           HorizontalAlignment="Center" />
+                <ScrollViewer Margin="0 80 0 40">
+                    <StackPanel x:Name="coinsToChart"></StackPanel>
+                </ScrollViewer>
             </Grid>
             <Grid Grid.Column="2" x:Name="tradeSecondColumn">
                 <StackPanel>
@@ -963,7 +969,7 @@
                                FontSize="60"
                                HorizontalAlignment="Center"
                                Margin="0 0 0 0" />
-                    <lvc:CartesianChart Background="#222E31" Height="500">
+                    <lvc:CartesianChart Background="#222E31" Height="400" Width="650" Margin="0 0 50 0">
                         <lvc:CartesianChart.Series>
                             <lvc:LineSeries Values="{Binding Values1}"
                                             StrokeThickness="2"
@@ -986,8 +992,6 @@
                                 </lvc:Axis.Separator>
                             </lvc:Axis>
                         </lvc:CartesianChart.AxisX>
-                        
-                        
                         <lvc:CartesianChart.AxisY>
                             <lvc:Axis IsMerged="True">
                                 <lvc:Axis.Separator>
@@ -1001,9 +1005,42 @@
                             </lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                     </lvc:CartesianChart>
-                    
-                    
-                    
+                    <StackPanel Orientation="Horizontal" Margin="0 30 0 0 ">
+                        <TextBlock Text="Margin" FontSize="30"/>
+                        <TextBox  Width="150" FontSize="30" MaxWidth="150" MaxLength="6" Margin="10 0 0 0"/>
+                        <TextBlock Text="Laverage"
+                                   FontSize="30" Margin="160 0 0 0"/>
+                        <TextBox  Width="150"
+                                  FontSize="30"
+                                  MaxWidth="150"
+                                  MaxLength="2"
+                                  Margin="10 0 0 0"/>
+                    </StackPanel>
+                    <TextBlock  Text="AVLB: " x:Name="marginAmount"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Background="#FF1D212C"
+                                Height="60"
+                                Width="180"
+                                Content="Buy"
+                                Foreground="White"
+                                FontSize="15"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Margin="0,30,0,45"
+                                Click="BuyCoinChart"
+                                x:Name="Buy" />
+                        <Button Background="#FF1D212C"
+                                Height="60"
+                                Width="180"
+                                Content="Sell"
+                                Foreground="White"
+                                FontSize="15"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Margin="230,30,0,45"
+                                Click="SellCoinChart"
+                                x:Name="Sell" />
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </Grid>

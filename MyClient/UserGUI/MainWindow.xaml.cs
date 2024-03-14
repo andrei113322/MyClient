@@ -150,19 +150,6 @@ namespace UserGUI
                 }
             }
 
-
-            // Add the series to the SeriesCollection
-            //SeriesCollection = new SeriesCollection {
-            //        new LineSeries
-            //        {
-            //            Values = new ChartValues<double> { 3, 5, 7, 4 }
-            //        },
-            //        new ColumnSeries
-            //        {
-            //            Values = new ChartValues<decimal> { 5, 6, 2, 7 }
-            //        }
-            //};
-
         }
 
         private void chackIfAllCoinsThere(CoinList allCoins)
@@ -509,7 +496,8 @@ namespace UserGUI
         }
         private void coinsBuyHandler(object sender, EventArgs e)
         {
-            Console.WriteLine("Buy\n");
+            var arg = new RoutedEventArgs();
+            tradeSelectionClick(sender, arg);
         }
 
 

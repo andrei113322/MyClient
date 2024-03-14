@@ -969,7 +969,7 @@
                                FontSize="60"
                                HorizontalAlignment="Center"
                                Margin="0 0 0 0" />
-                    <lvc:CartesianChart Background="#222E31" Height="400" Width="650" Margin="0 0 50 0">
+                    <lvc:CartesianChart Background="#222E31" Height="400" Width="650" Margin="0 0 50 0" x:Name="MyChart">
                         <lvc:CartesianChart.Series>
                             <lvc:LineSeries Values="{Binding Values1}"
                                             StrokeThickness="2"

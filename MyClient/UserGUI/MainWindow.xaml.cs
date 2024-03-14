@@ -22,6 +22,7 @@ using System.Windows.Forms;
 using Application = System.Windows.Application;
 using LiveCharts;
 using LiveCharts.Wpf;
+using LiveCharts.Definitions.Charts;
 
 namespace UserGUI
 {
@@ -50,13 +51,6 @@ namespace UserGUI
         public MainWindow(User user)
         {
             InitializeComponent();
-            closingPrices = brokerService.GetHistoricalClosingPrices("BTCUSDT");
-            double[] doubleArray = closingPrices.Select(Convert.ToDouble).ToArray();
-
-            Values1 = new ChartValues<double> {};
-            Values1.AddRange(doubleArray);
-
-            DataContext = this;
 
 
             InitializeComponent();
@@ -99,6 +93,25 @@ namespace UserGUI
 
 
         }
+
+
+        private void UpdateGraph(string symbol)
+        {
+            closingPrices = brokerService.GetHistoricalClosingPrices(symbol);
+            double[] doubleArray = closingPrices.Select(Convert.ToDouble).ToArray();
+
+            // Clear the current chart values and update with new data
+            Values1.Clear();
+            foreach (var value in doubleArray)
+            {
+                Values1.Add(value);
+            }
+            // Update the chart
+            MyChart.Update(true);
+        }
+
+
+
         private void tradeSelectionClick(object sender, RoutedEventArgs e)
         {
             collapseAllElipses();
@@ -107,13 +120,23 @@ namespace UserGUI
             tradeFirstColumn.Visibility = Visibility.Visible;
             tradeSecondColumn.Visibility = Visibility.Visible;
 
+            closingPrices = brokerService.GetHistoricalClosingPrices("BTCUSDT");
+            double[] doubleArray = closingPrices.Select(Convert.ToDouble).ToArray();
+
+            Values1 = new ChartValues<double> { };
+            Values1.AddRange(doubleArray);
+            DataContext = this;
+
             CoinList coins = brokerService.SelectAllCoins();
             foreach (var item in coinList)
             {
-                CoinChartDesign con = new CoinChartDesign(item);
-                con.Margin = new Thickness(0, 20, 0, 0);
-                con.CoinClicked += CoinChartDesign_CoinClicked;
-                coinsToChart.Children.Add(con);
+                if (item.Coin.Symbol != "USDR")
+                {
+                    CoinChartDesign con = new CoinChartDesign(item);
+                    con.Margin = new Thickness(0, 20, 0, 0);
+                    con.CoinClicked += CoinChartDesign_CoinClicked;
+                    coinsToChart.Children.Add(con);
+                }
             }
 
 
@@ -846,36 +869,42 @@ namespace UserGUI
                     senderCoin = brokerService.GetCoinsByUser(sendUser);
                     if (SendCoin != null)
                     {
-                        copyCoin = SendCoin;
-                        copyCoin.Value = copyCoin.Value - double.Parse(amountToSend.Text);
-                        brokerService.UpdateMyCoin(copyCoin);
-                        this.avlbCoins.Text = "AVLB:" + copyCoin.Value;
-                        updateMyCoins();
-
-
-
-
-                        foreach (var item in senderCoin)
+                        if (double.Parse(amountToSend.Text) > 0)
                         {
-                            if (item.Coin.Symbol == copyCoin.Coin.Symbol)
+                            if (double.Parse(amountToSend.Text) <= SendCoin.Value)
                             {
-                                copyCoin2 = item;
+                                if (sendUser.UserName != user.UserName)
+                                {
+                                    copyCoin = SendCoin;
+                                    copyCoin.Value = copyCoin.Value - double.Parse(amountToSend.Text);
+                                    brokerService.UpdateMyCoin(copyCoin);
+                                    this.avlbCoins.Text = "AVLB:" + copyCoin.Value;
+                                    updateMyCoins();
+
+                                    foreach (var item in senderCoin)
+                                    {
+                                        if (item.Coin.Symbol == copyCoin.Coin.Symbol)
+                                        {
+                                            copyCoin2 = item;
+                                        }
+                                    }
+
+                                    if (copyCoin2 != null)
+                                    {
+                                        copyCoin2.Value = copyCoin2.Value + double.Parse(amountToSend.Text);
+                                        brokerService.UpdateMyCoin(copyCoin2);
+                                    }
+                                    else
+                                    {
+                                        copyCoin2 = new MyCoin();
+                                        copyCoin2.User = sendUser;
+                                        copyCoin2.Coin = SendCoin.Coin;
+                                        copyCoin2.Value = double.Parse(amountToSend.Text);
+                                        brokerService.InsertMyCoin(copyCoin2);
+
+                                    }
+                                }
                             }
-                        }
-
-                        if (copyCoin2 != null)
-                        {
-                            copyCoin2.Value = copyCoin2.Value + double.Parse(amountToSend.Text);
-                            brokerService.UpdateMyCoin(copyCoin2);
-                        }
-                        else
-                        {
-                            copyCoin2 = new MyCoin();
-                            copyCoin2.User = sendUser;
-                            copyCoin2.Coin = SendCoin.Coin;
-                            copyCoin2.Value = double.Parse(amountToSend.Text);
-                            brokerService.InsertMyCoin(copyCoin2);
-
                         }
                     }
                 }
@@ -899,6 +928,7 @@ namespace UserGUI
         private void CoinChartDesign_CoinClicked(object sender, EventArgs e)
         {
             CoinChartDesign myCoin = sender as CoinChartDesign;
+            UpdateGraph(myCoin.myCoin.Coin.Symbol + "USDT");
             coinToBuy = myCoin;
         }
 

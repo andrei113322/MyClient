@@ -965,11 +965,85 @@
             </Grid>
             <Grid Grid.Column="2" x:Name="tradeSecondColumn">
                 <StackPanel>
-                    <TextBlock Text="Chart"
-                               FontSize="60"
-                               HorizontalAlignment="Center"
-                               Margin="0 0 0 0" />
-                    <lvc:CartesianChart Background="#222E31" Height="400" Width="650" Margin="0 0 50 0" x:Name="MyChart">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Chart"
+                                   FontSize="60"
+                                   HorizontalAlignment="Center"
+                                   Margin="250 0 0 0" />
+                        <ComboBox Width="150"
+                                  FontSize="20"
+                                  SelectedIndex="0"
+                                  Margin="70 0 0 0"
+                                  SelectionChanged="ComboBox_SelectionChanged"
+                                  x:Name="tradeComboBox"
+                                  Style="{StaticResource comboBoxStyle}">
+                            <ComboBoxItem Content="Graph" />
+                            <ComboBoxItem Content="Open Positions" />
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Width="650"
+                                Height="400"
+                                x:Name="openPositions">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                      Margin="0,0,0,0">
+                            <Grid x:Name="OpenPositionsPanel">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Symbol"
+                                           FontSize="25"
+                                           Margin="0,0,40,0"
+                                           Grid.Column="0" />
+                                <TextBlock Text="Side"
+                                           FontSize="25"
+                                           Margin="0,0,40,0"
+                                           Grid.Column="1" />
+                                <TextBlock Text="Type"
+                                           FontSize="25"
+                                           Margin="0,0,40,0"
+                                           Grid.Column="2" />
+                                <TextBlock Text="QTY"
+                                           FontSize="25"
+                                           Margin="0,0,40,0"
+                                           Grid.Column="3" />
+                                <TextBlock Text="PAndL"
+                                           FontSize="25"
+                                           Margin="0,0,40,0"
+                                           Grid.Column="4" />
+                                <TextBlock Text="Price"
+                                           FontSize="25"
+                                           Margin="0,0,40,0"
+                                           Grid.Column="5" />
+                                <TextBlock Text="FillPrice"
+                                           FontSize="25"
+                                           Margin="0,0,40,0"
+                                           Grid.Column="6" />
+                                <TextBlock Text="Status"
+                                           FontSize="25"
+                                           Margin="0,0,40,0"
+                                           Grid.Column="7" />
+                                <TextBlock Text="PlacingT"
+                                           FontSize="25"
+                                           Margin="0,0,40,0"
+                                           Grid.Column="8" />
+                                <TextBlock Text="ClosingT"
+                                           FontSize="25"
+                                           Margin="0,0,40,0"
+                                           Grid.Column="9" />
+                            </Grid>
+                        </ScrollViewer>
+                    </StackPanel>
+                    <lvc:CartesianChart Background="#222E31" Height="400" Width="650" Margin="0 0 50 0" x:Name="MyChart" Visibility="Collapsed">
                         <lvc:CartesianChart.Series>
                             <lvc:LineSeries Values="{Binding Values1}"
                                             StrokeThickness="2"
@@ -1007,14 +1081,15 @@
                     </lvc:CartesianChart>
                     <StackPanel Orientation="Horizontal" Margin="0 30 0 0 ">
                         <TextBlock Text="Margin" FontSize="30"/>
-                        <TextBox  Width="150" FontSize="30" MaxWidth="150" MaxLength="6" Margin="10 0 0 0"/>
+                        <TextBox  Width="150" FontSize="30" MaxWidth="150" MaxLength="6" Margin="10 0 0 0" x:Name="MarginChoice"/>
                         <TextBlock Text="Laverage"
                                    FontSize="30" Margin="160 0 0 0"/>
                         <TextBox  Width="150"
                                   FontSize="30"
                                   MaxWidth="150"
                                   MaxLength="2"
-                                  Margin="10 0 0 0"/>
+                                  Margin="10 0 0 0"
+                                  x:Name="laverageChoice"/>
                     </StackPanel>
                     <TextBlock  Text="AVLB: " x:Name="marginAmount"/>
                     <StackPanel Orientation="Horizontal">

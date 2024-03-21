@@ -23,6 +23,7 @@ using Application = System.Windows.Application;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Definitions.Charts;
+using Button = System.Windows.Controls.Button;
 
 namespace UserGUI
 {
@@ -132,6 +133,10 @@ namespace UserGUI
             {
                 if (item.Coin.Symbol != "USDR")
                 {
+                    if (item.Coin.Symbol == "BTC")
+                    {
+                        coinToBuy = new CoinChartDesign(item);
+                    }
                     CoinChartDesign con = new CoinChartDesign(item);
                     con.Margin = new Thickness(0, 20, 0, 0);
                     con.CoinClicked += CoinChartDesign_CoinClicked;
@@ -905,13 +910,182 @@ namespace UserGUI
 
         private void BuyCoinChart(object sender, RoutedEventArgs e)
         {
+            double myMoney = 0;
+            foreach (var item in coinList)
+            {
+                if (item.Coin.Symbol == "USDR")
+                {
+                    myMoney = item.Value;
+                }
+            }
+            if (double.Parse(MarginChoice.Text) <= myMoney)
+            {
+                OrderHistory myOrder = new OrderHistory();
+                myOrder.UserId = user.ID;
+                myOrder.Symbol = coinToBuy.myCoin.Coin.Symbol;
+                myOrder.Side = "Long";
+                myOrder.Type = "Open";
+                myOrder.Qty = float.Parse(MarginChoice.Text);
+                myOrder.Price = (float)coinsValues[myOrder.Symbol + "USDT"];
+                myOrder.FillPrice = 0;
+                myOrder.Status = "Running";
+                myOrder.Placingtime = DateTime.Now;
+                myOrder.ClosingTime = DateTime.MaxValue;
+                brokerService.InsertOrderHistory(myOrder);
+
+            }
         }
 
         private void SellCoinChart(object sender, RoutedEventArgs e)
         {
+            double myMoney = 0;
+            foreach (var item in coinList)
+            {
+                if (item.Coin.Symbol == "USDR")
+                {
+                    myMoney = item.Value;
+                }
+            }
+            if (double.Parse(MarginChoice.Text) <= myMoney)
+            {
+                OrderHistory myOrder = new OrderHistory();
+                myOrder.UserId = user.ID;
+                myOrder.Symbol = coinToBuy.myCoin.Coin.Symbol;
+                myOrder.Side = "Short";
+                myOrder.Type = "Open";
+                myOrder.Qty = float.Parse(MarginChoice.Text);
+                myOrder.Price = (float)coinsValues[myOrder.Symbol + "USDT"];
+                myOrder.FillPrice = 0;
+                myOrder.Status = "Running";
+                myOrder.Placingtime = DateTime.Now;
+                myOrder.ClosingTime = DateTime.MaxValue;
+                brokerService.InsertOrderHistory(myOrder);
 
+            }
         }
 
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (tradeComboBox.SelectedIndex == 1)
+            {
+                MyChart.Visibility = Visibility.Collapsed;
+                openPositions.Visibility = Visibility.Visible;
+                showOpenPositions();
+
+            }
+            else
+            {
+                if (MyChart != null)
+                {
+                    MyChart.Visibility = Visibility.Visible;
+                    openPositions.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void showOpenPositions()
+        {
+            this.spaceBetween = 30;
+            int buttonSpace = 0;
+
+            var textBlocksToRemove = new List<TextBlock>();
+
+            foreach (var child in OpenPositionsPanel.Children)
+            {
+                if (child is TextBlock textBlock && textBlock.Tag != null && textBlock.Tag.ToString() == "data1")
+                {
+                    textBlocksToRemove.Add(textBlock);
+                }
+            }
+
+            foreach (var textBlockToRemove in textBlocksToRemove)
+            {
+                OpenPositionsPanel.Children.Remove(textBlockToRemove);
+            }
+            orderHistoryList = brokerService.SelectOrderHistoryByUser(user);
+
+
+            foreach (var item in orderHistoryList)
+            {
+                if (item.Status == "Running")
+                {
+
+                    Button button = new Button();
+                    button.Click += OrderButton_Click;
+                    button.Content = "Close"; // Set button text as needed
+                    button.FontSize = 18;
+                    button.Margin = new Thickness(0, buttonSpace, 0, 0);
+                    button.Tag = item;
+                    button.Height = 30;
+
+
+                    // Create TextBlocks for each column and set their text
+                    TextBlock symbolText = new TextBlock() { Text = item.Symbol, FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                    TextBlock sideText = new TextBlock() { Text = item.Side, FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                    TextBlock typeText = new TextBlock() { Text = item.Type, FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                    TextBlock qtyText = new TextBlock() { Text = item.Qty.ToString(), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                    TextBlock pAndLText = new TextBlock();
+                    if (item.Side == "Short")
+                    {
+                        pAndLText = new TextBlock() { Text = (((decimal)item.Price - coinsValues["BTCUSDT"]) * (decimal)item.Qty).ToString("F2"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+
+                    }
+                    else
+                    {
+                        pAndLText = new TextBlock() { Text = ((coinsValues["BTCUSDT"] - (decimal)item.Price) * (decimal)item.Qty).ToString("F2"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                    }
+                    TextBlock priceText = new TextBlock() { Text = item.Price.ToString(), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                    TextBlock fillPriceText = new TextBlock() { Text = item.FillPrice.ToString(), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                    TextBlock statusText = new TextBlock() { Text = item.Status, FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                    TextBlock placingTimeText = new TextBlock() { Text = item.Placingtime.ToString("MM/dd/yyyy"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                    TextBlock closingTimeText = new TextBlock() { Text = item.ClosingTime.ToString("MM/dd/yyyy"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+
+                    // Add TextBlocks to the grid with appropriate column
+                    OpenPositionsPanel.Children.Add(symbolText);
+                    OpenPositionsPanel.Children.Add(sideText);
+                    OpenPositionsPanel.Children.Add(typeText);
+                    OpenPositionsPanel.Children.Add(qtyText);
+                    OpenPositionsPanel.Children.Add(pAndLText);
+                    OpenPositionsPanel.Children.Add(priceText);
+                    OpenPositionsPanel.Children.Add(fillPriceText);
+                    OpenPositionsPanel.Children.Add(statusText);
+                    OpenPositionsPanel.Children.Add(placingTimeText);
+                    OpenPositionsPanel.Children.Add(closingTimeText);
+                    OpenPositionsPanel.Children.Add(button);
+
+                    // Set the Grid.Row property for each TextBlock
+                    Grid.SetColumn(symbolText, 0);
+                    Grid.SetColumn(sideText, 1);
+                    Grid.SetColumn(typeText, 2);
+                    Grid.SetColumn(qtyText, 3);
+                    Grid.SetColumn(pAndLText, 4);
+                    Grid.SetColumn(priceText, 5);
+                    Grid.SetColumn(fillPriceText, 6);
+                    Grid.SetColumn(statusText, 7);
+                    Grid.SetColumn(placingTimeText, 8);
+                    Grid.SetColumn(closingTimeText, 9);
+                    Grid.SetColumn(button, 10);
+                    // Add the grid to the StackPanel
+                    //Grid.SetRow(rowGrid, OrderHistoryPanel.RowDefinitions.Count - 1);
+                    this.spaceBetween += 30;
+                    buttonSpace += 70;
+                }
+            }
+        }
+
+        private void OrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Handle the click event here
+            Button clickedButton = (Button)sender;
+            // Access the order item associated with the clicked button
+            var selectedItem = (OrderHistory)clickedButton.Tag;
+
+            // Change button's appearance
+            clickedButton.Background = Brushes.LightGray;
+
+            // Trigger an event or perform other actions as needed
+            // ...
+        }
 
         private void CoinChartDesign_CoinClicked(object sender, EventArgs e)
         {

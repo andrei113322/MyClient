@@ -1004,6 +1004,7 @@ namespace UserGUI
             this.spaceBetween = 30;
 
             var textBlocksToRemove = new List<TextBlock>();
+            var buttonsToRemouve = new List<Button>();
 
             foreach (var child in OpenPositionsPanel.Children)
             {
@@ -1011,12 +1012,23 @@ namespace UserGUI
                 {
                     textBlocksToRemove.Add(textBlock);
                 }
+                if (child is Button button)
+                {
+                    buttonsToRemouve.Add(button);
+                }
             }
 
             foreach (var textBlockToRemove in textBlocksToRemove)
             {
                 OpenPositionsPanel.Children.Remove(textBlockToRemove);
             }
+
+            foreach (var buttonToRemouve in buttonsToRemouve)
+            {
+                OpenPositionsPanel.Children.Remove(buttonToRemouve);
+            }
+
+
             orderHistoryList = brokerService.SelectOrderHistoryByUser(user);
 
 
@@ -1043,18 +1055,19 @@ namespace UserGUI
                     TextBlock pAndLText = new TextBlock();
                     if (item.Side == "Short")
                     {
-                        pAndLText = new TextBlock() { Text = (((decimal)item.Price - coinsValues["BTCUSDT"]) * (decimal)item.Qty).ToString("F2"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                        pAndLText = new TextBlock() { Text = (((decimal)item.Price - coinsValues["BTCUSDT"]) * (decimal)item.Qty * item.Laverage).ToString("F2"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
 
                     }
                     else
                     {
-                        pAndLText = new TextBlock() { Text = ((coinsValues["BTCUSDT"] - (decimal)item.Price) * (decimal)item.Qty).ToString("F2"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                        pAndLText = new TextBlock() { Text = ((coinsValues["BTCUSDT"] - (decimal)item.Price) * (decimal)item.Qty * item.Laverage).ToString("F2"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
                     }
                     TextBlock priceText = new TextBlock() { Text = item.Price.ToString(), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
                     TextBlock fillPriceText = new TextBlock() { Text = item.FillPrice.ToString(), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
                     TextBlock statusText = new TextBlock() { Text = item.Status, FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
                     TextBlock placingTimeText = new TextBlock() { Text = item.Placingtime.ToString("MM/dd/yyyy"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
                     TextBlock closingTimeText = new TextBlock() { Text = item.ClosingTime.ToString("MM/dd/yyyy"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                    TextBlock laverage = new TextBlock() { Text = item.Laverage.ToString(), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
 
                     // Add TextBlocks to the grid with appropriate column
                     OpenPositionsPanel.Children.Add(symbolText);
@@ -1067,6 +1080,7 @@ namespace UserGUI
                     OpenPositionsPanel.Children.Add(statusText);
                     OpenPositionsPanel.Children.Add(placingTimeText);
                     OpenPositionsPanel.Children.Add(closingTimeText);
+                    OpenPositionsPanel.Children.Add(laverage);
                     OpenPositionsPanel.Children.Add(button);
 
                     // Set the Grid.Row property for each TextBlock
@@ -1080,7 +1094,8 @@ namespace UserGUI
                     Grid.SetColumn(statusText, 7);
                     Grid.SetColumn(placingTimeText, 8);
                     Grid.SetColumn(closingTimeText, 9);
-                    Grid.SetColumn(button, 10);
+                    Grid.SetColumn(laverage, 10);
+                    Grid.SetColumn(button, 11);
                     // Add the grid to the StackPanel
                     //Grid.SetRow(rowGrid, OrderHistoryPanel.RowDefinitions.Count - 1);
                     this.spaceBetween += 50;
@@ -1093,16 +1108,33 @@ namespace UserGUI
             // Handle the click event here
             Button clickedButton = (Button)sender;
             // Access the order item associated with the clicked button
+            MyCoin usdrCoin = new MyCoin();
+
+            foreach (var item2 in coinList)
+            {
+                if (item2.Coin.Symbol == "USDR")
+                {
+                    usdrCoin = item2;
+                }
+            }
+
             var item = (OrderHistory)clickedButton.Tag;
             decimal pandl = 0;
             if (item.Side == "Short")
             {
-                pandl = ((decimal)item.Price - coinsValues["BTCUSDT"]) * (decimal)item.Qty;
+                pandl = ((decimal)item.Price - coinsValues["BTCUSDT"]) * (decimal)item.Qty * item.Laverage;
             }
             else
             {
-                pandl = (coinsValues["BTCUSDT"] - (decimal)item.Price) * (decimal)item.Qty;
+                pandl = (coinsValues["BTCUSDT"] - (decimal)item.Price) * (decimal)item.Qty * item.Laverage;
             }
+            //OpenPositionsPanel.Children.Remove(clickedButton);
+            item.Status = "Stopped";
+            item.ClosingTime = DateTime.Now;
+            brokerService.UpdateOrderHistory(item);
+            usdrCoin.Value += (double)pandl;
+            brokerService.UpdateMyCoin(usdrCoin);
+            showOpenPositions();
         }
 
         private void CoinChartDesign_CoinClicked(object sender, EventArgs e)

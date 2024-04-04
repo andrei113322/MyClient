@@ -313,6 +313,9 @@ namespace UserGUI.BrokerReference {
         private float FillPriceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int LaverageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime PlacingtimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -358,6 +361,19 @@ namespace UserGUI.BrokerReference {
                 if ((this.FillPriceField.Equals(value) != true)) {
                     this.FillPriceField = value;
                     this.RaisePropertyChanged("FillPrice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Laverage {
+            get {
+                return this.LaverageField;
+            }
+            set {
+                if ((this.LaverageField.Equals(value) != true)) {
+                    this.LaverageField = value;
+                    this.RaisePropertyChanged("Laverage");
                 }
             }
         }

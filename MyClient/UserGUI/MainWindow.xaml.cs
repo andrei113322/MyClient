@@ -32,6 +32,7 @@ namespace UserGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region mainStuff
         private User user;
         private MyCoinList coinList;
         private ServiceBrokerClient brokerService = new ServiceBrokerClient();
@@ -94,8 +95,9 @@ namespace UserGUI
 
 
         }
+        #endregion
 
-
+        #region graph
         private void UpdateGraph(string symbol)
         {
             closingPrices = brokerService.GetHistoricalClosingPrices(symbol);
@@ -110,6 +112,7 @@ namespace UserGUI
             // Update the chart
             MyChart.Update(true);
         }
+        #endregion
 
 
 
@@ -911,11 +914,13 @@ namespace UserGUI
         private void BuyCoinChart(object sender, RoutedEventArgs e)
         {
             double myMoney = 0;
+            MyCoin usdrCoin = new MyCoin();
             foreach (var item in coinList)
             {
                 if (item.Coin.Symbol == "USDR")
                 {
                     myMoney = item.Value;
+                    usdrCoin = item;
                 }
             }
             if (double.Parse(MarginChoice.Text) <= myMoney)
@@ -931,7 +936,12 @@ namespace UserGUI
                 myOrder.Status = "Running";
                 myOrder.Placingtime = DateTime.Now;
                 myOrder.ClosingTime = DateTime.MaxValue;
+                myOrder.Laverage = int.Parse(laverageChoice.Text);
                 brokerService.InsertOrderHistory(myOrder);
+                usdrCoin.Value = usdrCoin.Value - float.Parse(MarginChoice.Text);
+                brokerService.UpdateMyCoin(usdrCoin);
+                tradeSelectionClick(sender, e);
+                
 
             }
         }
@@ -939,11 +949,13 @@ namespace UserGUI
         private void SellCoinChart(object sender, RoutedEventArgs e)
         {
             double myMoney = 0;
+            MyCoin usdrCoin = new MyCoin();
             foreach (var item in coinList)
             {
                 if (item.Coin.Symbol == "USDR")
                 {
                     myMoney = item.Value;
+                    usdrCoin = item;
                 }
             }
             if (double.Parse(MarginChoice.Text) <= myMoney)
@@ -959,7 +971,11 @@ namespace UserGUI
                 myOrder.Status = "Running";
                 myOrder.Placingtime = DateTime.Now;
                 myOrder.ClosingTime = DateTime.MaxValue;
+                myOrder.Laverage = int.Parse(laverageChoice.Text);
                 brokerService.InsertOrderHistory(myOrder);
+                usdrCoin.Value = usdrCoin.Value - float.Parse(MarginChoice.Text);
+                brokerService.UpdateMyCoin(usdrCoin);
+                tradeSelectionClick(sender, e);
 
             }
         }
@@ -986,7 +1002,6 @@ namespace UserGUI
         private void showOpenPositions()
         {
             this.spaceBetween = 30;
-            int buttonSpace = 0;
 
             var textBlocksToRemove = new List<TextBlock>();
 
@@ -1014,9 +1029,10 @@ namespace UserGUI
                     button.Click += OrderButton_Click;
                     button.Content = "Close"; // Set button text as needed
                     button.FontSize = 18;
-                    button.Margin = new Thickness(0, buttonSpace, 0, 0);
+                    button.Margin = new Thickness(0, spaceBetween, 0, 0);
                     button.Tag = item;
                     button.Height = 30;
+                    button.VerticalAlignment = VerticalAlignment.Top;
 
 
                     // Create TextBlocks for each column and set their text
@@ -1067,8 +1083,7 @@ namespace UserGUI
                     Grid.SetColumn(button, 10);
                     // Add the grid to the StackPanel
                     //Grid.SetRow(rowGrid, OrderHistoryPanel.RowDefinitions.Count - 1);
-                    this.spaceBetween += 30;
-                    buttonSpace += 70;
+                    this.spaceBetween += 50;
                 }
             }
         }
@@ -1078,13 +1093,16 @@ namespace UserGUI
             // Handle the click event here
             Button clickedButton = (Button)sender;
             // Access the order item associated with the clicked button
-            var selectedItem = (OrderHistory)clickedButton.Tag;
-
-            // Change button's appearance
-            clickedButton.Background = Brushes.LightGray;
-
-            // Trigger an event or perform other actions as needed
-            // ...
+            var item = (OrderHistory)clickedButton.Tag;
+            decimal pandl = 0;
+            if (item.Side == "Short")
+            {
+                pandl = ((decimal)item.Price - coinsValues["BTCUSDT"]) * (decimal)item.Qty;
+            }
+            else
+            {
+                pandl = (coinsValues["BTCUSDT"] - (decimal)item.Price) * (decimal)item.Qty;
+            }
         }
 
         private void CoinChartDesign_CoinClicked(object sender, EventArgs e)

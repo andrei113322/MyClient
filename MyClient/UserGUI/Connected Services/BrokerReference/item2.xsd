@@ -70,6 +70,7 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="ClosingTime" type="xs:dateTime" />
           <xs:element minOccurs="0" name="FillPrice" type="xs:float" />
+          <xs:element minOccurs="0" name="Laverage" type="xs:int" />
           <xs:element minOccurs="0" name="Placingtime" type="xs:dateTime" />
           <xs:element minOccurs="0" name="Price" type="xs:float" />
           <xs:element minOccurs="0" name="Qty" type="xs:float" />

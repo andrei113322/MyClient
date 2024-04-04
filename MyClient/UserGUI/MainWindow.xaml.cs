@@ -57,43 +57,50 @@ namespace UserGUI
 
             InitializeComponent();
             this.user = user;
-
-            coinList = brokerService.GetCoinsByUser(user);
-            getCoinsValueSimple();
-            Console.WriteLine("hello");
-
-            Thread getCoinValueThread = new Thread(getCoinsValue);
-            getCoinValueThread.Start();
-
-            coinDesigns = new List<CoinDesign>();
-            chackIfAllCoinsThere(brokerService.SelectAllCoins());
-
-            foreach (var item in coinList)
+            if (user.IsAdmin)
             {
-                double usd = (double)coinsValues.ToList().Find(c => c.Key.ToString().Contains(item.Coin.Symbol)).Value;
-                totValue += item.Value * usd;
-
-                CoinDesign cd = new CoinDesign(item, usd);
-                coinsPanel.Children.Add(cd);
-                coinDesigns.Add(cd);
-
-                PurpuleCoinDesign cp = new PurpuleCoinDesign(item, usd);
-                purpuleCoinsPanel.Items.Add(cp);
-
-                PurpuleCoinDesign cpp = new PurpuleCoinDesign(item, usd);
-                purpuleCoinsPanelSecond.Items.Add(cpp);
-
+                convertButtons.Visibility = Visibility.Collapsed;
+                prizeButtons.Visibility = Visibility.Collapsed;
+                profileButtons.Visibility = Visibility.Collapsed;
+                tradeButtons.Visibility = Visibility.Collapsed;
+                walletButtons.Visibility = Visibility.Collapsed;
             }
+            else
+            {
+                coinList = brokerService.GetCoinsByUser(user);
+                getCoinsValueSimple();
 
-            TOTBalance.Text = totValue.ToString("F2");
+                Thread getCoinValueThread = new Thread(getCoinsValue);
+                getCoinValueThread.Start();
 
-            dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = TimeSpan.FromSeconds(2);
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
+                coinDesigns = new List<CoinDesign>();
+                chackIfAllCoinsThere(brokerService.SelectAllCoins());
 
-            dispatcherTimer.Start();
+                foreach (var item in coinList)
+                {
+                    double usd = (double)coinsValues.ToList().Find(c => c.Key.ToString().Contains(item.Coin.Symbol)).Value;
+                    totValue += item.Value * usd;
 
+                    CoinDesign cd = new CoinDesign(item, usd);
+                    coinsPanel.Children.Add(cd);
+                    coinDesigns.Add(cd);
 
+                    PurpuleCoinDesign cp = new PurpuleCoinDesign(item, usd);
+                    purpuleCoinsPanel.Items.Add(cp);
+
+                    PurpuleCoinDesign cpp = new PurpuleCoinDesign(item, usd);
+                    purpuleCoinsPanelSecond.Items.Add(cpp);
+
+                }
+
+                TOTBalance.Text = totValue.ToString("F2");
+
+                dispatcherTimer = new DispatcherTimer();
+                dispatcherTimer.Interval = TimeSpan.FromSeconds(2);
+                dispatcherTimer.Tick += DispatcherTimer_Tick;
+
+                dispatcherTimer.Start();
+            }
         }
         #endregion
 

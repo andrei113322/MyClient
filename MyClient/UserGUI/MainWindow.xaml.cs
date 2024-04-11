@@ -598,6 +598,9 @@ namespace UserGUI
             walletSelectionEllipse.Visibility = Visibility.Collapsed;
             prizeSelectionEllipse.Visibility = Visibility.Collapsed;
             profileSelectionEllipse.Visibility = Visibility.Collapsed;
+            homeInfoSelectionEllipse.Visibility = Visibility.Collapsed;
+            usersProfileEllipse.Visibility = Visibility.Collapsed;
+            CashEllipse.Visibility = Visibility.Collapsed;
 
             convertSecondColumn.Visibility = Visibility.Collapsed;
             convertThirdColums.Visibility = Visibility.Collapsed;
@@ -613,6 +616,15 @@ namespace UserGUI
 
             tradeSecondColumn.Visibility = Visibility.Collapsed;
             tradeFirstColumn.Visibility = Visibility.Collapsed;
+
+            homeInfoFirstColums.Visibility = Visibility.Collapsed;
+            homeInfoSecondColums.Visibility = Visibility.Collapsed;
+
+            usersProfileFirstColums.Visibility = Visibility.Collapsed;
+            usersProfileSecondColums.Visibility = Visibility.Collapsed;
+
+            CashFirstColums.Visibility = Visibility.Collapsed;
+            CashSecondColums.Visibility = Visibility.Collapsed;
 
         }
 
@@ -1168,6 +1180,16 @@ namespace UserGUI
             usersProfileFirstColums.Visibility = Visibility.Visible;
             usersProfileSecondColums.Visibility = Visibility.Visible;
         }
+
+        private void CashClick(object sender, RoutedEventArgs e)
+        {
+            collapseAllElipses();
+            CashEllipse.Visibility = Visibility.Visible;
+            CashFirstColums.Visibility= Visibility.Visible;
+            CashSecondColums.Visibility = Visibility.Visible;
+        }
+
+
 
 
 

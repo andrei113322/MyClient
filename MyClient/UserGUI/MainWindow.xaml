@@ -1206,6 +1206,7 @@
                     <TextBlock Text="Tot users"  FontSize="40"/>
                     <TextBlock Text="Tot assets" FontSize="40"/>
                     <TextBlock Text="Tot liquidations" FontSize="40"/>
+                    <TextBlock Text="Profits" FontSize="40"/>
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="2"

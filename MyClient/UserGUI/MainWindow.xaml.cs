@@ -1189,11 +1189,5 @@ namespace UserGUI
             CashSecondColums.Visibility = Visibility.Visible;
         }
 
-
-
-
-
-
-
     }
 }

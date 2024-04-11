@@ -162,6 +162,23 @@
                             </StackPanel>
                         </Button>
                     </StackPanel>
+                    <StackPanel x:Name="CashButtons"
+                                Visibility="Visible">
+                        <Button Style="{StaticResource MenuButtonStyle}"
+                                x:Name="CashSelection"
+                                Click="CashClick">
+                            <StackPanel>
+                                <Image Source="/Images/cash.png"
+                                       Width="22" />
+                                <Ellipse Width="5"
+                                         Height="5"
+                                         Fill="White"
+                                         Margin="3"
+                                         Visibility="Collapsed"
+                                         x:Name="CashEllipse" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
             </Border>
             
@@ -1179,11 +1196,17 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1"
-                  x:Name="homeInfoFirstColums">  
-                
-                
-                
-                
+                  x:Name="homeInfoFirstColums">
+                <StackPanel>
+                    <TextBlock Text="Volume"
+                               FontSize="40" />
+                    <TextBlock Text="Tot open positions"
+                               FontSize="40" />
+                    <TextBlock Text="Tot Transfers" FontSize="40"/>
+                    <TextBlock Text="Tot users"  FontSize="40"/>
+                    <TextBlock Text="Tot assets" FontSize="40"/>
+                    <TextBlock Text="Tot liquidations" FontSize="40"/>
+                </StackPanel>
             </Grid>
             <Grid Grid.Column="2"
                   x:Name="homeInfoSecondColums">
@@ -1195,6 +1218,12 @@
                   x:Name="usersProfileFirstColums" Visibility="Collapsed"></Grid>
             <Grid Grid.Column="2"
                   x:Name="usersProfileSecondColums" Visibility="Collapsed"></Grid>
+            <Grid Grid.Column="1"
+                  x:Name="CashFirstColums"
+                  Visibility="Collapsed"></Grid>
+            <Grid Grid.Column="2"
+                  x:Name="CashSecondColums"
+                  Visibility="Collapsed"></Grid>
         </Grid>
     </Border>
 </Window>

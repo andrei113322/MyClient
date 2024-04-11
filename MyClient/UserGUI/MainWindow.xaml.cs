@@ -937,7 +937,7 @@ namespace UserGUI
                 myOrder.Symbol = coinToBuy.myCoin.Coin.Symbol;
                 myOrder.Side = "Long";
                 myOrder.Type = "Open";
-                myOrder.Qty = float.Parse(MarginChoice.Text);
+                myOrder.Qty = float.Parse(MarginChoice.Text) / (float)coinsValues[coinToBuy.myCoin.Coin.Symbol + "USDT"];
                 myOrder.Price = (float)coinsValues[myOrder.Symbol + "USDT"];
                 myOrder.FillPrice = 0;
                 myOrder.Status = "Running";
@@ -972,7 +972,7 @@ namespace UserGUI
                 myOrder.Symbol = coinToBuy.myCoin.Coin.Symbol;
                 myOrder.Side = "Short";
                 myOrder.Type = "Open";
-                myOrder.Qty = float.Parse(MarginChoice.Text);
+                myOrder.Qty = float.Parse(MarginChoice.Text) / (float)coinsValues[coinToBuy.myCoin.Coin.Symbol + "USDT"];
                 myOrder.Price = (float)coinsValues[myOrder.Symbol + "USDT"];
                 myOrder.FillPrice = 0;
                 myOrder.Status = "Running";
@@ -1062,12 +1062,12 @@ namespace UserGUI
                     TextBlock pAndLText = new TextBlock();
                     if (item.Side == "Short")
                     {
-                        pAndLText = new TextBlock() { Text = (((decimal)item.Price - coinsValues["BTCUSDT"]) * (decimal)item.Qty * item.Laverage).ToString("F2"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                        pAndLText = new TextBlock() { Text = (((decimal)item.Price - coinsValues[item.Symbol + "USDT"]) * (decimal)item.Qty * item.Laverage).ToString("F2"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
 
                     }
                     else
                     {
-                        pAndLText = new TextBlock() { Text = ((coinsValues["BTCUSDT"] - (decimal)item.Price) * (decimal)item.Qty * item.Laverage).ToString("F2"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
+                        pAndLText = new TextBlock() { Text = ((coinsValues[item.Symbol + "USDT"] - (decimal)item.Price) * (decimal)item.Qty * item.Laverage).ToString("F2"), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
                     }
                     TextBlock priceText = new TextBlock() { Text = item.Price.ToString(), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
                     TextBlock fillPriceText = new TextBlock() { Text = item.FillPrice.ToString(), FontSize = 25, Margin = new Thickness(0, spaceBetween, 0, 0), Tag = "data1" };
@@ -1129,17 +1129,17 @@ namespace UserGUI
             decimal pandl = 0;
             if (item.Side == "Short")
             {
-                pandl = ((decimal)item.Price - coinsValues["BTCUSDT"]) * (decimal)item.Qty * item.Laverage;
+                pandl = ((decimal)item.Price - coinsValues[item.Symbol + "USDT"]) * (decimal)item.Qty * item.Laverage;
             }
             else
             {
-                pandl = (coinsValues["BTCUSDT"] - (decimal)item.Price) * (decimal)item.Qty * item.Laverage;
+                pandl = (coinsValues[item.Symbol + "USDT"] - (decimal)item.Price) * (decimal)item.Qty * item.Laverage;
             }
             //OpenPositionsPanel.Children.Remove(clickedButton);
             item.Status = "Stopped";
             item.ClosingTime = DateTime.Now;
             brokerService.UpdateOrderHistory(item);
-            usdrCoin.Value += (double)pandl;
+            usdrCoin.Value += (double)pandl + item.Qty * (double)coinsValues[item.Symbol + "USDT"];
             brokerService.UpdateMyCoin(usdrCoin);
             showOpenPositions();
         }
@@ -1149,6 +1149,24 @@ namespace UserGUI
             CoinChartDesign myCoin = sender as CoinChartDesign;
             UpdateGraph(myCoin.myCoin.Coin.Symbol + "USDT");
             coinToBuy = myCoin;
+        }
+
+
+        private void homeInfoSelectionClick(object sender, RoutedEventArgs e)
+        {
+            collapseAllElipses();
+            homeInfoSelectionEllipse.Visibility = Visibility.Visible;
+            homeInfoFirstColums.Visibility = Visibility.Visible;
+            homeInfoSecondColums.Visibility = Visibility.Visible;
+        }
+
+
+        private void usersProfileClick(object sender, RoutedEventArgs e)
+        {
+            collapseAllElipses();
+            usersProfileEllipse.Visibility = Visibility.Visible;
+            usersProfileFirstColums.Visibility = Visibility.Visible;
+            usersProfileSecondColums.Visibility = Visibility.Visible;
         }
 
 

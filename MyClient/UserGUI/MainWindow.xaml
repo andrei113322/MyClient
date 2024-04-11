@@ -38,7 +38,7 @@
                     <Image Source="/Images/diamond.png"
                            Width="32"
                            Margin="0,55" />
-                    <StackPanel x:Name="tradeButtons">
+                    <StackPanel x:Name="tradeButtons" Visibility="Collapsed">
                         <Button Margin="0,30,0,0" 
                             x:Name="tradeSelection"
                             Style="{StaticResource MenuButtonStyle}"
@@ -55,7 +55,7 @@
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                    <StackPanel x:Name="convertButtons">
+                    <StackPanel x:Name="convertButtons" Visibility="Collapsed">
                       
                     <Button Style="{StaticResource MenuButtonStyle}"
                             x:Name="convertSelection"
@@ -71,7 +71,7 @@
                         </StackPanel>
                     </Button>
                     </StackPanel>
-                    <StackPanel x:Name="walletButtons">
+                    <StackPanel x:Name="walletButtons" Visibility="Collapsed">
                         
                     <Button Style="{StaticResource MenuButtonStyle}"
                             x:Name="walletSelection"
@@ -88,7 +88,7 @@
                         </StackPanel>
                     </Button>
                     </StackPanel>
-                    <StackPanel x:Name="prizeButtons">
+                    <StackPanel x:Name="prizeButtons" Visibility="Collapsed">
                         
                     <Button Style="{StaticResource MenuButtonStyle}"
                             x:Name="prizeSelection"
@@ -105,7 +105,7 @@
                         </StackPanel>
                     </Button>
                     </StackPanel>
-                    <StackPanel x:Name="profileButtons">
+                    <StackPanel x:Name="profileButtons" Visibility="Collapsed">
                         
                     <Button Style="{StaticResource MenuButtonStyle}"
                             x:Name="profileSelection"
@@ -121,6 +121,46 @@
                                      x:Name="profileSelectionEllipse"/>
                         </StackPanel>
                     </Button>
+                    </StackPanel>
+                    
+                    
+                    
+                    
+                    <StackPanel x:Name="homeInfoButtons" 
+                                Visibility="Visible">
+                        <Button Margin="0,30,0,0"
+                                x:Name="homeInfoSelection"
+                                Style="{StaticResource MenuButtonStyle}"
+                                Click="homeInfoSelectionClick">
+                            <StackPanel>
+                                <Image Source="/Images/white-house.png"
+                                       Width="22" />
+                                <Ellipse Width="5"
+                                         Height="5"
+                                         Fill="White"
+                                         Margin="3"
+                                         Visibility="Collapsed"
+                                         x:Name="homeInfoSelectionEllipse" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    
+                    <StackPanel x:Name="usersProfileButtons"
+                                Visibility="Visible">
+                        <Button Style="{StaticResource MenuButtonStyle}"
+                                x:Name="usersProfileSelection"
+                                Click="usersProfileClick">
+                            <StackPanel>
+                                <Image Source="/Images/profile.png"
+                                       Width="22" />
+                                <Ellipse Width="5"
+                                         Height="5"
+                                         Fill="White"
+                                         Margin="3"
+                                         Visibility="Collapsed"
+                                         x:Name="usersProfileEllipse" />
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -969,7 +1009,7 @@
                 </StackPanel>
             </Grid>
             
-            <Grid Grid.Column="1" x:Name="tradeFirstColumn">
+            <Grid Grid.Column="1" x:Name="tradeFirstColumn" Visibility="Collapsed">
                 <TextBlock Text="Coins"
                            FontSize="60"
                            HorizontalAlignment="Center" />
@@ -977,7 +1017,7 @@
                     <StackPanel x:Name="coinsToChart"></StackPanel>
                 </ScrollViewer>
             </Grid>
-            <Grid Grid.Column="2" x:Name="tradeSecondColumn">
+            <Grid Grid.Column="2" x:Name="tradeSecondColumn" Visibility="Collapsed">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Chart"
@@ -997,7 +1037,7 @@
                     </StackPanel>
                     <StackPanel Width="650"
                                 Height="400"
-                                x:Name="openPositions" Visibility="Visible">
+                                x:Name="openPositions" Visibility="Collapsed">
                         <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                       Margin="0,0,0,0">
                             <Grid x:Name="OpenPositionsPanel">
@@ -1062,7 +1102,7 @@
                             </Grid>
                         </ScrollViewer>
                     </StackPanel>
-                    <lvc:CartesianChart Background="#222E31" Height="400" Width="650" Margin="0 0 50 0" x:Name="MyChart" Visibility="Collapsed">
+                    <lvc:CartesianChart Background="#222E31" Height="400" Width="650" Margin="0 0 50 0" x:Name="MyChart" Visibility="Visible">
                         <lvc:CartesianChart.Series>
                             <lvc:LineSeries Values="{Binding Values1}"
                                             StrokeThickness="2"
@@ -1138,6 +1178,23 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
+            <Grid Grid.Column="1"
+                  x:Name="homeInfoFirstColums">  
+                
+                
+                
+                
+            </Grid>
+            <Grid Grid.Column="2"
+                  x:Name="homeInfoSecondColums">
+                
+            </Grid>
+            
+            
+            <Grid Grid.Column="1"
+                  x:Name="usersProfileFirstColums" Visibility="Collapsed"></Grid>
+            <Grid Grid.Column="2"
+                  x:Name="usersProfileSecondColums" Visibility="Collapsed"></Grid>
         </Grid>
     </Border>
 </Window>

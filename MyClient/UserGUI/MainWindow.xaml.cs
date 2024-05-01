@@ -1170,6 +1170,17 @@ namespace UserGUI
             homeInfoSelectionEllipse.Visibility = Visibility.Visible;
             homeInfoFirstColums.Visibility = Visibility.Visible;
             homeInfoSecondColums.Visibility = Visibility.Visible;
+            AdminList myAdmins = new AdminList();
+
+            myAdmins = brokerService.SelectAdminData();
+            Admin myAdmin = myAdmins[0];
+            totAssetsText.Text = "Tot assets- " + myAdmin.Assets ;
+            totLiquidationsText.Text = "Tot liquidations- " + myAdmin.Liquidations;
+            totOpenPositionsText.Text = "Tot open positions- " + myAdmin.OpenPositions;
+            totProfitsText.Text = "Profits- " + myAdmin.Profits;
+            totVolumeText.Text = "Volume- " + myAdmin.Volume;
+            totTransfersText.Text = "Tot Transfers- " + myAdmin.Transfers;
+            totUsersText.Text = "Tot users- " + myAdmin.Users;
         }
 
 

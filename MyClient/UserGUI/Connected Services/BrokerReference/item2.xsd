@@ -129,4 +129,26 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="Notification" nillable="true" type="tns:Notification" />
+  <xs:complexType name="AdminList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Admin" nillable="true" type="tns:Admin" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AdminList" nillable="true" type="tns:AdminList" />
+  <xs:complexType name="Admin">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Assets" type="xs:double" />
+          <xs:element minOccurs="0" name="Liquidations" type="xs:double" />
+          <xs:element minOccurs="0" name="OpenPositions" type="xs:int" />
+          <xs:element minOccurs="0" name="Profits" type="xs:double" />
+          <xs:element minOccurs="0" name="Transfers" type="xs:double" />
+          <xs:element minOccurs="0" name="Users" type="xs:int" />
+          <xs:element minOccurs="0" name="Volume" type="xs:double" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Admin" nillable="true" type="tns:Admin" />
 </xs:schema>

@@ -1195,30 +1195,53 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Column="1"
-                  x:Name="homeInfoFirstColums">
+            <Grid Grid.Column="1" Grid.ColumnSpan="3"
+                  x:Name="homeInfoFirstColums" Visibility="Collapsed" >
                 <StackPanel>
                     <TextBlock Text="Volume"
-                               FontSize="40" />
+                               FontSize="40" x:Name="totVolumeText" />
                     <TextBlock Text="Tot open positions"
-                               FontSize="40" />
-                    <TextBlock Text="Tot Transfers" FontSize="40"/>
-                    <TextBlock Text="Tot users"  FontSize="40"/>
-                    <TextBlock Text="Tot assets" FontSize="40"/>
-                    <TextBlock Text="Tot liquidations" FontSize="40"/>
-                    <TextBlock Text="Profits" FontSize="40"/>
+                               FontSize="40" x:Name="totOpenPositionsText" />
+                    <TextBlock Text="Tot Transfers" FontSize="40" x:Name="totTransfersText"/>
+                    <TextBlock Text="Tot users"  FontSize="40" x:Name="totUsersText"/>
+                    <TextBlock Text="Tot assets" FontSize="40" x:Name="totAssetsText"/>
+                    <TextBlock Text="Tot liquidations" FontSize="40" x:Name="totLiquidationsText"/>
+                    <TextBlock Text="Profits" FontSize="40" x:Name="totProfitsText"/>
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="2"
-                  x:Name="homeInfoSecondColums">
+                  x:Name="homeInfoSecondColums" Visibility="Collapsed">
                 
             </Grid>
-            
-            
             <Grid Grid.Column="1"
-                  x:Name="usersProfileFirstColums" Visibility="Collapsed"></Grid>
+                  Grid.ColumnSpan="3"
+                  x:Name="usersProfileFirstColums">
+                <Border BorderBrush="Black"
+                        BorderThickness="5"
+                        Width="510"
+                        Height="55"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Margin="0 20 0 0"
+                        CornerRadius="10">
+                    <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Top"
+                            Margin="0 2 0 0"
+                            >
+                    <TextBox  Text="User name" Width="450" Height="40" FontSize="25"/>
+                    <Image Source="\Images\search-interface-symbol.png"
+                           Height="40"
+                           Margin="0 0 0 0"
+                           Visibility="Visible"
+                           x:Name="SearchIcon" />
+                </StackPanel>
+                </Border>
+            </Grid>
             <Grid Grid.Column="2"
-                  x:Name="usersProfileSecondColums" Visibility="Collapsed"></Grid>
+                  x:Name="usersProfileSecondColums"></Grid>
+            
+            
+            
             <Grid Grid.Column="1"
                   x:Name="CashFirstColums"
                   Visibility="Collapsed"></Grid>

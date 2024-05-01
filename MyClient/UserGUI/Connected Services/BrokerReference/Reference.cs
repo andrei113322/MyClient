@@ -68,6 +68,7 @@ namespace UserGUI.BrokerReference {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.OrderHistory))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.MyCoin))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.Notification))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.Admin))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(UserGUI.BrokerReference.Coin))]
     public partial class BaseEntity : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -643,6 +644,125 @@ namespace UserGUI.BrokerReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Admin", Namespace="http://schemas.datacontract.org/2004/07/Model")]
+    [System.SerializableAttribute()]
+    public partial class Admin : UserGUI.BrokerReference.BaseEntity {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double AssetsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double LiquidationsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int OpenPositionsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double ProfitsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double TransfersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UsersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double VolumeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Assets {
+            get {
+                return this.AssetsField;
+            }
+            set {
+                if ((this.AssetsField.Equals(value) != true)) {
+                    this.AssetsField = value;
+                    this.RaisePropertyChanged("Assets");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Liquidations {
+            get {
+                return this.LiquidationsField;
+            }
+            set {
+                if ((this.LiquidationsField.Equals(value) != true)) {
+                    this.LiquidationsField = value;
+                    this.RaisePropertyChanged("Liquidations");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int OpenPositions {
+            get {
+                return this.OpenPositionsField;
+            }
+            set {
+                if ((this.OpenPositionsField.Equals(value) != true)) {
+                    this.OpenPositionsField = value;
+                    this.RaisePropertyChanged("OpenPositions");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Profits {
+            get {
+                return this.ProfitsField;
+            }
+            set {
+                if ((this.ProfitsField.Equals(value) != true)) {
+                    this.ProfitsField = value;
+                    this.RaisePropertyChanged("Profits");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Transfers {
+            get {
+                return this.TransfersField;
+            }
+            set {
+                if ((this.TransfersField.Equals(value) != true)) {
+                    this.TransfersField = value;
+                    this.RaisePropertyChanged("Transfers");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Users {
+            get {
+                return this.UsersField;
+            }
+            set {
+                if ((this.UsersField.Equals(value) != true)) {
+                    this.UsersField = value;
+                    this.RaisePropertyChanged("Users");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Volume {
+            get {
+                return this.VolumeField;
+            }
+            set {
+                if ((this.VolumeField.Equals(value) != true)) {
+                    this.VolumeField = value;
+                    this.RaisePropertyChanged("Volume");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.CollectionDataContractAttribute(Name="LogList", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="Log")]
     [System.SerializableAttribute()]
     public class LogList : System.Collections.Generic.List<UserGUI.BrokerReference.Log> {
@@ -674,6 +794,13 @@ namespace UserGUI.BrokerReference {
     [System.Runtime.Serialization.CollectionDataContractAttribute(Name="NotificationList", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="Notification")]
     [System.SerializableAttribute()]
     public class NotificationList : System.Collections.Generic.List<UserGUI.BrokerReference.Notification> {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="AdminList", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="Admin")]
+    [System.SerializableAttribute()]
+    public class AdminList : System.Collections.Generic.List<UserGUI.BrokerReference.Admin> {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -859,6 +986,18 @@ namespace UserGUI.BrokerReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/InsertNotification", ReplyAction="http://tempuri.org/IServiceBroker/InsertNotificationResponse")]
         System.Threading.Tasks.Task<bool> InsertNotificationAsync(UserGUI.BrokerReference.Notification notification);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/SelectAdminData", ReplyAction="http://tempuri.org/IServiceBroker/SelectAdminDataResponse")]
+        UserGUI.BrokerReference.AdminList SelectAdminData();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/SelectAdminData", ReplyAction="http://tempuri.org/IServiceBroker/SelectAdminDataResponse")]
+        System.Threading.Tasks.Task<UserGUI.BrokerReference.AdminList> SelectAdminDataAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateAdmin", ReplyAction="http://tempuri.org/IServiceBroker/UpdateAdminResponse")]
+        bool UpdateAdmin(UserGUI.BrokerReference.Admin myAdmin);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/UpdateAdmin", ReplyAction="http://tempuri.org/IServiceBroker/UpdateAdminResponse")]
+        System.Threading.Tasks.Task<bool> UpdateAdminAsync(UserGUI.BrokerReference.Admin myAdmin);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1126,6 +1265,22 @@ namespace UserGUI.BrokerReference {
         
         public System.Threading.Tasks.Task<bool> InsertNotificationAsync(UserGUI.BrokerReference.Notification notification) {
             return base.Channel.InsertNotificationAsync(notification);
+        }
+        
+        public UserGUI.BrokerReference.AdminList SelectAdminData() {
+            return base.Channel.SelectAdminData();
+        }
+        
+        public System.Threading.Tasks.Task<UserGUI.BrokerReference.AdminList> SelectAdminDataAsync() {
+            return base.Channel.SelectAdminDataAsync();
+        }
+        
+        public bool UpdateAdmin(UserGUI.BrokerReference.Admin myAdmin) {
+            return base.Channel.UpdateAdmin(myAdmin);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateAdminAsync(UserGUI.BrokerReference.Admin myAdmin) {
+            return base.Channel.UpdateAdminAsync(myAdmin);
         }
     }
 }

@@ -181,6 +181,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\BrokerReference\ServiceBroker.wsdl" />
+    <None Include="Connected Services\BrokerReference\UserGUI.BrokerReference.AdminList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\BrokerReference\UserGUI.BrokerReference.Coin.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -314,6 +317,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\cash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\search-interface-symbol.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />

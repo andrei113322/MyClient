@@ -1200,5 +1200,24 @@ namespace UserGUI
             CashSecondColums.Visibility = Visibility.Visible;
         }
 
+        private void SearchMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+
+        private void WihdrowAssetsClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void RemouveUserClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void BanUserClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

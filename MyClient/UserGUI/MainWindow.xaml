@@ -1197,16 +1197,30 @@
             </Grid>
             <Grid Grid.Column="1" Grid.ColumnSpan="3"
                   x:Name="homeInfoFirstColums" Visibility="Collapsed" >
-                <StackPanel>
+                <StackPanel Margin="0 90 0 0 ">
                     <TextBlock Text="Volume"
-                               FontSize="40" x:Name="totVolumeText" />
+                               FontSize="40" x:Name="totVolumeText" Margin="0 20 0 0" />
                     <TextBlock Text="Tot open positions"
-                               FontSize="40" x:Name="totOpenPositionsText" />
-                    <TextBlock Text="Tot Transfers" FontSize="40" x:Name="totTransfersText"/>
-                    <TextBlock Text="Tot users"  FontSize="40" x:Name="totUsersText"/>
-                    <TextBlock Text="Tot assets" FontSize="40" x:Name="totAssetsText"/>
-                    <TextBlock Text="Tot liquidations" FontSize="40" x:Name="totLiquidationsText"/>
-                    <TextBlock Text="Profits" FontSize="40" x:Name="totProfitsText"/>
+                               FontSize="40"
+                               x:Name="totOpenPositionsText"
+                               Margin="0 20 0 0" />
+                    <TextBlock Text="Tot Transfers" FontSize="40" x:Name="totTransfersText" Margin="0 20 0 0"/>
+                    <TextBlock Text="Tot users"
+                               FontSize="40"
+                               x:Name="totUsersText"
+                               Margin="0 20 0 0" />
+                    <TextBlock Text="Tot assets"
+                               FontSize="40"
+                               x:Name="totAssetsText"
+                               Margin="0 20 0 0" />
+                    <TextBlock Text="Tot liquidations"
+                               FontSize="40"
+                               x:Name="totLiquidationsText"
+                               Margin="0 20 0 0" />
+                    <TextBlock Text="Profits"
+                               FontSize="40"
+                               x:Name="totProfitsText"
+                               Margin="0 20 0 0" />
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="2"
@@ -1216,6 +1230,27 @@
             <Grid Grid.Column="1"
                   Grid.ColumnSpan="3"
                   x:Name="usersProfileFirstColums">
+                <StackPanel Margin="0 90 0 0">
+                    <TextBlock Text="Volume:"
+                               FontSize="40"
+                               x:Name="VolumeText" />
+                    <TextBlock Text="Open positions:"
+                               FontSize="40"
+                               x:Name="OpenPositionsText"
+                               Margin="0 20 0 0" />
+                    <TextBlock Text="Closed positions:"
+                               FontSize="40"
+                               x:Name="ClosedPositionsText"
+                               Margin="0 20 0 0" />
+                    <TextBlock Text="PandL:"
+                               FontSize="40"
+                               x:Name="PandLText"
+                               Margin="0 20 0 0" />
+                    <TextBlock Text="TotAssets:"
+                               FontSize="40"
+                               x:Name="AssetsText"
+                               Margin="0 20 0 0" />
+                </StackPanel>
                 <Border BorderBrush="Black"
                         BorderThickness="5"
                         Width="510"
@@ -1228,18 +1263,62 @@
                             VerticalAlignment="Top"
                             Margin="0 2 0 0"
                             >
-                    <TextBox  Text="User name" Width="450" Height="40" FontSize="25"/>
+                        <TextBox Width="450" Height="50" FontSize="25"/>
                     <Image Source="\Images\search-interface-symbol.png"
                            Height="40"
                            Margin="0 0 0 0"
                            Visibility="Visible"
-                           x:Name="SearchIcon" />
+                           x:Name="SearchIcon"
+                           MouseDown="SearchMouseDown" />
                 </StackPanel>
                 </Border>
             </Grid>
+               
             <Grid Grid.Column="2"
-                  x:Name="usersProfileSecondColums"></Grid>
-            
+                  x:Name="usersProfileSecondColums">
+                <StackPanel Margin="0 90 30 0" HorizontalAlignment="Right">
+                    <Button Background="#FF1D212C"
+                            Grid.Column="2"
+                            Height="50"
+                            Width="220"
+                            Content="wihdrow assets"
+                            Foreground="White"
+                            FontSize="15"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            
+                            Click="WihdrowAssetsClick"
+                            x:Name="WihdrowAssetsButton" />
+                    
+                    <Button Background="#FF1D212C"
+                            Grid.Column="2"
+                            Height="50"
+                            Width="220"
+                            Content="Remouve User"
+                            Foreground="White"
+                            FontSize="15"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Click="RemouveUserClick"
+                            x:Name="RemouveUserButton"
+                            Margin="0 20 0 0"/>
+                    <Button Background="#FF1D212C"
+                            Grid.Column="2"
+                            Height="50"
+                            Width="220"
+                            Content="Ban User"
+                            Foreground="White"
+                            FontSize="15"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Click="BanUserClick"
+                            x:Name="BanButton"
+                            Margin="0 20 0 0" />
+                </StackPanel>
+                
+                
+            </Grid>
+                
             
             
             <Grid Grid.Column="1"

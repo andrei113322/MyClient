@@ -118,6 +118,9 @@ namespace UserGUI.BrokerReference {
     public partial class User : UserGUI.BrokerReference.BaseEntity {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool BanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime BirthDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -130,6 +133,9 @@ namespace UserGUI.BrokerReference {
         private bool IsAdminField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double PAndLField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -137,6 +143,22 @@ namespace UserGUI.BrokerReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UserNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double VolumeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Ban {
+            get {
+                return this.BanField;
+            }
+            set {
+                if ((this.BanField.Equals(value) != true)) {
+                    this.BanField = value;
+                    this.RaisePropertyChanged("Ban");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime BirthDate {
@@ -191,6 +213,19 @@ namespace UserGUI.BrokerReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public double PAndL {
+            get {
+                return this.PAndLField;
+            }
+            set {
+                if ((this.PAndLField.Equals(value) != true)) {
+                    this.PAndLField = value;
+                    this.RaisePropertyChanged("PAndL");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Password {
             get {
                 return this.PasswordField;
@@ -225,6 +260,19 @@ namespace UserGUI.BrokerReference {
                 if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
                     this.UserNameField = value;
                     this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Volume {
+            get {
+                return this.VolumeField;
+            }
+            set {
+                if ((this.VolumeField.Equals(value) != true)) {
+                    this.VolumeField = value;
+                    this.RaisePropertyChanged("Volume");
                 }
             }
         }
@@ -969,6 +1017,12 @@ namespace UserGUI.BrokerReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetHistoricalClosingPrices", ReplyAction="http://tempuri.org/IServiceBroker/GetHistoricalClosingPricesResponse")]
         System.Threading.Tasks.Task<decimal[]> GetHistoricalClosingPricesAsync(string symbol);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetAllCryptos", ReplyAction="http://tempuri.org/IServiceBroker/GetAllCryptosResponse")]
+        System.Collections.Generic.Dictionary<string, decimal> GetAllCryptos(string coinName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetAllCryptos", ReplyAction="http://tempuri.org/IServiceBroker/GetAllCryptosResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, decimal>> GetAllCryptosAsync(string coinName);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBroker/GetNotificationsBySender", ReplyAction="http://tempuri.org/IServiceBroker/GetNotificationsBySenderResponse")]
         UserGUI.BrokerReference.NotificationList GetNotificationsBySender(UserGUI.BrokerReference.User user);
         
@@ -1241,6 +1295,14 @@ namespace UserGUI.BrokerReference {
         
         public System.Threading.Tasks.Task<decimal[]> GetHistoricalClosingPricesAsync(string symbol) {
             return base.Channel.GetHistoricalClosingPricesAsync(symbol);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, decimal> GetAllCryptos(string coinName) {
+            return base.Channel.GetAllCryptos(coinName);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, decimal>> GetAllCryptosAsync(string coinName) {
+            return base.Channel.GetAllCryptosAsync(coinName);
         }
         
         public UserGUI.BrokerReference.NotificationList GetNotificationsBySender(UserGUI.BrokerReference.User user) {

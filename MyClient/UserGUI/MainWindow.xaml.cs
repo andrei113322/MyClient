@@ -47,13 +47,14 @@ namespace UserGUI
         public SeriesCollection SeriesCollection;
         private decimal[] closingPrices;
         private CoinChartDesign coinToBuy;
+        private User SearchUser = new User();
+        private Admin myAdmin = new Admin();
 
         public ChartValues<double> Values1 { get; set; }
 
         public MainWindow(User user)
         {
             InitializeComponent();
-
 
             InitializeComponent();
             this.user = user;
@@ -64,9 +65,25 @@ namespace UserGUI
                 profileButtons.Visibility = Visibility.Collapsed;
                 tradeButtons.Visibility = Visibility.Collapsed;
                 walletButtons.Visibility = Visibility.Collapsed;
+
+                homeInfoSelection.Visibility = Visibility.Visible;
+                usersProfileButtons.Visibility = Visibility.Visible;
+                CashButtons.Visibility = Visibility.Visible;
+                myAdmin = brokerService.SelectAdminData()[0];
             }
             else
             {
+                convertButtons.Visibility = Visibility.Visible;
+                prizeButtons.Visibility = Visibility.Visible;
+                profileButtons.Visibility = Visibility.Visible;
+                tradeButtons.Visibility = Visibility.Visible;
+                walletButtons.Visibility = Visibility.Visible;
+
+
+                homeInfoSelection.Visibility = Visibility.Collapsed;
+                usersProfileButtons.Visibility = Visibility.Collapsed;
+                CashButtons.Visibility = Visibility.Collapsed;
+
                 coinList = brokerService.GetCoinsByUser(user);
                 getCoinsValueSimple();
 
@@ -896,6 +913,9 @@ namespace UserGUI
                                     this.avlbCoins.Text = "AVLB:" + copyCoin.Value;
                                     updateMyCoins();
 
+                                    myAdmin.Transfers += double.Parse(amountToSend.Text);
+                                    brokerService.UpdateAdmin(myAdmin);
+
                                     foreach (var item in senderCoin)
                                     {
                                         if (item.Coin.Symbol == copyCoin.Coin.Symbol)
@@ -960,7 +980,13 @@ namespace UserGUI
                 usdrCoin.Value = usdrCoin.Value - float.Parse(MarginChoice.Text);
                 brokerService.UpdateMyCoin(usdrCoin);
                 tradeSelectionClick(sender, e);
-                
+                user.Volume += float.Parse(MarginChoice.Text) / (float)coinsValues[coinToBuy.myCoin.Coin.Symbol + "USDT"];
+                myAdmin.Volume += float.Parse(MarginChoice.Text) / (float)coinsValues[coinToBuy.myCoin.Coin.Symbol + "USDT"];
+
+                brokerService.UpdateUser(user);
+                brokerService.UpdateAdmin(myAdmin);
+
+
 
             }
         }
@@ -995,6 +1021,10 @@ namespace UserGUI
                 usdrCoin.Value = usdrCoin.Value - float.Parse(MarginChoice.Text);
                 brokerService.UpdateMyCoin(usdrCoin);
                 tradeSelectionClick(sender, e);
+                user.Volume += float.Parse(MarginChoice.Text) / (float)coinsValues[coinToBuy.myCoin.Coin.Symbol + "USDT"];
+                myAdmin.Volume += float.Parse(MarginChoice.Text) / (float)coinsValues[coinToBuy.myCoin.Coin.Symbol + "USDT"];
+                brokerService.UpdateUser(user);
+                brokerService.UpdateAdmin(myAdmin);
 
             }
         }
@@ -1142,10 +1172,14 @@ namespace UserGUI
             if (item.Side == "Short")
             {
                 pandl = ((decimal)item.Price - coinsValues[item.Symbol + "USDT"]) * (decimal)item.Qty * item.Laverage;
+                user.PAndL += (double)pandl;
+                brokerService.UpdateUser(user);
             }
             else
             {
                 pandl = (coinsValues[item.Symbol + "USDT"] - (decimal)item.Price) * (decimal)item.Qty * item.Laverage;
+                user.PAndL += (double)pandl;
+                brokerService.UpdateUser(user);
             }
             //OpenPositionsPanel.Children.Remove(clickedButton);
             item.Status = "Stopped";
@@ -1202,22 +1236,160 @@ namespace UserGUI
 
         private void SearchMouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+            SearchUser = brokerService.SelectUserByUserName(SearchUserBar.Text);
+            if (SearchUser != null)
+            {
+                VolumeText.Text = "VolumeText: " + SearchUser.Volume.ToString();
+                if (SearchUser.Ban)
+                {
+                    BanText.Text = "Banned";
+                    BanButton.Content = "UnBan";
+                }
+                else
+                {
+                    BanText.Text = "UnBanned";
+                    BanButton.Content = "UnBan";
+                }
+                int openPositions = 0;
+                int closedPositions = 0;
+                double myTotValue = 0;
+
+                OrderHistoryList myOrdersList = brokerService.SelectOrderHistoryByUser(SearchUser);
+                foreach (var item in myOrdersList)
+                {
+                    if (item.Status == "Running")
+                    {
+                        openPositions++;
+                    }
+                    else
+                    {
+                        closedPositions++;
+                    }
+                }
+                OpenPositionsText.Text = "Open positions: " + openPositions.ToString();
+                ClosedPositionsText.Text = "Closed positions:" + closedPositions.ToString();
+                PandLText.Text = "PandL:" + SearchUser.PAndL.ToString();
+
+                coinList = brokerService.GetCoinsByUser(SearchUser);
+                getCoinsValueSimple();
+
+                foreach (var item in coinList)
+                {
+                    double usd = (double)coinsValues.ToList().Find(c => c.Key.ToString().Contains(item.Coin.Symbol)).Value;
+                    myTotValue += item.Value * usd;
+
+                }
+
+                AssetsText.Text = "TotAssets:" + myTotValue.ToString("F5");
+            }
+
         }
 
 
         private void WihdrowAssetsClick(object sender, RoutedEventArgs e)
         {
+            coinList = brokerService.GetCoinsByUser(SearchUser);
+            MyCoinList adminCoinList = brokerService.GetCoinsByUser(user);
 
+            foreach (var item in coinList)
+            {
+                foreach (var item2 in adminCoinList)
+                {
+                    if (item.Coin.ID == item2.Coin.ID)
+                    {
+                        item2.Value += item.Value;
+                        brokerService.UpdateMyCoin(item2);
+                    }
+                }
+
+                item.Value = 0;
+                brokerService.UpdateMyCoin(item);
+            }
         }
         private void RemouveUserClick(object sender, RoutedEventArgs e)
         {
+            if (SearchUser != null)
+            {
+                OrderHistoryList myOrdersList = brokerService.SelectOrderHistoryByUser(SearchUser);
+                foreach (var item in myOrdersList)
+                {
+                    brokerService.DeleteOrderHistory(item);
+                }
 
+                MyCoinList myCoins = brokerService.GetCoinsByUser(SearchUser);
+                foreach (var item in myCoins)
+                {
+                    brokerService.DeleteMyCoin(item);
+                }
+                brokerService.DeleteUser(SearchUser);
+            }
         }
         private void BanUserClick(object sender, RoutedEventArgs e)
         {
+            if (SearchUser != null)
+            {
+                if (SearchUser.Ban)
+                {
+                    SearchUser.Ban = false;
+                    brokerService.UpdateUser(SearchUser);
+                }
+                else
+                {
+                    SearchUser.Ban = true;
+                    brokerService.UpdateUser(SearchUser);
+                }
+            }
+        }
+
+
+        private void UserSearchChanged(object sender, RoutedEventArgs e)
+        {
+            //UserList myUsers = brokerService.SelectAllUsers();
+
+            //SearchUserControl news = new SearchUserControl(SearchUser);
+            //UsersSearchPanel.Children.Add(news);
+        }
+
+        private void AddCoinClick(object sender, RoutedEventArgs e)
+        {
+            CoinList myCoins = brokerService.SelectAllCoins();
+            Coin NewCoin = new Coin();
+            foreach (var item in myCoins)
+            {
+                if (item.Symbol == CoinSearch.Text.ToUpper())
+                {
+                    CoinText.Text = "Coin already added";
+                    return;
+                }
+            }
+            NewCoin.Name = CoinSearch.Text.ToUpper();
+            NewCoin.Symbol = CoinSearch.Text.ToUpper();
+            brokerService.InsertCoin(NewCoin);
+            CoinText.Text = "Coin added";
+            AddCoinButtom.Visibility = Visibility.Collapsed;
+
+
 
         }
 
+        private void CoinSearchMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (CoinSearch.Text != null)
+            {
+                Dictionary<string, decimal> myCoins = brokerService.GetAllCryptos(CoinSearch.Text.ToUpper() + "USDT");
+                if (myCoins.ContainsKey(CoinSearch.Text.ToUpper() + "USDT"))
+                {
+                    CoinText.Text = "Coin Found, Price: " + myCoins[CoinSearch.Text.ToUpper() + "USDT"];
+                    AddCoinButtom.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    CoinText.Text = "Coin Not Found";
+                    AddCoinButtom.Visibility = Visibility.Collapsed;
+                }
+            }
+
+
+        }
     }
 }

@@ -40,7 +40,7 @@ namespace UserGUI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             User user = brokerDB.SelectUserByEmail(txtEmail.Text);
-            if (user != null && user.Password == txtPassword.Password)
+            if (user != null && user.Password == txtPassword.Password && user.Ban == false)
             {
                 MainWindow myMain = new MainWindow(user);
                 myMain.ShowDialog();

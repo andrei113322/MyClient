@@ -1229,7 +1229,8 @@
             </Grid>
             <Grid Grid.Column="1"
                   Grid.ColumnSpan="3"
-                  x:Name="usersProfileFirstColums">
+                  x:Name="usersProfileFirstColums"
+                  Visibility="Collapsed">
                 <StackPanel Margin="0 90 0 0">
                     <TextBlock Text="Volume:"
                                FontSize="40"
@@ -1250,6 +1251,10 @@
                                FontSize="40"
                                x:Name="AssetsText"
                                Margin="0 20 0 0" />
+                    <TextBlock Text="Status:"
+                               FontSize="40"
+                               x:Name="BanText"
+                               Margin="0 20 0 0" />
                 </StackPanel>
                 <Border BorderBrush="Black"
                         BorderThickness="5"
@@ -1260,22 +1265,35 @@
                         Margin="0 20 0 0"
                         CornerRadius="10">
                     <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Top"
-                            Margin="0 2 0 0"
-                            >
-                        <TextBox Width="450" Height="50" FontSize="25"/>
-                    <Image Source="\Images\search-interface-symbol.png"
-                           Height="40"
-                           Margin="0 0 0 0"
-                           Visibility="Visible"
-                           x:Name="SearchIcon"
-                           MouseDown="SearchMouseDown" />
-                </StackPanel>
+                                VerticalAlignment="Top"
+                                Margin="0 2 0 0">
+                        <TextBox Width="450"
+                                 Height="50"
+                                 FontSize="25"
+                                 x:Name="SearchUserBar"
+                                 TextChanged="UserSearchChanged" />
+                        <Image Source="\Images\search-interface-symbol.png"
+                               Height="40"
+                               Margin="0 0 0 0"
+                               Visibility="Visible"
+                               x:Name="SearchIcon"
+                               MouseDown="SearchMouseDown" />
+                    </StackPanel>
                 </Border>
+                
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              Width="510"
+                              Height="55"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Top"
+                              Margin="0 70 0 0">
+                    <StackPanel x:Name="UsersSearchPanel" />
+                </ScrollViewer>
             </Grid>
                
             <Grid Grid.Column="2"
-                  x:Name="usersProfileSecondColums">
+                  x:Name="usersProfileSecondColums" Visibility="Collapsed">
                 <StackPanel Margin="0 90 30 0" HorizontalAlignment="Right">
                     <Button Background="#FF1D212C"
                             Grid.Column="2"
@@ -1323,7 +1341,49 @@
             
             <Grid Grid.Column="1"
                   x:Name="CashFirstColums"
-                  Visibility="Collapsed"></Grid>
+                  Visibility="Collapsed"
+                  Grid.ColumnSpan="3">
+                <StackPanel>
+                    <Border BorderBrush="Black"
+                            BorderThickness="5"
+                            Width="510"
+                            Height="55"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0 20 0 0"
+                            CornerRadius="10">
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Top"
+                                    Margin="0 2 0 0">
+                            <TextBox Width="450"
+                                     Height="50"
+                                     FontSize="25"
+                                     x:Name="CoinSearch" />
+                            <Image Source="\Images\search-interface-symbol.png"
+                                   Height="40"
+                                   Margin="0 0 0 0"
+                                   Visibility="Visible"
+                                   MouseDown="CoinSearchMouseDown" />
+                        </StackPanel>
+                    </Border>
+                    <TextBlock  Text="CoinFound" x:Name="CoinText" FontSize="50" HorizontalAlignment="Center" Margin="0 50 0 0"/>
+                    <Button Background="#FF1D212C"
+                            Grid.Column="2"
+                            Height="50"
+                            Width="150"
+                            Content="Add Coin"
+                            Foreground="White"
+                            FontSize="15"
+                            HorizontalAlignment="Center"
+                            Click="AddCoinClick"
+                            x:Name="AddCoinButtom"
+                            Margin="0 20 0 0" />
+                </StackPanel>
+            </Grid>
+            
+            
+            
+            
             <Grid Grid.Column="2"
                   x:Name="CashSecondColums"
                   Visibility="Collapsed"></Grid>
